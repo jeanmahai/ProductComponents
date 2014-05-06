@@ -1,0 +1,10 @@
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.SMSWindowsServiceHost\bin\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.exe
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.SMSWindowsServiceHost\bin\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.exe
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\bin\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.exe
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\bin\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.exe
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\obj\x86\Debug\Soho.EmailAndSMS.SMSWindowsServiceHost.pdb
