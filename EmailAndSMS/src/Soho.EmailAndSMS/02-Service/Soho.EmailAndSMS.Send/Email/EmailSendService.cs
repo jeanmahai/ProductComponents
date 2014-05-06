@@ -12,20 +12,7 @@ namespace Soho.EmailAndSMS.Send.Email
     /// </summary>
     public class EmailSendService
     {
-        #region 电子邮件发送服务实例
-        private EmailSendService _Instance = null;
-        public EmailSendService Instance
-        {
-            get
-            {
-                if (_Instance == null)
-                    _Instance = new EmailSendService();
-                return _Instance;
-            }
-        }
-        #endregion
-
-        #region 电子邮件发送服务
+        #region 电子邮件发送服务私有对象
 
         /// <summary>
         /// 发送完成线程对象
@@ -40,14 +27,21 @@ namespace Soho.EmailAndSMS.Send.Email
         /// </summary>
         private Queue<EmailEntity> _WaitSendEmailQueue = new Queue<EmailEntity>(ConfigHelper.Instance.Config.Email.LoadEmailCounts);
 
+        #endregion
+
+        #region 电子邮件发送服务委托事件
         /// <summary>
         /// 发送电子邮件委托
         /// </summary>
-        public delegate void SendEmailDelegateHandler();
+        private delegate void SendEmailDelegateHandler();
         /// <summary>
         /// 发送电子邮件事件
         /// </summary>
-        public event SendEmailDelegateHandler SendEmailEventHandler;
+        private event SendEmailDelegateHandler SendEmailEventHandler;
+
+        #endregion
+
+        #region 电子邮件发送服务
 
         /// <summary>
         /// 开始发送电子邮件
