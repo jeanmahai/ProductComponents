@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -41,7 +42,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigHelper.cs" />
     <Compile Include="DataAccess\DBHelper.cs" />
     <Compile Include="DataAccess\EmailDA.cs" />
     <Compile Include="DataAccess\SMSDA.cs" />
@@ -51,6 +51,7 @@
     <Compile Include="Entity\QueryResult.cs" />
     <Compile Include="Entity\SMSEntity.cs" />
     <Compile Include="Entity\SMSQueryFilter.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Processor\EmailProcessor.cs" />
     <Compile Include="Processor\SMSProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

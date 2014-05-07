@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Soho.EmailAndSMS.Service.DataAccess
 {
@@ -8,44 +9,9 @@ namespace Soho.EmailAndSMS.Service.DataAccess
     /// </summary>
     public class DBHelper
     {
-        /*
-        CollectResultEntity result = new CollectResultEntity();
-
-            string sql = @"SELECT TOP 1 [PeriodNum],[RetTime] FROM [Helpmate].[dbo].[SourceData_28_Beijing] ORDER BY [PeriodNum] DESC";
-            DBHelper db = new DBHelper();
-            try
-            {
-                DataTable dt = db.ExeSqlDataAdapter(CommandType.Text, sql);
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    result.PeriodNum = long.Parse(dt.Rows[0]["PeriodNum"].ToString()) + 1;
-                    result.RetTime = DateTime.Parse(dt.Rows[0]["RetTime"].ToString());
-                    //到23:55当天开奖就结束了，下一期在第二天9:05
-                    if (result.RetTime.Hour == 23 && result.RetTime.Minute == 55)
-                        result.RetTime = DateTime.Parse(string.Format("{0} 9:05", result.RetTime.ToShortDateString())).AddDays(1);
-                    else
-                        result.RetTime = result.RetTime.AddMinutes(5);
-                }
-                else
-                {
-                    result.PeriodNum = 0;
-                }
-            }
-            catch (Exception ex)
-            {
-                WriteLog.Write(string.Format("GetBeijingNextPeriodNum读取SQL Server数据库期号失败，sql：{0}，错误信息：{1}", sql, ex.ToString()));
-            }
-            finally
-            {
-                db.Dispose();
-            }
-
-            return result;
-        */
-
         private SqlConnection conn;
         private SqlCommand cmd;
-        private static readonly string ConnectionString = "";//GetConfig.GetXMLValue(ConfigSource.NA, "SqlServices");
+        private static readonly string ConnectionString = ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"];
 
         public DBHelper()
         {

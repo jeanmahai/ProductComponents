@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soho.EmailAndSMS.EmailWindo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soho.EmailAndSMS.SMSWindowsServiceHost", "01-Host\Soho.EmailAndSMS.SMSWindowsServiceHost\Soho.EmailAndSMS.SMSWindowsServiceHost.csproj", "{79E54B6C-6EF6-4D4C-8454-E8E55477920D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{3E20D614-03BF-45B6-B12F-79A9F19F1E30}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,16 @@ Global
 		{79E54B6C-6EF6-4D4C-8454-E8E55477920D}.Release|Mixed Platforms.Build.0 = Release|x86
 		{79E54B6C-6EF6-4D4C-8454-E8E55477920D}.Release|x86.ActiveCfg = Release|x86
 		{79E54B6C-6EF6-4D4C-8454-E8E55477920D}.Release|x86.Build.0 = Release|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Debug|x86.ActiveCfg = Debug|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Debug|x86.Build.0 = Debug|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Release|Any CPU.ActiveCfg = Release|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Release|Mixed Platforms.Build.0 = Release|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Release|x86.ActiveCfg = Release|x86
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,5 +110,6 @@ Global
 		{1C82F5DA-E812-41B8-B964-D2EC4DEFC4EA} = {BE39F11B-74DD-48E7-9D41-9E39E49A9440}
 		{0EB2CE52-C78D-4660-A047-59DE45843285} = {BE39F11B-74DD-48E7-9D41-9E39E49A9440}
 		{79E54B6C-6EF6-4D4C-8454-E8E55477920D} = {BE39F11B-74DD-48E7-9D41-9E39E49A9440}
+		{3E20D614-03BF-45B6-B12F-79A9F19F1E30} = {BE39F11B-74DD-48E7-9D41-9E39E49A9440}
 	EndGlobalSection
 EndGlobal

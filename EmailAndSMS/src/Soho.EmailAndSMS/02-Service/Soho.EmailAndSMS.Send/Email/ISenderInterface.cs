@@ -1,4 +1,5 @@
-﻿using Soho.EmailAndSMS.Service.Entity;
+﻿using System.Collections.Generic;
+using Soho.EmailAndSMS.Service.Entity;
 
 namespace Soho.EmailAndSMS.Send.Email
 {
@@ -10,8 +11,9 @@ namespace Soho.EmailAndSMS.Send.Email
         /// <summary>
         /// 发送电子邮件
         /// </summary>
+        /// <param name="serivceConfig">服务配置</param>
         /// <param name="email">电子邮件对象</param>
-        /// <returns>发送成功失败</returns>
-        bool Send(EmailEntity email);
+        /// <returns>返回发送结果，OK-发送成功；其他-发送失败</returns>
+        string Send(Dictionary<string, string> serivceConfig, EmailEntity email);
     }
 }

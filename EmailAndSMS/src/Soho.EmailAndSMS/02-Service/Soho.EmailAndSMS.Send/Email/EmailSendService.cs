@@ -15,6 +15,10 @@ namespace Soho.EmailAndSMS.Send.Email
         #region 电子邮件发送服务私有对象
 
         /// <summary>
+        /// 服务配置
+        /// </summary>
+        private Dictionary<string, string> _SerivceConfig = null;
+        /// <summary>
         /// 发送完成线程对象
         /// </summary>
         private static readonly object _FinishThreadObject = new object();
@@ -25,7 +29,7 @@ namespace Soho.EmailAndSMS.Send.Email
         /// <summary>
         /// 待发送的电子邮件
         /// </summary>
-        private Queue<EmailEntity> _WaitSendEmailQueue = new Queue<EmailEntity>(ConfigHelper.Instance.Config.Email.LoadEmailCounts);
+        private Queue<EmailEntity> _WaitSendEmailQueue = null;
 
         #endregion
 
@@ -46,24 +50,32 @@ namespace Soho.EmailAndSMS.Send.Email
         /// <summary>
         /// 开始发送电子邮件
         /// </summary>
-        /// <param name="email">电子邮件对象</param>
-        public void StartSendMail(EmailEntity email)
+        public void StartSendMail()
         {
+            SendEmailEventHandler += LoadConfig;
             SendEmailEventHandler += LoadWaitSendMailList;
             SendEmailEventHandler += ThreadSendEmail;
             SendEmailEventHandler();
             //所有线程发送完毕后结束本次发送任务
-            while (_FinishThreadCounts != ConfigHelper.Instance.Config.Email.SendThreadCounts)
+            while (_FinishThreadCounts != int.Parse(_SerivceConfig["SendThreadCounts"]))
             {
                 Thread.Sleep(100);
             }
+        }
+        /// <summary>
+        /// 加载配置
+        /// </summary>
+        private void LoadConfig()
+        {
+            _SerivceConfig = EmailProcessor.Instance.LoadConfig();
+            _WaitSendEmailQueue = new Queue<EmailEntity>(int.Parse(_SerivceConfig["LoadEmailCounts"]));
         }
         /// <summary>
         /// 加载待发送的电子邮件
         /// </summary>
         private void LoadWaitSendMailList()
         {
-            var emailList = EmailProcessor.Instance.GetWaitSendMailList();
+            var emailList = EmailProcessor.Instance.GetWaitSendMailList(int.Parse(_SerivceConfig["LoadEmailCounts"]));
             if (emailList != null)
             {
                 emailList.ForEach(m =>
@@ -80,7 +92,8 @@ namespace Soho.EmailAndSMS.Send.Email
         /// </summary>
         private void ThreadSendEmail()
         {
-            for (int i = 0; i < ConfigHelper.Instance.Config.Email.SendThreadCounts; i++)
+            int sendThreadCounts = int.Parse(_SerivceConfig["SendThreadCounts"]);
+            for (int i = 0; i < sendThreadCounts; i++)
             {
                 ThreadPool.QueueUserWorkItem(SendMail);
             }
@@ -96,6 +109,11 @@ namespace Soho.EmailAndSMS.Send.Email
                 EmailEntity email = null;
                 lock (_WaitSendEmailQueue)
                 {
+                    if (_WaitSendEmailQueue.Count == 0)
+                    {
+                        isSendFinish = true;
+                        break;
+                    }
                     email = _WaitSendEmailQueue.Dequeue();
                 }
                 if (email == null)
@@ -104,10 +122,10 @@ namespace Soho.EmailAndSMS.Send.Email
                     break;
                 }
                 //发送
-                bool sendResult = GetSender().Send(email);
+                string sendResult = GetSender().Send(_SerivceConfig, email);
                 //更新电子邮件发送结果
-                EmailStatus status = sendResult ? EmailStatus.SendSuccess : EmailStatus.SendFailure;
-                EmailProcessor.Instance.UpdateEmailStatus(email.SysNo.Value, status);
+                EmailStatus status = sendResult.Equals("OK") ? EmailStatus.SendSuccess : EmailStatus.SendFailure;
+                EmailProcessor.Instance.UpdateEmailStatus(email.SysNo.Value, status, sendResult);
             }
             IncreaseFinishThreadCounts();
         }
@@ -128,7 +146,7 @@ namespace Soho.EmailAndSMS.Send.Email
         private ISenderInterface GetSender()
         {
             ISenderInterface sender = null;
-            switch (ConfigHelper.Instance.Config.Email.SendType)
+            switch (_SerivceConfig["SendType"])
             {
                 case "PersonalMailSender":
                     sender = new PersonalMailSender();

@@ -31,10 +31,15 @@ namespace Soho.EmailAndSMS.Service.Entity
         [DataMember]
         public EmailStatus? Status { get; set; }
         /// <summary>
-        /// 插入时间
+        /// 插入时间起
         /// </summary>
         [DataMember]
-        public DateTime? InDate { get; set; }
+        public DateTime? BeginInDate { get; set; }
+        /// <summary>
+        /// 插入时间止
+        /// </summary>
+        [DataMember]
+        public DateTime? EndInDate { get; set; }
         /// <summary>
         /// 当前显示第几页数据
         /// </summary>

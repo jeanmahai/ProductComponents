@@ -13,7 +13,7 @@ namespace Soho.EmailAndSMS.Service.Entity
     public class QueryResult<T> where T : class
     {
         /// <summary>
-        /// 当前显示第几页数据
+        /// 当前显示第几页数据，从1开始
         /// </summary>
         [DataMember]
         public long PageIndex { get; set; }

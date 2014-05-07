@@ -15,7 +15,7 @@ namespace Soho.EmailAndSMS.Service.Entity
         /// 邮件编号
         /// </summary>
         [DataMember]
-        public int? SysNo { get; set; }
+        public long? SysNo { get; set; }
         /// <summary>
         /// 使用系统的用户编号，可不指定
         /// </summary>
@@ -30,7 +30,7 @@ namespace Soho.EmailAndSMS.Service.Entity
         /// 收件人地址，以;分隔
         /// </summary>
         [DataMember]
-        public string ReveiveAddress { get; set; }
+        public string ReceiveAddress { get; set; }
         /// <summary>
         /// 抄送地址，以;分隔
         /// </summary>

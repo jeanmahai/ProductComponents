@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Data;
+using System.Collections.Generic;
 using Soho.EmailAndSMS.Service.Entity;
 using Soho.EmailAndSMS.Service.DataAccess;
 
@@ -19,6 +20,26 @@ namespace Soho.EmailAndSMS.Service.Processor
                     _Instance = new EmailProcessor();
                 return _Instance;
             }
+        }
+        #endregion
+
+        #region 加载配置
+        /// <summary>
+        /// 加载配置
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> LoadConfig()
+        {
+            Dictionary<string, string> configs = new Dictionary<string,string>();
+            DataTable dt = EmailDA.LoadConfig();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    configs[row["ConfigKey"].ToString()] = row["ConfigValue"].ToString();
+                }
+            }
+            return configs;
         }
         #endregion
 
@@ -72,10 +93,11 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <summary>
         /// 获取待发送的电子邮件列表
         /// </summary>
+        /// <param name="topCnts">获取记录数</param>
         /// <returns></returns>
-        public List<EmailEntity> GetWaitSendMailList()
+        public List<EmailEntity> GetWaitSendMailList(int topCnts)
         {
-            return EmailDA.GetWaitSendMailList();
+            return EmailDA.GetWaitSendMailList(topCnts);
         }
         
         /// <summary>
@@ -83,9 +105,10 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// </summary>
         /// <param name="sysNo">电子邮件编号</param>
         /// <param name="status">状态</param>
-        public void UpdateEmailStatus(int sysNo, EmailStatus status)
+        /// <param name="note">备注</param>
+        public void UpdateEmailStatus(long sysNo, EmailStatus status, string note = "")
         {
-            EmailDA.UpdateEmailStatus(sysNo, status);
+            EmailDA.UpdateEmailStatus(sysNo, status, note);
         }
         #endregion
     }
