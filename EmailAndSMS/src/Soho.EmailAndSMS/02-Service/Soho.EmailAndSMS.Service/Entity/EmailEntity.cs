@@ -17,7 +17,7 @@ namespace Soho.EmailAndSMS.Service.Entity
         [DataMember]
         public long? SysNo { get; set; }
         /// <summary>
-        /// 使用系统的用户编号，可不指定
+        /// 业务系统的用户编号，可不指定
         /// </summary>
         [DataMember]
         public int? UserSysNo { get; set; }

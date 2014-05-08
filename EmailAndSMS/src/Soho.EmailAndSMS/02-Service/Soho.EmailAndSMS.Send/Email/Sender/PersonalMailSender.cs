@@ -1,9 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using Soho.EmailAndSMS.Service.Entity;
 using System.Net.Mail;
+using System.ComponentModel;
+using System.Collections.Generic;
+
+using Soho.EmailAndSMS.Service;
+using Soho.EmailAndSMS.Service.Entity;
+using Soho.EmailAndSMS.Service.Processor;
 
 namespace Soho.EmailAndSMS.Send.Email.Sender
 {
@@ -17,8 +20,7 @@ namespace Soho.EmailAndSMS.Send.Email.Sender
         /// </summary>
         /// <param name="serivceConfig">服务配置</param>
         /// <param name="email">电子邮件对象</param>
-        /// <returns>返回发送结果，OK-发送成功；其他-发送失败</returns>
-        public string Send(Dictionary<string, string> serivceConfig, EmailEntity email)
+        public void Send(Dictionary<string, string> serivceConfig, EmailEntity email)
         {
             try
             {
@@ -59,7 +61,7 @@ namespace Soho.EmailAndSMS.Send.Email.Sender
                 //}
 
                 //邮件服务器和端口
-                SmtpClient smtp = new SmtpClient("smtp.163.com", 25);
+                SmtpClient smtp = new SmtpClient(serivceConfig["PersonalEmailServerHost"], 25);
                 smtp.UseDefaultCredentials = true;
                 //指定发送方式
                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -67,15 +69,44 @@ namespace Soho.EmailAndSMS.Send.Email.Sender
                 smtp.Credentials = new System.Net.NetworkCredential(serivceConfig["PersonalSendEmail"], serivceConfig["PersonalSendEmailPassword"]);
 
                 //超时时间
-                smtp.Timeout = 60000;
-                smtp.Send(mail);
-                return "OK";
+                smtp.Timeout = int.Parse(serivceConfig["PersonalSendTimeout"]);
+                smtp.SendCompleted += new SendCompletedEventHandler(SendCompleted);
+                object userState = email;
+                smtp.SendAsync(mail, userState);
             }
 
             catch (Exception ex)
             {
-                return ex.Message;
+                Logger.WriteException(ex.ToString());
             } 
+        }
+
+        /// <summary>
+        /// 异步发送完成处理该封电子邮件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e">电子邮件对象</param>
+        private void SendCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            bool bSendResult = true;
+            string sendResult = string.Format("{0}：OK；", DateTime.Now);
+
+            EmailEntity email = e.UserState as EmailEntity;
+
+            if (e.Cancelled)
+            {
+                bSendResult = false;
+                sendResult = string.Format("{0}：Cancelled；", DateTime.Now);
+            }
+            if (e.Error != null)
+            {
+                bSendResult = false;
+                sendResult = string.Format("{0}：{1}；", DateTime.Now, e.Error.Message);
+            }
+
+            //更新电子邮件发送结果
+            EmailStatus status = bSendResult ? EmailStatus.SendSuccess : EmailStatus.SendFailure;
+            EmailProcessor.Instance.UpdateEmailStatus(email.SysNo.Value, status, sendResult);
         }
     }
 }

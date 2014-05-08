@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Soho.EmailAndSMS.Service.Entity;
+using System.Net.Mail;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net.Mail;
+
+using Soho.EmailAndSMS.Service.Entity;
 
 namespace Soho.EmailAndSMS.Service.DataAccess
 {
@@ -157,6 +158,12 @@ namespace Soho.EmailAndSMS.Service.DataAccess
                     strWhere += " AND [ReceiveName] LIKE '%' + @ReceiveName + '%'";
                     param.Add(new SqlParameter("@ReceiveName", filter.ReceiveName));
                 }
+                if (!string.IsNullOrWhiteSpace(filter.EmailAddress))
+                {
+                    strWhere += " AND ([ReceiveAddress] LIKE '%' + @EmailAddress + '%'";
+                    strWhere += " OR [CCAddress] LIKE '%' + @EmailAddress + '%')";
+                    param.Add(new SqlParameter("@EmailAddress", filter.EmailAddress));
+                }
                 if (!string.IsNullOrWhiteSpace(filter.Keywords))
                 {
                     strWhere += " AND ([EmailTitle] LIKE '%' + @Keywords + '%'";
@@ -239,22 +246,31 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         {
             List<EmailEntity> result = new List<EmailEntity>();
 
-            string sql = "SELECT TOP " + topCnts.ToString() + @" [SysNo]
-                              ,[UserSysNo]
-                              ,[ReceiveName]
-                              ,[ReceiveAddress]
-                              ,[CCAddress]
-                              ,[EmailTitle]
-                              ,[EmailBody]
-                              ,[IsBodyHtml]
-                              ,[EmailPriority]
-                              ,[Status]
-                              ,[SendTime]
-                              ,[InDate]
-                              ,[LastUpdateTime]
-                              ,[Note]
-                          FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
-                          WHERE [Status] = 200 OR ([Status] = 300 AND [SendTime] < GETDATE())";
+            string sql = @"DECLARE @TblSysNoList TABLE (GetSysNo INT);
+INSERT INTO @TblSysNoList
+SELECT TOP " + topCnts.ToString() + @" [SysNo]
+	FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+    WHERE [Status] = 200 OR ([Status] = 300 AND [SendTime] < GETDATE())
+
+UPDATE [SohoEmailAndSMS].[dbo].[Emails] SET Status = 301
+	WHERE [SysNo] IN (SELECT GetSysNo FROM @TblSysNoList)
+
+SELECT [SysNo]
+              ,[UserSysNo]
+              ,[ReceiveName]
+              ,[ReceiveAddress]
+              ,[CCAddress]
+              ,[EmailTitle]
+              ,[EmailBody]
+              ,[IsBodyHtml]
+              ,[EmailPriority]
+              ,[Status]
+              ,[SendTime]
+              ,[InDate]
+              ,[LastUpdateTime]
+              ,[Note]
+          FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+          WHERE [SysNo] IN (SELECT GetSysNo FROM @TblSysNoList)";
             DBHelper db = new DBHelper();
             try
             {

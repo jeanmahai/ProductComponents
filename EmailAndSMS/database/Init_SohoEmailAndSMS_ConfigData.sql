@@ -1,0 +1,16 @@
+SET IDENTITY_INSERT [Configs] ON
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1001','Email','SendThreadCounts','20')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1002','Email','LoadEmailCounts','1000000')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1003','Email','SendType','PersonalMailSender')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1004','Email','PersonalSendEmail','abcd115922@163.com')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1005','Email','PersonalSendEmailNickName','Regrets')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1007','Email','PersonalSendEmailPassword','115922abcd')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1008','Email','PersonalEmailServerHost','smtp.163.com')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1009','Email','PersonalSendTimeout','60000')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1010','SMS','EmayAuthCode','xxxx')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1011','SMS','SendType','EmaySMSSender')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1012','SMS','SendThreadCounts','20')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1013','SMS','LoadSMSCounts','1000000')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1014','SMS','EmayAuthCodePassword','123456')
+Insert Into [Configs] ([SysNo],[Category],[ConfigKey],[ConfigValue]) Values('1015','SMS','EmaySMSServerHost','http://sdk4report.eucp.b2m.cn:8080/sdk/SDKService?wsdl')
+SET IDENTITY_INSERT [Configs] OFF

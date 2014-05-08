@@ -40,6 +40,12 @@ namespace Soho.EmailAndSMS.Service.Entity
         [Description("延迟发送")]
         DelaySend = 300,
         /// <summary>
+        /// 发送中
+        /// </summary>
+        [EnumMember]
+        [Description("发送中")]
+        Sending = 301,
+        /// <summary>
         /// 发送成功
         /// </summary>
         [EnumMember]
@@ -89,6 +95,12 @@ namespace Soho.EmailAndSMS.Service.Entity
         [EnumMember]
         [Description("延迟发送")]
         DelaySend = 300,
+        /// <summary>
+        /// 发送中
+        /// </summary>
+        [EnumMember]
+        [Description("发送中")]
+        Sending = 301,
         /// <summary>
         /// 发送成功
         /// </summary>

@@ -1,6 +1,6 @@
-﻿namespace Soho.EmailAndSMS.SMSWindowsServiceHost
+﻿namespace Soho.EmailAndSMS.EmailWindowsServiceHost
 {
-    partial class Service1
+    partial class EmailSendSvc
     {
         /// <summary> 
         /// 必需的设计器变量。

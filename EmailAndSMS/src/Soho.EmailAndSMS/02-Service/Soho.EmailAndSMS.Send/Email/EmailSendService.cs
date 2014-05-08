@@ -1,8 +1,10 @@
-﻿using Soho.EmailAndSMS.Service.Entity;
+﻿using System.Threading;
 using System.Collections;
-using System.Threading;
 using System.Collections.Generic;
+
+using Soho.EmailAndSMS.Service;
 using Soho.EmailAndSMS.Service.Processor;
+using Soho.EmailAndSMS.Service.Entity;
 using Soho.EmailAndSMS.Send.Email.Sender;
 
 namespace Soho.EmailAndSMS.Send.Email
@@ -19,17 +21,13 @@ namespace Soho.EmailAndSMS.Send.Email
         /// </summary>
         private Dictionary<string, string> _SerivceConfig = null;
         /// <summary>
-        /// 发送完成线程对象
-        /// </summary>
-        private static readonly object _FinishThreadObject = new object();
-        /// <summary>
-        /// 发送完成线程数
-        /// </summary>
-        private int _FinishThreadCounts = 0;
-        /// <summary>
         /// 待发送的电子邮件
         /// </summary>
         private Queue<EmailEntity> _WaitSendEmailQueue = null;
+        /// <summary>
+        /// 推送邮件数量
+        /// </summary>
+        private int _SendMailCounts = 0;
 
         #endregion
 
@@ -56,11 +54,7 @@ namespace Soho.EmailAndSMS.Send.Email
             SendEmailEventHandler += LoadWaitSendMailList;
             SendEmailEventHandler += ThreadSendEmail;
             SendEmailEventHandler();
-            //所有线程发送完毕后结束本次发送任务
-            while (_FinishThreadCounts != int.Parse(_SerivceConfig["SendThreadCounts"]))
-            {
-                Thread.Sleep(100);
-            }
+            Logger.WriteBizLogs(string.Format("本次推送电子邮件数量：{0}封。", _SendMailCounts));
         }
         /// <summary>
         /// 加载配置
@@ -78,6 +72,7 @@ namespace Soho.EmailAndSMS.Send.Email
             var emailList = EmailProcessor.Instance.GetWaitSendMailList(int.Parse(_SerivceConfig["LoadEmailCounts"]));
             if (emailList != null)
             {
+                _SendMailCounts = emailList.Count;
                 emailList.ForEach(m =>
                 {
                     lock (_WaitSendEmailQueue)
@@ -122,21 +117,7 @@ namespace Soho.EmailAndSMS.Send.Email
                     break;
                 }
                 //发送
-                string sendResult = GetSender().Send(_SerivceConfig, email);
-                //更新电子邮件发送结果
-                EmailStatus status = sendResult.Equals("OK") ? EmailStatus.SendSuccess : EmailStatus.SendFailure;
-                EmailProcessor.Instance.UpdateEmailStatus(email.SysNo.Value, status, sendResult);
-            }
-            IncreaseFinishThreadCounts();
-        }
-        /// <summary>
-        /// 递增完成线程数
-        /// </summary>
-        private void IncreaseFinishThreadCounts()
-        {
-            lock (_FinishThreadObject)
-            {
-                _FinishThreadCounts++;
+                GetSender().Send(_SerivceConfig, email);
             }
         }
         /// <summary>

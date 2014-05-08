@@ -21,6 +21,11 @@ namespace Soho.EmailAndSMS.Service.Entity
         [DataMember]
         public string ReceiveName { get; set; }
         /// <summary>
+        /// 收件人地址
+        /// </summary>
+        [DataMember]
+        public string EmailAddress { get; set; }
+        /// <summary>
         /// 关键字
         /// </summary>
         [DataMember]

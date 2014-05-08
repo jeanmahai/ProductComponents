@@ -1,6 +1,9 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.IO;
+using System.Security.Cryptography;
+using System;
 
 namespace Soho.EmailAndSMS.Service.DataAccess
 {
@@ -11,7 +14,60 @@ namespace Soho.EmailAndSMS.Service.DataAccess
     {
         private SqlConnection conn;
         private SqlCommand cmd;
-        private static readonly string ConnectionString = ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"];
+        private static string ConnectionString
+        {
+            get
+            {
+                string conn = ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"];
+                return Decrypt(conn);
+            }
+        }
+
+        #region 连接串解密
+        private static string Decrypt(string encryptionText)
+        {
+            string result = string.Empty;
+
+            if (encryptionText.Length > 0)
+            {
+                byte[] bytes = Convert.FromBase64String(encryptionText);
+                byte[] inArray = Decrypt(bytes);
+                if (inArray.Length > 0)
+                {
+                    result = System.Text.Encoding.Unicode.GetString(inArray);
+                }
+            }
+            return result;
+
+        }
+        private static byte[] Decrypt(byte[] bytesData)
+        {
+            byte[] result = new byte[0];
+            using (MemoryStream stream = new MemoryStream())
+            {
+                ICryptoTransform cryptoServiceProvider = CreateAlgorithm().CreateDecryptor();
+                using (CryptoStream stream2 = new CryptoStream(stream, cryptoServiceProvider, CryptoStreamMode.Write))
+                {
+                    stream2.Write(bytesData, 0, bytesData.Length);
+                    stream2.FlushFinalBlock();
+                    stream2.Close();
+                    result = stream.ToArray();
+                }
+                stream.Close();
+            }
+            return result;
+        }
+        private static Rijndael CreateAlgorithm()
+        {
+            Rijndael rijndael = new RijndaelManaged();
+            rijndael.Mode = CipherMode.CBC;
+            byte[] key = System.Text.Encoding.Unicode.GetBytes("Nesc.Oversea");
+            byte[] iv = System.Text.Encoding.Unicode.GetBytes("Oversea3");
+            rijndael.Key = key;
+            rijndael.IV = iv;
+            return rijndael;
+        }
+        #endregion
 
         public DBHelper()
         {

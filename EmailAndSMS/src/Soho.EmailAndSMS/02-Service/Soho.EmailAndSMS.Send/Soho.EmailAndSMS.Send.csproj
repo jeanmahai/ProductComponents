@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,11 @@
     <Compile Include="Email\ISenderInterface.cs" />
     <Compile Include="Email\Sender\PersonalMailSender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SMS\ISenderInterface.cs" />
+    <Compile Include="SMS\Sender\EmaySMSSender.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SMS\SMSSendService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Soho.EmailAndSMS.Service\Soho.EmailAndSMS.Service.csproj">
@@ -52,9 +58,7 @@
       <Name>Soho.EmailAndSMS.Service</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SMS\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

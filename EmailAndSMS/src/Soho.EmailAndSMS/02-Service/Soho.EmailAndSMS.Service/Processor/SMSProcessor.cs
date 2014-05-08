@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Soho.EmailAndSMS.Service.Entity;
+using System.Data;
+using Soho.EmailAndSMS.Service.DataAccess;
 
 namespace Soho.EmailAndSMS.Service.Processor
 {
@@ -9,8 +11,8 @@ namespace Soho.EmailAndSMS.Service.Processor
     public class SMSProcessor
     {
         #region 短信服务实例
-        private SMSProcessor _Instance = null;
-        public SMSProcessor Instance
+        private static SMSProcessor _Instance = null;
+        public static SMSProcessor Instance
         {
             get
             {
@@ -21,15 +23,36 @@ namespace Soho.EmailAndSMS.Service.Processor
         }
         #endregion
 
+        #region 加载配置
+        /// <summary>
+        /// 加载配置
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<string, string> LoadConfig()
+        {
+            Dictionary<string, string> configs = new Dictionary<string, string>();
+            DataTable dt = SMSDA.LoadConfig();
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    configs[row["ConfigKey"].ToString()] = row["ConfigValue"].ToString();
+                }
+            }
+            return configs;
+        }
+        #endregion
+
         #region 系统读写短信
         /// <summary>
         /// 插入短信
+        /// 说明：邮件若无审核，则初始状态写入200，否则写入0
         /// </summary>
         /// <param name="sms">短信对象</param>
         /// <returns></returns>
         public bool InsertSMS(SMSEntity sms)
         {
-            return true;
+            return SMSDA.InsertSMS(sms);
         }
 
         /// <summary>
@@ -39,7 +62,14 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <returns></returns>
         public bool BatchInsertSMS(List<SMSEntity> smsList)
         {
-            return true;
+            bool result = false;
+            foreach (var sms in smsList)
+            {
+                result = SMSDA.InsertSMS(sms);
+                if (!result)
+                    break;
+            }
+            return result;
         }
 
         /// <summary>
@@ -49,7 +79,14 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <returns></returns>
         public QueryResult<SMSEntity> QuerySMS(SMSQueryFilter filter)
         {
-            return null;
+            QueryResult<SMSEntity> result = new QueryResult<SMSEntity>();
+            int totalCounts = 0;
+            var dataList = SMSDA.QuerySMS(filter, out totalCounts);
+            result.TotalCount = totalCounts;
+            result.PageIndex = filter.PageIndex;
+            result.PageSize = filter.PageSize;
+            result.ResultList = dataList;
+            return result;
         }
         #endregion
 
@@ -57,10 +94,22 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <summary>
         /// 获取待发送的短信列表
         /// </summary>
+        /// <param name="topCnts">获取记录数</param>
         /// <returns></returns>
-        public List<SMSEntity> GetWaitSendSMSList()
+        public List<SMSEntity> GetWaitSendSMSList(int topCnts)
         {
-            return null;
+            return SMSDA.GetWaitSendSMSList(topCnts);
+        }
+
+        /// <summary>
+        /// 更新短信状态
+        /// </summary>
+        /// <param name="sysNo">短信编号</param>
+        /// <param name="status">状态</param>
+        /// <param name="note">备注</param>
+        public void UpdateSMSStatus(long sysNo, SMSStatus status, string note = "")
+        {
+            SMSDA.UpdateSMSStatus(sysNo, status, note);
         }
         #endregion
     }

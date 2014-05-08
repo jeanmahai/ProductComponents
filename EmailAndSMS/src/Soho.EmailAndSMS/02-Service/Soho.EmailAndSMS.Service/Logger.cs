@@ -13,7 +13,7 @@ namespace Soho.EmailAndSMS.Service
         /// 写业务日志
         /// </summary>
         /// <param name="contents"></param>
-        internal static void WriteBizLogs(string contents)
+        public static void WriteBizLogs(string contents)
         {
             DateTime dtNow = DateTime.Now;
             string filePath = string.Format("Log/BizLog/{0}/{1}/{2}.txt", dtNow.Year, dtNow.Month, dtNow.ToString("yyyy-MM-dd"));
@@ -24,7 +24,7 @@ namespace Soho.EmailAndSMS.Service
         /// 写异常日志
         /// </summary>
         /// <param name="contents"></param>
-        internal static void WriteException(string contents)
+        public static void WriteException(string contents)
         {
             DateTime dtNow = DateTime.Now;
             string filePath = string.Format("Log/ExceptionLog/{0}/{1}/{2}.txt", dtNow.Year, dtNow.Month, dtNow.ToString("yyyy-MM-dd"));
@@ -36,7 +36,7 @@ namespace Soho.EmailAndSMS.Service
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <param name="contents">日志内容</param>
-        private static void WriteLog(string filePath, string contents)
+        public static void WriteLog(string filePath, string contents)
         {
             string fileDirection = filePath.Substring(0, filePath.LastIndexOf('/') + 1);
             if (!Directory.Exists(fileDirection))
@@ -45,7 +45,7 @@ namespace Soho.EmailAndSMS.Service
             }
             DateTime now = DateTime.Now;
             StringBuilder sb = new StringBuilder();
-            sb.Append("\r\n** [" + now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "] - Begin **************************************************************");
+            sb.Append("\r\n** [" + now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "] - Begin **************************************************************\r\n");
             sb.Append(contents);
             sb.Append("\r\n** [" + now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "] - End ****************************************************************\r\n");
             byte[] textByte = System.Text.Encoding.UTF8.GetBytes(sb.ToString());

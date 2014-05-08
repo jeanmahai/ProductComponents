@@ -7,11 +7,11 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 
-namespace Soho.EmailAndSMS.SMSWindowsServiceHost
+namespace Soho.EmailAndSMS.EmailWindowsServiceHost
 {
-    public partial class Service1 : ServiceBase
+    public partial class EmailSendSvc : ServiceBase
     {
-        public Service1()
+        public EmailSendSvc()
         {
             InitializeComponent();
         }

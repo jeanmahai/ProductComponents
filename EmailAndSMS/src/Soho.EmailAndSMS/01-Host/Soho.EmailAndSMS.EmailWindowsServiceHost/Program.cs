@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.ServiceProcess;
-using System.Text;
+﻿using System.ServiceProcess;
 
 namespace Soho.EmailAndSMS.EmailWindowsServiceHost
 {
@@ -13,10 +9,12 @@ namespace Soho.EmailAndSMS.EmailWindowsServiceHost
         /// </summary>
         static void Main()
         {
+            (new MainSvc()).Run();
+
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new Service1() 
+				new EmailSendSvc() 
 			};
             ServiceBase.Run(ServicesToRun);
         }

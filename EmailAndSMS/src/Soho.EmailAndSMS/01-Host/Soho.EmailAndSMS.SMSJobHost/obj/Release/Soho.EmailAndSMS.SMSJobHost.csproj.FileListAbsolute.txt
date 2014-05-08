@@ -1,0 +1,5 @@
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.SMSJobHost.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.SMSJobHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\Soho.EmailAndSMS.SMSJobHost.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\Soho.EmailAndSMS.SMSJobHost.pdb

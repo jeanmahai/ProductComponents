@@ -1,0 +1,5 @@
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\bin\Release\Soho.EmailAndSMS.Service.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\bin\Release\Soho.EmailAndSMS.Service.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Release\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Release\Soho.EmailAndSMS.Service.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Release\Soho.EmailAndSMS.Service.pdb
