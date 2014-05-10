@@ -54,7 +54,7 @@ namespace Soho.EmailAndSMS.Send.SMS
             SendSMSEventHandler += LoadWaitSendSMSList;
             SendSMSEventHandler += ThreadSendSMS;
             SendSMSEventHandler();
-            Logger.WriteBizLogs(string.Format("本次推送短信数量：{0}封。", _SendSMSCounts));
+            Logger.WriteBizLogs(string.Format("本次推送短信数量：{0}条。", _SendSMSCounts));
         }
         /// <summary>
         /// 加载配置

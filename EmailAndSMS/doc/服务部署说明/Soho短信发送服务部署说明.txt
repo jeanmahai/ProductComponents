@@ -1,0 +1,17 @@
+1.JobConsole中的Job部署方式：
+将SohoSMSJob包中配置文件按需修改；
+然后将bin打包成SohoSMSJob.zip包；
+设置Job参数如下：
+Soho.EmailAndSMS.SMSJobHost.Program, SohoSMSJob
+Soho短信发送服务Job。
+SohoSMSJob
+上传SohoSMSJob.zip包至JobConsole，启动Job；
+部署完成。
+
+
+**********************************************************************
+2.Windows服务部署方式：
+将SMSSendService包放置部署的目录；
+按需修改其下配置文件；
+执行其下Install.bat批处理文件；
+部署完成。

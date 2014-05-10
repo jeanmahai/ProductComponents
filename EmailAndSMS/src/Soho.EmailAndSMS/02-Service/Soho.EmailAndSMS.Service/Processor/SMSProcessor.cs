@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
-using Soho.EmailAndSMS.Service.Entity;
+﻿using System;
+using System.IO;
+using System.Xml;
 using System.Data;
+using System.Configuration;
+using System.Collections.Generic;
+
+using Soho.EmailAndSMS.Service.Entity;
 using Soho.EmailAndSMS.Service.DataAccess;
 
 namespace Soho.EmailAndSMS.Service.Processor
@@ -23,6 +28,42 @@ namespace Soho.EmailAndSMS.Service.Processor
         }
         #endregion
 
+        #region 获取数据持久化实现类
+        private ISMSDA GetDAInstance
+        {
+            get
+            {
+                ISMSDA _instance = null;
+
+                string _DBType = string.Empty;
+                if (ConfigurationManager.AppSettings["DBType"] == null)
+                {
+                    string path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Configuration\\EmailAndSMSConfig.xml");
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(path);
+                    _DBType = xmlDoc.SelectSingleNode("Root/DBType").InnerText;
+                }
+                else
+                {
+                    _DBType = ConfigurationManager.AppSettings["DBType"].ToString();
+                }
+                switch (_DBType)
+                {
+                    case "SQLServer":
+                        _instance = new Soho.EmailAndSMS.Service.DataAccess.SqlServer.SMSDA();
+                        break;
+                    case "MongoDB":
+                        _instance = new Soho.EmailAndSMS.Service.DataAccess.MongoDB.SMSDA();
+                        break;
+                    default:
+                        _instance = new Soho.EmailAndSMS.Service.DataAccess.SqlServer.SMSDA();
+                        break;
+                }
+                return _instance;
+            }
+        }
+        #endregion
+
         #region 加载配置
         /// <summary>
         /// 加载配置
@@ -31,7 +72,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         public Dictionary<string, string> LoadConfig()
         {
             Dictionary<string, string> configs = new Dictionary<string, string>();
-            DataTable dt = SMSDA.LoadConfig();
+            DataTable dt = GetDAInstance.LoadConfig();
             if (dt != null && dt.Rows.Count > 0)
             {
                 foreach (DataRow row in dt.Rows)
@@ -52,7 +93,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <returns></returns>
         public bool InsertSMS(SMSEntity sms)
         {
-            return SMSDA.InsertSMS(sms);
+            return GetDAInstance.InsertSMS(sms);
         }
 
         /// <summary>
@@ -65,7 +106,7 @@ namespace Soho.EmailAndSMS.Service.Processor
             bool result = false;
             foreach (var sms in smsList)
             {
-                result = SMSDA.InsertSMS(sms);
+                result = GetDAInstance.InsertSMS(sms);
                 if (!result)
                     break;
             }
@@ -81,7 +122,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         {
             QueryResult<SMSEntity> result = new QueryResult<SMSEntity>();
             int totalCounts = 0;
-            var dataList = SMSDA.QuerySMS(filter, out totalCounts);
+            var dataList = GetDAInstance.QuerySMS(filter, out totalCounts);
             result.TotalCount = totalCounts;
             result.PageIndex = filter.PageIndex;
             result.PageSize = filter.PageSize;
@@ -98,7 +139,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <returns></returns>
         public List<SMSEntity> GetWaitSendSMSList(int topCnts)
         {
-            return SMSDA.GetWaitSendSMSList(topCnts);
+            return GetDAInstance.GetWaitSendSMSList(topCnts);
         }
 
         /// <summary>
@@ -109,7 +150,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         /// <param name="note">备注</param>
         public void UpdateSMSStatus(long sysNo, SMSStatus status, string note = "")
         {
-            SMSDA.UpdateSMSStatus(sysNo, status, note);
+            GetDAInstance.UpdateSMSStatus(sysNo, status, note);
         }
         #endregion
     }

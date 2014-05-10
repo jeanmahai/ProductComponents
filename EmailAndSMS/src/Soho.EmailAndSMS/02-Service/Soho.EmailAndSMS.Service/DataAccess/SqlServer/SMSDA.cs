@@ -1,36 +1,33 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Net.Mail;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 using Soho.EmailAndSMS.Service.Entity;
 
-namespace Soho.EmailAndSMS.Service.DataAccess
+namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
 {
     /// <summary>
-    /// Email数据处理
+    /// 短信数据处理
     /// </summary>
-    public class EmailDA
+    public class SMSDA : ISMSDA
     {
         /// <summary>
         /// 加载配置
         /// </summary>
         /// <returns></returns>
-        public static DataTable LoadConfig()
+        public DataTable LoadConfig()
         {
             DataTable dt = null;
             string sql = @"SELECT SysNo, Category, ConfigKey, ConfigValue
                                 FROM [SohoEmailAndSMS].[dbo].[Configs](NOLOCK)
-	                            WHERE [Category] = N'Email'";
-            DBHelper db = new DBHelper();
+	                            WHERE [Category] = N'SMS'";
+            SqlServerDBHelper db = new SqlServerDBHelper();
             try
             {
                 dt = db.ExeSqlDataAdapter(CommandType.Text, sql);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Logger.WriteException(ex.ToString());
             }
@@ -42,21 +39,17 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         }
 
         /// <summary>
-        /// 写入Email数据
+        /// 写入短信数据
         /// </summary>
-        /// <param name="entity">Email对象</param>
-        public static bool InsertEmail(EmailEntity entity)
+        /// <param name="entity">短信对象</param>
+        public bool InsertSMS(SMSEntity entity)
         {
             int retVal = 0;
-            string sql = @"INSERT INTO [SohoEmailAndSMS].[dbo].[Emails]
+            string sql = @"INSERT INTO [SohoEmailAndSMS].[dbo].[SMS]
                             ([UserSysNo]
                             ,[ReceiveName]
-                            ,[ReceiveAddress]
-                            ,[CCAddress]
-                            ,[EmailTitle]
-                            ,[EmailBody]
-                            ,[IsBodyHtml]
-                            ,[EmailPriority]
+                            ,[ReceivePhoneNumber]
+                            ,[SMSBody]
                             ,[Status]
                             ,[SendTime]
                             ,[InDate]
@@ -65,31 +58,23 @@ namespace Soho.EmailAndSMS.Service.DataAccess
                         VALUES
                             (@UserSysNo
                             ,@ReceiveName
-                            ,@ReceiveAddress
-                            ,@CCAddress
-                            ,@EmailTitle
-                            ,@EmailBody
-                            ,@IsBodyHtml
-                            ,@EmailPriority
+                            ,@ReceivePhoneNumber
+                            ,@SMSBody
                             ,@Status
                             ,@SendTime
                             ,GETDATE()
                             ,NULL
                             ,@Note)";
 
-            DBHelper db = new DBHelper();
+            SqlServerDBHelper db = new SqlServerDBHelper();
             try
             {
                 SqlParameter[] para = new SqlParameter[]
                 { 
                     new SqlParameter("@UserSysNo", entity.UserSysNo.HasValue ? entity.UserSysNo.Value : 0),
                     new SqlParameter("@ReceiveName", entity.ReceiveName),
-                    new SqlParameter("@ReceiveAddress", entity.ReceiveAddress),
-                    new SqlParameter("@CCAddress", entity.CCAddress),
-                    new SqlParameter("@EmailTitle", entity.EmailTitle),
-                    new SqlParameter("@EmailBody", entity.EmailBody),
-                    new SqlParameter("@IsBodyHtml", entity.IsBodyHtml),
-                    new SqlParameter("@EmailPriority", entity.EmailPriority),
+                    new SqlParameter("@ReceivePhoneNumber", entity.ReceivePhoneNumber),
+                    new SqlParameter("@SMSBody", entity.SMSBody),
                     new SqlParameter("@Status", entity.Status),
                     new SqlParameter("@SendTime", entity.SendTime.HasValue ? entity.SendTime.Value.ToString() : ""),
                     new SqlParameter("@Note", string.IsNullOrWhiteSpace(entity.Note) ? "" : entity.Note)
@@ -109,18 +94,18 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         }
 
         /// <summary>
-        /// 查询Email数据
+        /// 查询短信数据
         /// </summary>
         /// <param name="filter">查询条件</param>
         /// <param name="totalCounts">总记录数</param>
         /// <returns></returns>
-        public static List<EmailEntity> QueryMail(EmailQueryFilter filter, out int totalCounts)
+        public List<SMSEntity> QuerySMS(SMSQueryFilter filter, out int totalCounts)
         {
             totalCounts = 0;
-            List<EmailEntity> result = new List<EmailEntity>();
+            List<SMSEntity> result = new List<SMSEntity>();
 
             string sql = @"SELECT COUNT(1)
-                          FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+                          FROM [SohoEmailAndSMS].[dbo].[SMS](NOLOCK)
                               WHERE #StrWhere#
 
                             SELECT TOP " + filter.PageSize.ToString() + @" T.* FROM
@@ -129,21 +114,17 @@ namespace Soho.EmailAndSMS.Service.DataAccess
                               ,[SysNo]
                               ,[UserSysNo]
                               ,[ReceiveName]
-                              ,[ReceiveAddress]
-                              ,[CCAddress]
-                              ,[EmailTitle]
-                              ,[EmailBody]
-                              ,[IsBodyHtml]
-                              ,[EmailPriority]
+                              ,[ReceivePhoneNumber]
+                              ,[SMSBody]
                               ,[Status]
                               ,[SendTime]
                               ,[InDate]
                               ,[LastUpdateTime]
                               ,[Note]
-                          FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+                          FROM [SohoEmailAndSMS].[dbo].[SMS](NOLOCK)
                               WHERE #StrWhere#) T
                           WHERE T.[RowNumber] > @StartNumber AND T.[RowNumber] < @EndNumber";
-            DBHelper db = new DBHelper();
+            SqlServerDBHelper db = new SqlServerDBHelper();
             try
             {
                 List<SqlParameter> param = new List<SqlParameter>();
@@ -158,16 +139,14 @@ namespace Soho.EmailAndSMS.Service.DataAccess
                     strWhere += " AND [ReceiveName] LIKE '%' + @ReceiveName + '%'";
                     param.Add(new SqlParameter("@ReceiveName", filter.ReceiveName));
                 }
-                if (!string.IsNullOrWhiteSpace(filter.EmailAddress))
+                if (!string.IsNullOrWhiteSpace(filter.ReceivePhoneNumber))
                 {
-                    strWhere += " AND ([ReceiveAddress] LIKE '%' + @EmailAddress + '%'";
-                    strWhere += " OR [CCAddress] LIKE '%' + @EmailAddress + '%')";
-                    param.Add(new SqlParameter("@EmailAddress", filter.EmailAddress));
+                    strWhere += " AND [ReceivePhoneNumber] LIKE '%' + @ReceivePhoneNumber + '%'";
+                    param.Add(new SqlParameter("@ReceivePhoneNumber", filter.ReceivePhoneNumber));
                 }
                 if (!string.IsNullOrWhiteSpace(filter.Keywords))
                 {
-                    strWhere += " AND ([EmailTitle] LIKE '%' + @Keywords + '%'";
-                    strWhere += " OR [EmailBody] LIKE '%' + @Keywords + '%')";
+                    strWhere += " AND [SMSBody] LIKE '%' + @Keywords + '%'";
                     param.Add(new SqlParameter("@Keywords", filter.Keywords));
                 }
                 if (filter.Status.HasValue)
@@ -204,18 +183,14 @@ namespace Soho.EmailAndSMS.Service.DataAccess
                     {
                         foreach (DataRow row in dt.Rows)
                         {
-                            result.Add(new EmailEntity()
+                            result.Add(new SMSEntity()
                             {
                                 SysNo = int.Parse(row["SysNo"].ToString()),
                                 UserSysNo = string.IsNullOrWhiteSpace(row["UserSysNo"].ToString()) ? 0 : int.Parse(row["UserSysNo"].ToString()),
                                 ReceiveName = row["ReceiveName"].ToString(),
-                                ReceiveAddress = row["ReceiveAddress"].ToString(),
-                                CCAddress = row["CCAddress"].ToString(),
-                                EmailTitle = row["EmailTitle"].ToString(),
-                                EmailBody = row["EmailBody"].ToString(),
-                                IsBodyHtml = row["IsBodyHtml"].ToString() == "1" ? true : false,
-                                EmailPriority = (MailPriority)int.Parse(row["EmailPriority"].ToString()),
-                                Status = (EmailStatus)int.Parse(row["Status"].ToString()),
+                                ReceivePhoneNumber = row["ReceivePhoneNumber"].ToString(),
+                                SMSBody = row["SMSBody"].ToString(),
+                                Status = (SMSStatus)int.Parse(row["Status"].ToString()),
                                 SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
                                 InDate = DateTime.Parse(row["InDate"].ToString()),
                                 LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
@@ -238,40 +213,36 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         }
 
         /// <summary>
-        /// 获取待发送的电子邮件列表
+        /// 获取待发送的短信列表
         /// </summary>
         /// <param name="topCnts">获取记录数</param>
         /// <returns></returns>
-        public static List<EmailEntity> GetWaitSendMailList(int topCnts)
+        public List<SMSEntity> GetWaitSendSMSList(int topCnts)
         {
-            List<EmailEntity> result = new List<EmailEntity>();
+            List<SMSEntity> result = new List<SMSEntity>();
 
             string sql = @"DECLARE @TblSysNoList TABLE (GetSysNo INT);
 INSERT INTO @TblSysNoList
 SELECT TOP " + topCnts.ToString() + @" [SysNo]
-	FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+	FROM [SohoEmailAndSMS].[dbo].[SMS](NOLOCK)
     WHERE [Status] = 200 OR ([Status] = 300 AND [SendTime] < GETDATE())
 
-UPDATE [SohoEmailAndSMS].[dbo].[Emails] SET Status = 301
+UPDATE [SohoEmailAndSMS].[dbo].[SMS] SET Status = 301
 	WHERE [SysNo] IN (SELECT GetSysNo FROM @TblSysNoList)
 
 SELECT [SysNo]
-              ,[UserSysNo]
-              ,[ReceiveName]
-              ,[ReceiveAddress]
-              ,[CCAddress]
-              ,[EmailTitle]
-              ,[EmailBody]
-              ,[IsBodyHtml]
-              ,[EmailPriority]
-              ,[Status]
-              ,[SendTime]
-              ,[InDate]
-              ,[LastUpdateTime]
-              ,[Note]
-          FROM [SohoEmailAndSMS].[dbo].[Emails](NOLOCK)
+      ,[UserSysNo]
+      ,[ReceiveName]
+      ,[ReceivePhoneNumber]
+      ,[SMSBody]
+      ,[Status]
+      ,[SendTime]
+      ,[InDate]
+      ,[LastUpdateTime]
+      ,[Note]
+          FROM [SohoEmailAndSMS].[dbo].[SMS](NOLOCK)
           WHERE [SysNo] IN (SELECT GetSysNo FROM @TblSysNoList)";
-            DBHelper db = new DBHelper();
+            SqlServerDBHelper db = new SqlServerDBHelper();
             try
             {
                 DataTable dt = db.ExeSqlDataAdapter(CommandType.Text, sql);
@@ -279,18 +250,14 @@ SELECT [SysNo]
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        result.Add(new EmailEntity()
+                        result.Add(new SMSEntity()
                         {
                             SysNo = int.Parse(row["SysNo"].ToString()),
                             UserSysNo = string.IsNullOrWhiteSpace(row["UserSysNo"].ToString()) ? 0 : int.Parse(row["UserSysNo"].ToString()),
                             ReceiveName = row["ReceiveName"].ToString(),
-                            ReceiveAddress = row["ReceiveAddress"].ToString(),
-                            CCAddress = row["CCAddress"].ToString(),
-                            EmailTitle = row["EmailTitle"].ToString(),
-                            EmailBody = row["EmailBody"].ToString(),
-                            IsBodyHtml = row["IsBodyHtml"].ToString() == "1" ? true : false,
-                            EmailPriority = (MailPriority)int.Parse(row["EmailPriority"].ToString()),
-                            Status = (EmailStatus)int.Parse(row["Status"].ToString()),
+                            ReceivePhoneNumber = row["ReceivePhoneNumber"].ToString(),
+                            SMSBody = row["SMSBody"].ToString(),
+                            Status = (SMSStatus)int.Parse(row["Status"].ToString()),
                             SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
                             InDate = DateTime.Parse(row["InDate"].ToString()),
                             LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
@@ -312,19 +279,19 @@ SELECT [SysNo]
         }
 
         /// <summary>
-        /// 更新电子邮件状态
+        /// 更新短信状态
         /// </summary>
-        /// <param name="sysNo">电子邮件编号</param>
+        /// <param name="sysNo">短信编号</param>
         /// <param name="status">状态</param>
         /// <param name="note">备注</param>
-        public static void UpdateEmailStatus(long sysNo, EmailStatus status, string note)
+        public void UpdateSMSStatus(long sysNo, SMSStatus status, string note)
         {
-            string sql = @"UPDATE [SohoEmailAndSMS].[dbo].[Emails]
+            string sql = @"UPDATE [SohoEmailAndSMS].[dbo].[SMS]
 	                          SET [Status] = @Status,
 		                          [LastUpdateTime] = GETDATE(),
 		                          [Note] = ISNULL([Note], N'') + @Note
 	                          WHERE [SysNo] = @SysNo";
-            DBHelper db = new DBHelper();
+            SqlServerDBHelper db = new SqlServerDBHelper();
             try
             {
                 SqlParameter[] para = new SqlParameter[]

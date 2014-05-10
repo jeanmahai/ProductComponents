@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Soho.EmailAndSMS.EmailJobHost</RootNamespace>
-    <AssemblyName>Soho.EmailAndSMS.EmailJobHost</AssemblyName>
+    <AssemblyName>SohoEmailJob</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newegg.Oversea.Framework.JobConsole.ClientInterface">
+      <HintPath>..\..\..\ReferenceLib\Newegg.Oversea.Framework.JobConsole.ClientInterface.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +43,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\02-Service\Soho.EmailAndSMS.Send\Soho.EmailAndSMS.Send.csproj">
+      <Project>{1128A422-04C1-49EF-A3E1-114BD4BAED38}</Project>
+      <Name>Soho.EmailAndSMS.Send</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\EmailAndSMSConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

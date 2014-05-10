@@ -1,5 +1,11 @@
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.SMSJobHost.dll
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.SMSJobHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Configuration\EmailAndSMSConfig.xml
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\SohoSMSJob.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\SohoSMSJob.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Newegg.Oversea.Framework.JobConsole.ClientInterface.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Send.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Service.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Send.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Service.pdb
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\ResolveAssemblyReference.cache
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\Soho.EmailAndSMS.SMSJobHost.dll
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\Soho.EmailAndSMS.SMSJobHost.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\SohoSMSJob.dll
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\SohoSMSJob.pdb

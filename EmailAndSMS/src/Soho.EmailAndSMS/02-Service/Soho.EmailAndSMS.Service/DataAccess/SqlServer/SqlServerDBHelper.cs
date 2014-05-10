@@ -1,24 +1,38 @@
-﻿using System.Data;
+﻿using System;
+using System.IO;
+using System.Xml;
+using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
-using System.IO;
 using System.Security.Cryptography;
-using System;
 
-namespace Soho.EmailAndSMS.Service.DataAccess
+namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
 {
     /// <summary>
-    /// 底层程序与数据库交互类
+    /// 底层程序与SqlServer数据库交互类
     /// </summary>
-    public class DBHelper
+    public class SqlServerDBHelper
     {
         private SqlConnection conn;
         private SqlCommand cmd;
-        private static string ConnectionString
+        public static string ConnectionString
         {
             get
             {
-                string conn = ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"];
+                //  如果找不到应用程序配置中的数据库连接串配置，则加载配置文件配置
+                string conn = string.Empty;
+                if (ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"] == null)
+                {
+                    string path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Configuration\\EmailAndSMSConfig.xml");
+                    XmlDocument xmlDoc = new XmlDocument();
+                    xmlDoc.Load(path);
+                    conn = xmlDoc.SelectSingleNode("Root/EmailAndSMSDbSettingConn").InnerText;
+                }
+                else
+                {
+                    conn = ConfigurationManager.AppSettings["EmailAndSMSDbSettingConn"].ToString();
+                }
+
                 return Decrypt(conn);
             }
         }
@@ -26,7 +40,7 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         #region 连接串解密
         private static string Decrypt(string encryptionText)
         {
-            string result = string.Empty;
+            string result = "";
 
             if (encryptionText.Length > 0)
             {
@@ -69,10 +83,10 @@ namespace Soho.EmailAndSMS.Service.DataAccess
         }
         #endregion
 
-        public DBHelper()
+        public SqlServerDBHelper()
         {
             conn = new System.Data.SqlClient.SqlConnection();
-            conn.ConnectionString = ConnectionString;
+            conn.ConnectionString = "data source=.;database=SohoEmailAndSMS;user id=sa;password=123;connection reset=false;Timeout=30;connection lifetime=30; min pool size=0; max pool size=50";//ConnectionString;
 
             try
             {

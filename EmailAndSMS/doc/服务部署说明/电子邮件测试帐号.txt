@@ -1,0 +1,2 @@
+send:	    abcd115922@163.com/115922abcd
+receive:	just115922@126.com/115922just

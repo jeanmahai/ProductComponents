@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Soho.EmailAndSMS.Send.Email;
 using System.Threading;
+using System.Configuration;
+
+using Soho.EmailAndSMS.Send.Email;
 
 namespace Soho.EmailAndSMS.EmailWindowsServiceHost
 {
@@ -24,8 +23,9 @@ namespace Soho.EmailAndSMS.EmailWindowsServiceHost
         {
             while (true)
             {
+                int interval = int.Parse(ConfigurationManager.AppSettings["EmailSvcIntervalSeconds"].ToString());
                 (new EmailSendService()).StartSendMail();
-                Thread.Sleep(1 * 60 * 1000);
+                Thread.Sleep(interval * 60 * 1000);
             }
         }
         private void RunCompleted(IAsyncResult ar)

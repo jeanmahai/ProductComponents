@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Configuration;
 
 using Soho.EmailAndSMS.Send.SMS;
 
@@ -22,8 +23,9 @@ namespace Soho.EmailAndSMS.SMSWindowsServiceHost
         {
             while (true)
             {
+                int interval = int.Parse(ConfigurationManager.AppSettings["SMSSvcIntervalSeconds"].ToString());
                 (new SMSSendService()).StartSendSMS();
-                Thread.Sleep(1 * 60 * 1000);
+                Thread.Sleep(interval * 60 * 1000);
             }
         }
         private void RunCompleted(IAsyncResult ar)

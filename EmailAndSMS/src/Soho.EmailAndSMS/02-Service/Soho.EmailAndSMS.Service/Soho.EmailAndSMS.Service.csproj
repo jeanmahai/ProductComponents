@@ -42,9 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\DBHelper.cs" />
-    <Compile Include="DataAccess\EmailDA.cs" />
-    <Compile Include="DataAccess\SMSDA.cs" />
+    <Compile Include="DataAccess\IEmailDA.cs" />
+    <Compile Include="DataAccess\ISMSDA.cs" />
+    <Compile Include="DataAccess\MongoDB\EmailDA.cs" />
+    <Compile Include="DataAccess\MongoDB\SMSDA.cs" />
+    <Compile Include="DataAccess\SqlServer\SqlServerDBHelper.cs" />
+    <Compile Include="DataAccess\SqlServer\EmailDA.cs" />
+    <Compile Include="DataAccess\SqlServer\SMSDA.cs" />
     <Compile Include="Entity\EmailEntity.cs" />
     <Compile Include="Entity\EmailQueryFilter.cs" />
     <Compile Include="Entity\Enums.cs" />
