@@ -1,0 +1,50 @@
+IE 7及以下版本不支持
+
+测试环境:
+chrome 最新
+FF 最新
+IE8,IE9
+
+使用js库包括如下:
+requirejs
+jquery 1.10.2
+jquery ui (datepicker) --jquery
+angular
+angularAMD --angular
+angular-route  --angular
+angular-cookie  --angular
+angualr-date  --angular
+               |--jquery
+               |--jquery ui (datepicker)
+               |--jquery css
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+angular-ng-grid  --angular
+                  |--jquery
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+使用css库包括如下:
+pure
+
+以上所有的库都是通过bower进行管理,bower_components不要包含在源码管理器中.
+需要安装的有如下库:
+bower install requirejs
+              jquery#1.10.2
+			  jqueryui
+			  angular
+			  angularAMD
+			  angular-route
+			  angular-cookies
+			  angular-ui-date
+			  pure
+
+index.html
+    容器,一般布需要修改.需要引用requirejs 文件和一个main.js的配置文件
+views/
+    存放所有的view子页面
+js/main.js
+    js依赖项配置,css配置
+js/scripts/app.js
+    angular配置,及一些自定义扩展,如provider,service,factory的应用,url route,http interceptor
+js/scripts/controllers
+    所有页面的额controller
+
