@@ -3,6 +3,8 @@
  */
 //ie9,chrome 34.0.1847.131 m,ff 29.0
 (function () {
+
+    //javascript 1.8 及以上的功能 在移动端部分浏览器没有此功能
     if (!Function.prototype.bind) {
         Function.prototype.bind = function (oThis) {
             if (typeof this !== "function") {
