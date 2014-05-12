@@ -40,10 +40,10 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     //#endregion
     app.config(["$routeProvider", function ($routeProvider) {
         $routeProvider.
-            when("/home",{
-                templateUrl:"www_views/home.html",
-                controller:"homeController"
-            }).
+            when("/pure-table",angularAMD.route({
+                templateUrl:"www_views/dataGrid1.html",
+                controller:"dataGrid1Controller"
+            })).
             otherwise({redirectTo:appConfig.index});
     }]);
     //interceptor http
