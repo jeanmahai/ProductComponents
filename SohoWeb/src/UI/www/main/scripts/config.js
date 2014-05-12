@@ -6,41 +6,61 @@
 (function(){
     //config
     window["appConfig"]={
+
+        //定义是否在http的时候显示loading
         showLoading:true,
+
+        //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
+
+        //定义需要依赖的js文件
         angularModualJS:["angularAMD"
             , "angular-route"
             //, "ng-grid"
             , "angular-cookies"
             , "angular-date"
             , "N"],
+
+        //定义需要依赖的angular modual
         angularModualNames:["ngRoute"//
             // , "ngGrid"
             , "ngCookies"
             , "NProvider"
-            , "ui.date"]
+            , "ui.date"],
+
+        //定义base controller
+        baseController:function($scope){
+            $scope.test=function(){
+                alert("base controller test.");
+            };
+        }
     };
     //url route
     window["appRouteUrl"]={
         home:{
             routeUrl:"/home",
-            templateUrl:"views/home.html",
+            templateUrl:"www_views/home.html",
             controller:"homeController"
         },
         dataGrid1:{
             routeUrl:"/pure-table",
-            templateUrl:"views/dataGrid1.html",
+            templateUrl:"www_views/dataGrid1.html",
             controller:"dataGrid1Controller"
         },
         demo:{
             routeUrl:"/demo",
-            templateUrl:"views/dynamicLoadControllerAndView.html",
+            templateUrl:"www_views/dynamicLoadControllerAndView.html",
             controller:"DynamicController"
         },
         datepicker:{
             routeUrl:"/datepicker",
-            templateUrl:"views/datepicker.html",
+            templateUrl:"www_views/datepicker.html",
             controller:"datepickerController"
+        },
+        testBaseController:{
+            routeUrl:"/testBaseController",
+            templateUrl:"www_views/testBaseController.html",
+            controller:"testBaseController"
         },
         //默认跳转页面
         otherwise:{

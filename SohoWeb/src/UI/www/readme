@@ -5,6 +5,7 @@ chrome 最新
 FF 最新
 IE8,IE9
 
+========================================================================================================================
 使用js库包括如下:
 requirejs
 jquery 1.10.2
@@ -24,7 +25,7 @@ angular-ng-grid  --angular
 
 使用css库包括如下:
 pure
-
+========================================================================================================================
 以上所有的库都是通过bower进行管理,bower_components不要包含在源码管理器中.
 需要安装的有如下库:
 bower install requirejs
@@ -36,15 +37,17 @@ bower install requirejs
 			  angular-cookies
 			  angular-ui-date
 			  pure
+========================================================================================================================
+bower_components:   bower安装的依赖项组件
+controllers:        所有基础的controller,所说的基础是因为在各个平台的使用同一controller,但是行为可能出现差异,需要对原有
+                    的controller进行重写或者扩展.
+css:                所有的css文件
+main:               程序框架以及一些公共的组件都在这里,一般修改的文件有main.js,config.js,pageLoaded.js,其他文件一般不需
+                    要修改
+mobile_views:       用于移动端的一些view
+www_views:          用于网站的一些view
 
 index.html
     容器,一般布需要修改.需要引用requirejs 文件和一个main.js的配置文件
-views/
-    存放所有的view子页面
-js/main.js
-    js依赖项配置,css配置
-js/scripts/app.js
-    angular配置,及一些自定义扩展,如provider,service,factory的应用,url route,http interceptor
-js/scripts/controllers
-    所有页面的额controller
+
 

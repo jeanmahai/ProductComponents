@@ -70,5 +70,9 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
     //start
     angularAMD.bootstrap(app);
+
+    //base controller
+    app.register.controller("baseController",appConfig.baseController||angular.noop);
+
     return app;
 });
