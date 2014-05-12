@@ -1,0 +1,29 @@
+引用Soho.EmailAndSMS.Service.dll库文件。
+
+1.需在引用的工程中的配置文件中AppSetting节点配置数据存储实现方式，SQLServer-SQLServer数据库存储；
+  MongoDB-MongoDB的NoSql数据库存储，节点名称：DBType；
+2.还需在该节点下配置数据库连接字符串，节点名称：EmailAndSMSDbSettingConn，被加密。
+
+3.提供写电子邮件/短信接口，批量写接口，查询接口，更改状态接口。
+写接口：
+[说明：邮件若无审核，则初始状态写入200，否则写入0]
+EmailProcessor.Instance.InsertMail(EmailEntity email);
+[说明：短信若无审核，则初始状态写入200，否则写入0]
+SMSProcessor.Instance.InsertSMS(SMSEntity sms);
+
+批量写接口：
+[说明：邮件若无审核，则初始状态写入200，否则写入0]
+EmailProcessor.Instance.BatchInsertMail(List<EmailEntity> emailList);
+[说明：短信若无审核，则初始状态写入200，否则写入0]
+SMSProcessor.Instance.BatchInsertSMS(List<SMSEntity> smsList);
+
+查询接口：
+EmailProcessor.Instance.QueryMail(EmailQueryFilter filter);
+SMSProcessor.Instance.QuerySMS(SMSQueryFilter filter);
+
+更新状态接口：
+EmailProcessor.Instance.UpdateEmailStatus(long sysNo, EmailStatus status, string note = "");
+SMSProcessor.Instance.UpdateSMSStatus(long sysNo, SMSStatus status, string note = "");
+
+
+

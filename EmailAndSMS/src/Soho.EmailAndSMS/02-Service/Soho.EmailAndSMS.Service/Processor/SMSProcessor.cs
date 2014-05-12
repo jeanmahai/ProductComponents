@@ -87,7 +87,7 @@ namespace Soho.EmailAndSMS.Service.Processor
         #region 系统读写短信
         /// <summary>
         /// 插入短信
-        /// 说明：邮件若无审核，则初始状态写入200，否则写入0
+        /// 说明：短信若无审核，则初始状态写入200，否则写入0
         /// </summary>
         /// <param name="sms">短信对象</param>
         /// <returns></returns>
@@ -98,6 +98,7 @@ namespace Soho.EmailAndSMS.Service.Processor
 
         /// <summary>
         /// 批量插入短信
+        /// 说明：短信若无审核，则初始状态写入200，否则写入0
         /// </summary>
         /// <param name="smsList">短信对象列表</param>
         /// <returns></returns>
