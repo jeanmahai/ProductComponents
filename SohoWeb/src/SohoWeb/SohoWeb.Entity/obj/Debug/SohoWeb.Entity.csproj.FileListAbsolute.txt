@@ -1,0 +1,5 @@
+D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\bin\Debug\SohoWeb.Entity.dll
+D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\bin\Debug\SohoWeb.Entity.pdb
+D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.dll
+D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.pdb
