@@ -14,27 +14,38 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     });
 
     //config url route
-    //================================
+    //#region 静态配置路由
+//    var routeOps = window["appRouteUrl"];
+//    app.config(["$routeProvider", function ($routeProvider) {
+//        for (var ops in routeOps) {
+//            if (ops === "otherwise") {
+//                $routeProvider.otherwise(routeOps[ops]);
+//                continue;
+//            }
+//            var routeUrl = routeOps[ops].routeUrl;
+//            delete routeOps[ops].routeUrl;
+//            $routeProvider.when(routeUrl, angularAMD.route(routeOps[ops]));
+//        }
+//    }]);
+    //#endregion
+
+    //#region 动态路由
     //动态routing,目前已经禁用了,由于功能还不成熟,暂停使用
     //需要做的东西::controller/:view/:params
     //1.动态去加载对应的view
     //2.动态去加载对应的controller
     //3.处理参数
     //modify angularAMD line angularAMD.prototype.route, line 108~111
-    //================================
-    var routeOps = window["appRouteUrl"];
-    app.config(["$routeProvider", function ($routeProvider) {
-        for (var ops in routeOps) {
-            if (ops === "otherwise") {
-                $routeProvider.otherwise(routeOps[ops]);
-                continue;
-            }
-            var routeUrl = routeOps[ops].routeUrl;
-            delete routeOps[ops].routeUrl;
-            $routeProvider.when(routeUrl, angularAMD.route(routeOps[ops]));
-        }
-    }]);
 
+    //#endregion
+    app.config(["$routeProvider", function ($routeProvider) {
+        $routeProvider.
+            when("/home",{
+                templateUrl:"www_views/home.html",
+                controller:"homeController"
+            }).
+            otherwise({redirectTo:appConfig.index});
+    }]);
     //interceptor http
     app.factory("httpInterceptor", ["$N", function ($N) {
         return{
@@ -70,9 +81,6 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
     //start
     angularAMD.bootstrap(app);
-
-    //base controller
-    app.register.controller("baseController",appConfig.baseController||angular.noop);
 
     return app;
 });

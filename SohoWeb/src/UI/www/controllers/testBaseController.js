@@ -1,7 +1,7 @@
 /**
  * Created by jm96 on 14-5-12.
  */
-define(["app"],function(app){
+define(["app","baseController"],function(app){
     app.register.controller("testBaseController",function($scope,$controller){
         $scope.child=function(){
             alert("i am a child");

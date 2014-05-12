@@ -27,13 +27,7 @@
             , "ngCookies"
             , "NProvider"
             , "ui.date"],
-
-        //定义base controller
-        baseController:function($scope){
-            $scope.test=function(){
-                alert("base controller test.");
-            };
-        }
+        index:"/home"
     };
     //url route
     window["appRouteUrl"]={

@@ -1,4 +1,6 @@
 <p>需要在定义controller时加上一句代码:angular.extend(this,$controller("baseController",{$scope:$scope}));</p>
+<p>在define的时候需要引用对应的controller define(["app","baseController"],function(app){</p>
 <button class="pure-button" ng-click="test()">base : test</button>
 <button class="pure-button" ng-click="child()">child : child</button>
 <button class="pure-button" ng-click="child2()">child : child2</button>
+<button class="pure-button" ng-click="home()">home : home</button>
