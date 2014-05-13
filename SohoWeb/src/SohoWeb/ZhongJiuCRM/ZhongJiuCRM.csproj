@@ -969,6 +969,11 @@
     <Content Include="www\images\star.png" />
     <Content Include="www\images\tool.png" />
     <Content Include="www\index.aspx" />
+    <Content Include="www\main\main.js" />
+    <Content Include="www\main\scripts\app.js" />
+    <Content Include="www\main\scripts\config.js" />
+    <Content Include="www\main\scripts\N.js" />
+    <Content Include="www\main\scripts\pageLoaded.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

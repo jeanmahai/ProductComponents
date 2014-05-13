@@ -24,7 +24,8 @@
         paths: {
             'angular': '../bower_components/angular/angular.min',
             'angular-route': '../bower_components/angular-route/angular-route.min',
-            'angularAMD': '../bower_components/angularAMD/angularAMD.min',
+            //'angularAMD': '../bower_components/angularAMD/angularAMD.min',
+            'angularAMD': '../main/scripts/angularAMD',
             'angular-cookies': '../bower_components/angular-cookies/angular-cookies.min',
             'jquery-ui': "../bower_components/jquery-ui/ui/jquery-ui",
             'jquery-ui-core': "../bower_components/jquery-ui/ui/minified/jquery.ui.core.min",

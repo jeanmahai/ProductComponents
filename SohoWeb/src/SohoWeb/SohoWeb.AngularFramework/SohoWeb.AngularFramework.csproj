@@ -939,10 +939,16 @@
     <Content Include="www\bower_components\pure\tables.css" />
     <Content Include="www\bower_components\requirejs\require.js" />
     <Content Include="www\main\main.js" />
+    <Content Include="www\main\scripts\angularAMD.js" />
     <Content Include="www\main\scripts\app.js" />
     <Content Include="www\main\scripts\config.js" />
     <Content Include="www\main\scripts\N.js" />
     <Content Include="www\main\scripts\pageLoaded.js" />
+    <Content Include="www\views\dataGrid1.html" />
+    <Content Include="www\views\datepicker.html" />
+    <Content Include="www\views\dynamicLoadControllerAndView.html" />
+    <Content Include="www\views\home.html" />
+    <Content Include="www\views\testBaseController.html" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.bat" />
