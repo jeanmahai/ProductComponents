@@ -27,34 +27,33 @@
             , "ngCookies"
             , "NProvider"
             , "ui.date"],
-        index: "/home",
-        viewBasePath:"views/"
+        index:"/home"
     };
     //url route
     window["appRouteUrl"]={
         home:{
             routeUrl:"/home",
-            templateUrl:"views/home.html",
+            templateUrl:"www_views/home.html",
             controller:"homeController"
         },
         dataGrid1:{
-            routeUrl: "/dataGrid1",
-            templateUrl: "views/dataGrid1.html",
+            routeUrl:"/pure-table",
+            templateUrl:"www_views/dataGrid1.html",
             controller:"dataGrid1Controller"
         },
         demo:{
             routeUrl:"/demo",
-            templateUrl: "views/dynamicLoadControllerAndView.html",
+            templateUrl:"www_views/dynamicLoadControllerAndView.html",
             controller:"DynamicController"
         },
         datepicker:{
             routeUrl:"/datepicker",
-            templateUrl: "views/datepicker.html",
+            templateUrl:"www_views/datepicker.html",
             controller:"datepickerController"
         },
         testBaseController:{
             routeUrl:"/testBaseController",
-            templateUrl: "views/testBaseController.html",
+            templateUrl:"www_views/testBaseController.html",
             controller:"testBaseController"
         },
         //默认跳转页面

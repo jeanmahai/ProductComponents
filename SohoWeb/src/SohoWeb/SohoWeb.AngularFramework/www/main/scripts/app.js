@@ -15,18 +15,18 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
     //config url route
     //#region 静态配置路由
-//    var routeOps = window["appRouteUrl"];
-//    app.config(["$routeProvider", function ($routeProvider) {
-//        for (var ops in routeOps) {
-//            if (ops === "otherwise") {
-//                $routeProvider.otherwise(routeOps[ops]);
-//                continue;
-//            }
-//            var routeUrl = routeOps[ops].routeUrl;
-//            delete routeOps[ops].routeUrl;
-//            $routeProvider.when(routeUrl, angularAMD.route(routeOps[ops]));
-//        }
-//    }]);
+    var routeOps = window["appRouteUrl"];
+    app.config(["$routeProvider", function ($routeProvider) {
+        for (var ops in routeOps) {
+            if (ops === "otherwise") {
+                $routeProvider.otherwise(routeOps[ops]);
+                continue;
+            }
+            var routeUrl = routeOps[ops].routeUrl;
+            delete routeOps[ops].routeUrl;
+            $routeProvider.when(routeUrl, angularAMD.route(routeOps[ops]));
+        }
+    }]);
     //#endregion
 
     //#region 动态路由
@@ -38,14 +38,50 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     //modify angularAMD line angularAMD.prototype.route, line 108~111
 
     //#endregion
-    app.config(["$routeProvider", function ($routeProvider) {
-        $routeProvider.
-            when("/pure-table",angularAMD.route({
-                templateUrl:"views/dataGrid1.html",
-                controller:"dataGrid1Controller"
-            })).
-            otherwise({redirectTo:appConfig.index});
-    }]);
+    //function getController(url) {
+    //    var index = url.indexOf("#");
+    //    var sub = url.substring(index + 1);
+    //    var strs = sub.split("/");
+    //    if (strs.length > 1) {
+    //        var ctlName = strs[1] + "Controller";
+    //        console.info("controller:" + ctlName);
+    //        return ctlName;
+    //    }
+    //    throw new Error("controller不存在");
+    //}
+    //app.config(["$routeProvider", function ($routeProvider, $routeParams) {
+    //    $routeProvider.
+    //        when("/:controller/:view", angularAMD.route({
+    //            templateUrl: function ($routeParams) {
+    //                var view = $routeParams.view;
+    //                if (view) {
+    //                    view = view.replace("-", "/");
+    //                    return appConfig.viewBasePath + view + ".html";
+    //                }
+    //                throw new Error("view不存在");
+    //            },
+    //            controller: function () {
+    //                console.info("get controller");
+    //                return getController(window.location.href);
+    //            }
+    //        })).
+    //        when("/:controller", angularAMD.route({
+    //            templateUrl: function ($routeParams) {
+    //                var view = $routeParams.controller
+    //                if (view) {
+    //                    return appConfig.viewBasePath + view + ".html";
+    //                }
+    //                throw new Error("view不存在");
+    //            },
+    //            controller: function () {
+    //                console.info("get controller");
+    //                return getController(window.location.href);
+    //            }
+    //        })).
+    //        otherwise({redirectTo:appConfig.index});
+    //}]);
+
+
     //interceptor http
     app.factory("httpInterceptor", ["$N", function ($N) {
         return{

@@ -7,7 +7,7 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace SohoWeb.AngularFramework.Test.www {
+namespace ZhongJiuCRM.www {
     
     
     public partial class index {
