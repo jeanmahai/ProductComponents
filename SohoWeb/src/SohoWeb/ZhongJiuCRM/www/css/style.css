@@ -5,6 +5,7 @@ body,
 .layout {
     height: 100%;
     font-family: Microsoft YaHei;
+    font-size:0.9em;
 }
 
 .top {
