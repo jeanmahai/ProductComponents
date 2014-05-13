@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7CB9769A-D605-4ED9-8DD4-0DA211BF2465}</ProjectGuid>
+    <ProjectGuid>{CA459594-BC82-45E6-AF7F-9A15F2DF9942}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SohoWeb.AngularFramework.Test</RootNamespace>
-    <AssemblyName>SohoWeb.AngularFramework.Test</AssemblyName>
+    <RootNamespace>ZhongJiuCRM</RootNamespace>
+    <AssemblyName>ZhongJiuCRM</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -58,22 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config" />
-    <Content Include="www\index.aspx" />
-    <Content Include="www\views\dataGrid1.html" />
-    <Content Include="www\views\datepicker.html" />
-    <Content Include="www\views\dynamicLoadControllerAndView.html" />
-    <Content Include="www\views\home.html" />
-    <Content Include="www\views\testBaseController.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="www\index.aspx.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="www\index.aspx.designer.cs">
-      <DependentUpon>index.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.bat" />
@@ -85,10 +72,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SohoWeb.AngularFramework\SohoWeb.AngularFramework.csproj">
-      <Project>{c9183eef-48ea-4d84-99e8-4b2a1917adbe}</Project>
-      <Name>SohoWeb.AngularFramework</Name>
-    </ProjectReference>
+    <Folder Include="www\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -105,7 +89,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6337/</IISUrl>
+          <IISUrl>http://localhost:1286/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

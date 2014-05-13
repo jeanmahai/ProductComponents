@@ -945,7 +945,7 @@
     <Content Include="www\main\scripts\pageLoaded.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.bat" />
+    <Content Include="build.bat" />
     <None Include="www\bower_components\angular-cookies\.bower.json" />
     <None Include="www\bower_components\angular-cookies\angular-cookies.min.js.map" />
     <None Include="www\bower_components\angular-cookies\bower.json" />
@@ -1025,8 +1025,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd ../..
-call build.bat</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
