@@ -979,6 +979,7 @@
     <Content Include="www\main\main.js" />
     <Content Include="www\main\scripts\page_init.js" />
     <Content Include="www\views\customer.html" />
+    <Content Include="www\views\customer_add.html" />
     <Content Include="www\views\home.html" />
   </ItemGroup>
   <ItemGroup>
