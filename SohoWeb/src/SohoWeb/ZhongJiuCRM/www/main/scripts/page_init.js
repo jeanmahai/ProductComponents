@@ -1,10 +1,8 @@
-/**
- * Created by Jeanma on 14-5-11.
- */
-(function () {
-
+﻿(function () {
     function menuHeaderClick() {
-        $(this).next("ul").toggle();
+        $(this).parent().parent().find("ul").slideUp();
+        $(this).next("ul").slideDown();
+        return false;
     }
     function resetContent() {
         var width = $(window).width();

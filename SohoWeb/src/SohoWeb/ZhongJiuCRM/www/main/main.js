@@ -35,10 +35,15 @@
             templateUrl:"views/home.html",
             controller:"homeController"
         },
-        dataGrid1:{
-            routeUrl: "/dataGrid1",
-            templateUrl: "views/dataGrid1.html",
-            controller:"dataGrid1Controller"
+        customer: {
+            routeUrl: "/customer",
+            templateUrl: "views/customer.html",
+            controller: "CustomerController"
+        },
+        customer_add: {
+            routeUrl: "/customer/add",
+            templateUrl: "views/customer_add.html",
+            controller: "CustomerController"
         },
         demo:{
             routeUrl:"/demo",
@@ -94,6 +99,7 @@
             'ng-grid': "../bower_components/ng-grid/ng-grid-2.0.11.min",
 
             'app': "../main/app"
+            ,"page_init":"../main/scripts/page_init"
         },
 
         // Add angular modules that does not support AMD out of the box, put it in a shim
@@ -124,11 +130,12 @@
                 }
             },
             'app':{
-                deps:["angular"],
+                deps: ["angular", "page_init"],
                 init:function(){
 
                 }
             }
+            ,"page_init":["jquery"]
         }
 
         // kick start application
