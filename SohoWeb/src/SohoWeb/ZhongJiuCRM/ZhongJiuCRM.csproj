@@ -946,35 +946,40 @@
     <Content Include="www\bower_components\pure\tables.css" />
     <Content Include="www\bower_components\requirejs\require.js" />
     <Content Include="www\controllers\baseController.js" />
+    <Content Include="www\controllers\CustomerController.js" />
     <Content Include="www\controllers\dataGrid1Controller.js" />
     <Content Include="www\controllers\datepickerController.js" />
     <Content Include="www\controllers\DynamicController.js" />
     <Content Include="www\controllers\HomeController.js" />
     <Content Include="www\controllers\PageController.js" />
     <Content Include="www\controllers\testBaseController.js" />
-    <Content Include="www\css\N.css" />
+    <Content Include="www\controllers\_parentController.js" />
     <Content Include="www\css\style.css" />
+    <Content Include="www\images\add_user.png" />
     <Content Include="www\images\care.png" />
     <Content Include="www\images\customers.png" />
     <Content Include="www\images\grid_dot.png" />
     <Content Include="www\images\grid_small_dot.png" />
+    <Content Include="www\images\home.png" />
     <Content Include="www\images\info.png" />
     <Content Include="www\images\internet.png" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\logout.png" />
     <Content Include="www\images\logo_1.png" />
     <Content Include="www\images\n-seg.png" />
+    <Content Include="www\images\psw.png" />
     <Content Include="www\images\report.png" />
     <Content Include="www\images\right_header_bg.png" />
     <Content Include="www\images\star.png" />
     <Content Include="www\images\tool.png" />
     <Content Include="www\index.aspx" />
     <Content Include="www\login.aspx" />
+    <Content Include="www\main\app.js" />
+    <Content Include="www\main\main.css" />
     <Content Include="www\main\main.js" />
-    <Content Include="www\main\scripts\app.js" />
-    <Content Include="www\main\scripts\config.js" />
-    <Content Include="www\main\scripts\N.js" />
-    <Content Include="www\main\scripts\pageLoaded.js" />
+    <Content Include="www\main\scripts\page_init.js" />
+    <Content Include="www\views\customer.html" />
+    <Content Include="www\views\home.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1073,6 +1078,7 @@
     <Content Include="www\bower_components\requirejs\.bower.json" />
     <Content Include="www\bower_components\requirejs\bower.json" />
     <Content Include="www\bower_components\requirejs\README.md" />
+    <Content Include="www\controllers\readme" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -1102,7 +1108,8 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PreBuildEvent>cd ..
-call build.bat</PreBuildEvent>
+call build.bat
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

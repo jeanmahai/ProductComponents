@@ -952,14 +952,11 @@
     <Content Include="www\controllers\HomeController.js" />
     <Content Include="www\controllers\PageController.js" />
     <Content Include="www\controllers\testBaseController.js" />
-    <Content Include="www\css\N.css" />
+    <Content Include="www\controllers\_parentController.js" />
     <Content Include="www\index.html" />
+    <Content Include="www\main\app.js" />
+    <Content Include="www\main\main.css" />
     <Content Include="www\main\main.js" />
-    <Content Include="www\main\scripts\angularAMD.js" />
-    <Content Include="www\main\scripts\app.js" />
-    <Content Include="www\main\scripts\config.js" />
-    <Content Include="www\main\scripts\N.js" />
-    <Content Include="www\main\scripts\pageLoaded.js" />
     <Content Include="www\views\dataGrid1.html" />
     <Content Include="www\views\datepicker.html" />
     <Content Include="www\views\dynamicLoadControllerAndView.html" />
@@ -1049,6 +1046,7 @@
     <Content Include="www\bower_components\requirejs\bower.json" />
     <Content Include="www\bower_components\requirejs\README.md" />
     <Content Include="www\readme" />
+    <Content Include="www\main\readme" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="www\bower_components\jquery\src\sizzle\" />
