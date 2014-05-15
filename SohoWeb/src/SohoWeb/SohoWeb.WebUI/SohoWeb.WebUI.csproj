@@ -35,16 +35,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Utility">
-      <HintPath>..\..\ReferenceLib\Common.Utility.dll</HintPath>
-    </Reference>
-    <Reference Include="Common.Utility.Web">
-      <HintPath>..\..\ReferenceLib\Common.Utility.Web.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferenceLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Soho.Utility">
+      <HintPath>..\..\ReferenceLib\Soho.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Soho.Utility.Web">
+      <HintPath>..\..\ReferenceLib\Soho.Utility.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -103,12 +103,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\Auth.cs" />
-    <Compile Include="App_Start\Auth2.cs" />
+    <Compile Include="App_Start\AuthMgr.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\PortalResult.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SohoWeb.Entity\SohoWeb.Entity.csproj">
@@ -152,6 +153,15 @@
   <ItemGroup>
     <Content Include="Configuration\Cookie.config" />
     <Content Include="Configuration\Route.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\BusinessRoute.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\GetDatas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

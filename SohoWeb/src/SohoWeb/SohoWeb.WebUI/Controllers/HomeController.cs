@@ -5,40 +5,34 @@ using System.Web;
 using System.Web.Mvc;
 using SohoWeb.Service.ControlPanel;
 using Newtonsoft.Json;
+using Soho.Utility.Web.Framework;
 
 namespace SohoWeb.WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : SSLController
     {
         public ActionResult Index()
         {
-            var data = UserAuthService.Instance.GetDemoData(0);
-            return View(data);
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = UserAuthService.Instance.GetDemoData(0),
+                Message = ""
+            };
+            return View(result);
         }
 
-        [Auth2]
         public ActionResult GetDatas()
         {
             PortalResult result = new PortalResult()
                     {
                         Code = 0,
                         Success = true,
-                        Data = 1,
+                        Data = UserAuthService.Instance.GetDemoData(0),
                         Message = ""
                     };
             return View(result);
-
-            //return new JsonResult()
-            //{
-            //    JsonRequestBehavior = System.Web.Mvc.JsonRequestBehavior.AllowGet,
-            //    Data = new PortalResult()
-            //        {
-            //            Code = 0,
-            //            Success = true,
-            //            Data = 1,
-            //            Message = ""
-            //        }
-            //};
         }
     }
 }

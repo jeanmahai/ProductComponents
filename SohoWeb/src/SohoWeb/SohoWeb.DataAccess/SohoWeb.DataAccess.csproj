@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Utility">
-      <HintPath>..\..\ReferenceLib\Common.Utility.dll</HintPath>
+    <Reference Include="Soho.Utility">
+      <HintPath>..\..\ReferenceLib\Soho.Utility.dll</HintPath>
     </Reference>
-    <Reference Include="Common.Utility.DataAccess">
-      <HintPath>..\..\ReferenceLib\Common.Utility.DataAccess.dll</HintPath>
+    <Reference Include="Soho.Utility.DataAccess">
+      <HintPath>..\..\ReferenceLib\Soho.Utility.DataAccess.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

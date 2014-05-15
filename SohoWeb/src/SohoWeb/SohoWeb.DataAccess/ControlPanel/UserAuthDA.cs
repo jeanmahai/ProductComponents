@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-using Common.Utility.DataAccess;
+using Soho.Utility.DataAccess;
 using SohoWeb.Entity.ControlPanel;
 
 namespace SohoWeb.DataAccess.ControlPanel
