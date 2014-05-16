@@ -32,24 +32,24 @@
     window["appRouteUrl"]={
         home:{
             routeUrl:"/home",
-            templateUrl:"views/home.html",
-            controller:"homeController"
+            templateUrl:"views/home.html"
         },
-        dataGrid1:{
-            routeUrl: "/dataGrid1",
-            templateUrl: "views/dataGrid1.html",
-            controller:"dataGrid1Controller"
+        datepicker:{
+            routeUrl:"/datepicker",
+            templateUrl: "views/datepicker.html",
+            controller:"testDatepickerController"
+        },
+        baseC:{
+            routeUrl: "/base",
+            templateUrl: "views/baseController.html",
+            controller:"testBaseController"
         },
         demo:{
             routeUrl:"/demo",
             templateUrl: "views/dynamicLoadControllerAndView.html",
             controller:"DynamicController"
         },
-        datepicker:{
-            routeUrl:"/datepicker",
-            templateUrl: "views/datepicker.html",
-            controller:"datepickerController"
-        },
+
         testBaseController:{
             routeUrl:"/testBaseController",
             templateUrl: "views/testBaseController.html",

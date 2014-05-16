@@ -114,9 +114,13 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
         $httpProvider.interceptors.push("httpInterceptor");
     });
 
-
     //start
     angularAMD.bootstrap(app);
+
+    //set parent controller
+//    app.register.controller("_parentController",function($scope){
+//
+//    });
 
     return app;
 });
