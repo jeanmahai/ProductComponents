@@ -160,10 +160,10 @@ angular.module("NProvider", ["ng"]).
             link: function (scope, element, attrs, controller) {
                 console.info("init my pager");
                 var pageInfo = scope[attrs.ngModel];
+                var first = true;
 
                 function refresh() {
                     if (controller) {
-                        console.info("index changed");
                         controller.$setViewValue(pageInfo);
                         controller.$render();
                         scope.$apply();
@@ -198,12 +198,15 @@ angular.module("NProvider", ["ng"]).
                 }, function (newVal, oldVal) {
                     console.info("data change");
                     console.info(newVal);
-                    if (newVal.change) {
-                        var r = newVal.change();
-                        if (r && r.finally) {
-                            r.finally(function () {
-                                console.info("page changed");
-                            });
+                    if (newVal && (newVal.index !== oldVal.index || newVal.size !== oldVal.size || first )) {
+                        if (newVal.change) {
+                            first = false;
+                            var r = newVal.change();
+                            if (r && r.finally) {
+                                r.finally(function () {
+                                    console.info("page changed");
+                                });
+                            }
                         }
                     }
                 }, true);

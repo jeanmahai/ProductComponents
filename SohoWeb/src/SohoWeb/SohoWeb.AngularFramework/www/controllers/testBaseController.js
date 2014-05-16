@@ -42,7 +42,6 @@ define(["app", "_baseController"], function (app) {
         var pager= new N.Pager(1,3,function(){
             //真实环境应该使用$http,然后返回$http promise
             //模拟测试
-            console.info("page change");
             var deferred=$q.defer();
             $N.loading();
             setTimeout(function(){
