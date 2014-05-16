@@ -958,11 +958,13 @@
     <Content Include="www\images\add_user.png" />
     <Content Include="www\images\care.png" />
     <Content Include="www\images\customers.png" />
+    <Content Include="www\images\default_user.png" />
     <Content Include="www\images\grid_dot.png" />
     <Content Include="www\images\grid_small_dot.png" />
     <Content Include="www\images\home.png" />
     <Content Include="www\images\info.png" />
     <Content Include="www\images\internet.png" />
+    <Content Include="www\images\login_bg.png" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\logout.png" />
     <Content Include="www\images\logo_1.png" />
