@@ -17,15 +17,16 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     //#region 静态配置路由
     var routeOps = window["appRouteUrl"];
     app.config(["$routeProvider", function ($routeProvider) {
-        for (var ops in routeOps) {
-            if (ops === "otherwise") {
-                $routeProvider.otherwise(routeOps[ops]);
-                continue;
+        angular.forEach(routeOps,function(val){
+            if(val.redirectTo){
+                $routeProvider.otherwise(val);
             }
-            var routeUrl = routeOps[ops].routeUrl;
-            delete routeOps[ops].routeUrl;
-            $routeProvider.when(routeUrl, angularAMD.route(routeOps[ops]));
-        }
+            else{
+                var routeUrl = val.routeUrl;
+                delete val.routeUrl;
+                $routeProvider.when(routeUrl,angularAMD.route(val));
+            }
+        });
     }]);
     //#endregion
 
@@ -89,7 +90,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                 // do something on success
                 //处理自定义headers
                 config.headers = {
-                    "x-newegg-mobile-cookie": window.localStorage.getItem("x-newegg-mobile-cookie")
+                    //"x-newegg-mobile-cookie": window.localStorage.getItem("x-newegg-mobile-cookie")
                 };
                 //处理loading
                 $N.loading(config);
@@ -98,13 +99,16 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
             'response': function (response) {
                 // do something on success
                 //处理自定义的headers
-                var mobileCookie = response.headers("x-newegg-mobile-cookie");
-                if (mobileCookie && mobileCookie != "") {
-
-                }
-                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
+//                var mobileCookie = response.headers("x-newegg-mobile-cookie");
+//                if (mobileCookie && mobileCookie != "") {
+//
+//                }
+//                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
                 //处理loaded
                 $N.loaded(response);
+
+                //处理异常
+
 
                 return response || $q.when(response);
             }

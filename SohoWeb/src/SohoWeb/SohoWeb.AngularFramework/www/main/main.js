@@ -29,37 +29,24 @@
         viewBasePath:"views/"
     };
     //url route
-    window["appRouteUrl"]={
-        home:{
-            routeUrl:"/home",
-            templateUrl:"views/home.html"
-        },
-        datepicker:{
-            routeUrl:"/datepicker",
-            templateUrl: "views/datepicker.html",
-            controller:"testDatepickerController"
-        },
-        baseC:{
-            routeUrl: "/base",
-            templateUrl: "views/baseController.html",
-            controller:"testBaseController"
-        },
-        demo:{
-            routeUrl:"/demo",
-            templateUrl: "views/dynamicLoadControllerAndView.html",
-            controller:"DynamicController"
-        },
-
-        testBaseController:{
-            routeUrl:"/testBaseController",
-            templateUrl: "views/testBaseController.html",
-            controller:"testBaseController"
-        },
-        //默认跳转页面
-        otherwise:{
-            redirectTo:"/home"
-        }
-    };
+    window["appRouteUrl"]=[{
+        routeUrl:"/home",
+        templateUrl:"views/home.html"
+    },{
+        routeUrl:"/datepicker",
+        templateUrl: "views/datepicker.html",
+        controller:"testDatepickerController"
+    },{
+        routeUrl:"/base",
+        templateUrl: "views/baseController.html",
+        controller:"testBaseController"
+    },{
+        routeUrl:"/repeat",
+        templateUrl: "views/repeat.html",
+        controller:"testBaseController"
+    },{
+        redirectTo:"/home"
+    }];
 
     function getShortDateString() {
         var date = new Date();
