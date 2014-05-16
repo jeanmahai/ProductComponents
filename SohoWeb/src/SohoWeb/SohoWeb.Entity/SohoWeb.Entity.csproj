@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlPanel\Users.cs" />
+    <Compile Include="EntityBase.cs" />
+    <Compile Include="Enums\Common.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

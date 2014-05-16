@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Soho.Utility.Web.Framework;
 
 namespace SohoWeb.WebUI
 {
@@ -7,7 +8,8 @@ namespace SohoWeb.WebUI
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new CustomHandleErrorAttribute());
+            //filters.Add(new HandleErrorAttribute());
         }
     }
 }
