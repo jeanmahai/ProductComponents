@@ -46,6 +46,10 @@
         controller:"testBaseController"
     },{
         redirectTo:"/home"
+    },{
+        routeUrl:"/dt",
+        templateUrl:"views/dataTable.html",
+        controller:"testBaseController"
     }];
 
     function getShortDateString() {

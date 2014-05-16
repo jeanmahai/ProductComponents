@@ -17,14 +17,14 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     //#region 静态配置路由
     var routeOps = window["appRouteUrl"];
     app.config(["$routeProvider", function ($routeProvider) {
-        angular.forEach(routeOps,function(val){
-            if(val.redirectTo){
+        angular.forEach(routeOps, function (val) {
+            if (val.redirectTo) {
                 $routeProvider.otherwise(val);
             }
-            else{
+            else {
                 var routeUrl = val.routeUrl;
                 delete val.routeUrl;
-                $routeProvider.when(routeUrl,angularAMD.route(val));
+                $routeProvider.when(routeUrl, angularAMD.route(val));
             }
         });
     }]);
@@ -121,11 +121,6 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     //start
     angularAMD.bootstrap(app);
 
-    //set parent controller
-//    app.register.controller("_parentController",function($scope){
-//
-//    });
-
     return app;
 });
 //javascript 1.8 及以上的功能 在移动端部分浏览器没有此功能
@@ -154,8 +149,67 @@ if (!Function.prototype.bind) {
     };
 }
 
-
+/*
+ * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
+ * */
 angular.module("NProvider", ["ng"]).
+    directive("myPager",function ($timeout) {
+        return {
+            require: "ngModel",
+            restrict: "ACE",
+            link: function (scope, element, attrs, controller) {
+                console.info("init my pager");
+                var pageInfo = scope[attrs.ngModel];
+
+                function refresh() {
+                    if (controller) {
+                        console.info("index changed");
+                        controller.$setViewValue(pageInfo);
+                        controller.$render();
+                        scope.$apply();
+                    }
+                }
+
+                function prev() {
+                    if (pageInfo && pageInfo.index && pageInfo.index > 1) {
+                        pageInfo.index--;
+                        refresh();
+                    }
+                    return false;
+                }
+
+                function next() {
+                    var totalPage = 0;
+                    if (pageInfo.size > 0) {
+                        totalPage = pageInfo.total / pageInfo.size;
+                    }
+                    if (pageInfo.index < totalPage) {
+                        pageInfo.index++;
+                        refresh();
+                    }
+                    return false;
+                }
+
+                element.find(".prev").bind("click", prev);
+                element.find(".next").bind("click", next);
+
+                scope.$watch(function (s) {
+                    return s[attrs.ngModel];
+                }, function (newVal, oldVal) {
+                    console.info("data change");
+                    console.info(newVal);
+                    if (newVal.change) {
+                        var r = newVal.change();
+                        if (r && r.finally) {
+                            r.finally(function () {
+                                console.info("page changed");
+                            });
+                        }
+                    }
+                }, true);
+            }
+        };
+    }).
     provider("$N", function () {
         function N() {
             this.showLoading = false;
@@ -201,3 +255,26 @@ angular.module("NProvider", ["ng"]).
             return new N();
         };
     });
+
+(function () {
+    if (!window["N"])window["N"] = {};
+    //分页实体
+    function pager(index, size, onChange) {
+        this.index = index || 1;
+        this.size = size || 0;
+        this.change = onChange || angular.noop();
+        this.total = 0;
+    }
+
+    pager.prototype = {
+        setTotal: function (t) {
+            this.total = t;
+            return this;
+        },
+        setSize: function (s) {
+            this.size = s;
+            return this;
+        }
+    };
+    window["N"]["Pager"] = pager;
+})();

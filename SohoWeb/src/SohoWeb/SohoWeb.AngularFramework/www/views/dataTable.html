@@ -1,0 +1,23 @@
+<table class="pure-table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="n in result">
+        <th>{{n.id}}</th>
+        <th>{{n.name}}</th>
+        <th>{{n.age}}</th>
+    </tr>
+    </tbody>
+</table>
+<ul my-pager="pager" ng-model="filter" class="pure-paginator">
+    <li><a class="pure-button prev">&#171;</a></li>
+    <li><a class="pure-button next">&#187;</a></li>
+</ul>
+<p>filter数据格式:N.Pager</p>
+<p>PageIndex:{{filter.index}},PageSize:{{filter.size}}</p>
+<button ng-click="addIndex()">add index</button>
