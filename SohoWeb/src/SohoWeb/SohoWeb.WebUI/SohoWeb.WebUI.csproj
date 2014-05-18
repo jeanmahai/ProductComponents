@@ -126,12 +126,39 @@
     <Compile Include="ViewModels\LoginInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Controllers\CustomerController.js" />
+    <Content Include="Controllers\HomeController.js" />
     <Content Include="Controllers\_baseController.js" />
     <Content Include="Controllers\_parentController.js" />
     <Content Include="Global.asax" />
-    <Content Include="abc\app.js" />
-    <Content Include="abc\main.css" />
-    <Content Include="abc\main.js" />
+    <Content Include="res\app.js" />
+    <Content Include="res\css\style.css" />
+    <Content Include="res\images\add_user.png" />
+    <Content Include="res\images\care.png" />
+    <Content Include="res\images\customers.png" />
+    <Content Include="res\images\default_user.png" />
+    <Content Include="res\images\grid_dot.png" />
+    <Content Include="res\images\grid_small_dot.png" />
+    <Content Include="res\images\home.png" />
+    <Content Include="res\images\info.png" />
+    <Content Include="res\images\internet.png" />
+    <Content Include="res\images\loading.GIF" />
+    <Content Include="res\images\login_bg.png" />
+    <Content Include="res\images\logo.png" />
+    <Content Include="res\images\logout.png" />
+    <Content Include="res\images\logo_1.png" />
+    <Content Include="res\images\n-seg.png" />
+    <Content Include="res\images\psw.png" />
+    <Content Include="res\images\report.png" />
+    <Content Include="res\images\right_header_bg.png" />
+    <Content Include="res\images\star.png" />
+    <Content Include="res\images\tool.png" />
+    <Content Include="res\main.css" />
+    <Content Include="res\main.js" />
+    <Content Include="res\scripts\page_init.js" />
+    <Content Include="Views\customer.html" />
+    <Content Include="Views\customer_add.html" />
+    <Content Include="Views\home.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -186,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Error404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="res\images\logo.psd" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -8,7 +8,7 @@
 
         //定义是否在http的时候显示loading
         showLoading:true,
-
+        loadingDelay:500,
         //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
 
@@ -29,28 +29,27 @@
         viewBasePath:"views/"
     };
     //url route
-    window["appRouteUrl"]=[{
-        routeUrl:"/home",
-        templateUrl:"views/home.html"
-    },{
-        routeUrl:"/datepicker",
-        templateUrl: "views/datepicker.html",
-        controller:"testDatepickerController"
-    },{
-        routeUrl:"/base",
-        templateUrl: "views/baseController.html",
-        controller:"testBaseController"
-    },{
-        routeUrl:"/repeat",
-        templateUrl: "views/repeat.html",
-        controller:"testBaseController"
-    },{
-        redirectTo:"/home"
-    },{
-        routeUrl:"/dt",
-        templateUrl:"views/dataTable.html",
-        controller:"testBaseController"
-    }];
+    window["appRouteUrl"]={
+        home:{
+            routeUrl:"/home",
+            templateUrl: "../Views/home.html",
+            controller:"homeController"
+        },
+        customer: {
+            routeUrl: "/customer",
+            templateUrl: "Views/customer.html",
+            controller: "CustomerController"
+        },
+        customer_add: {
+            routeUrl: "/customer/add",
+            templateUrl: "views/customer_add.html",
+            controller: "CustomerController"
+        },
+        //默认跳转页面
+        otherwise:{
+            redirectTo:"/home"
+        }
+    };
 
     function getShortDateString() {
         var date = new Date();
@@ -70,7 +69,7 @@
     }
 
     require.config({
-        baseUrl: "controllers",
+        baseUrl: "../../Controllers",
         paths: {
             'angular': '../bower_components/angular/angular.min',
             'angular-route': '../bower_components/angular-route/angular-route.min',
@@ -84,7 +83,8 @@
             'jquery': '../bower_components/jquery/jquery.min',
             'ng-grid': "../bower_components/ng-grid/ng-grid-2.0.11.min",
 
-            'app': "../main/app"
+            'app': "../res/app"
+            ,"page_init":"../res/scripts/page_init"
         },
 
         // Add angular modules that does not support AMD out of the box, put it in a shim
@@ -92,7 +92,7 @@
             'angular': {
                 deps: ["jquery"],
                 init: function () {
-                    loadCss("main/main.css");
+                    loadCss("../../res/main.css");
                 }
             },
             'angularAMD': ['angular'],
@@ -115,11 +115,12 @@
                 }
             },
             'app':{
-                deps:["angular"],
+                deps: ["angular", "page_init"],
                 init:function(){
 
                 }
             }
+            ,"page_init":["jquery"]
         }
 
         // kick start application

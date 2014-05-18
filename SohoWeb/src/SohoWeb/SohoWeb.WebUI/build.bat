@@ -18,10 +18,10 @@ xcopy %currentPath%\controllers\*.* %targetpath%\Controllers\*.* /s/y/exclude:%e
 
 if not exist %targetpath%\bower_components\ (xcopy %currentPath%\bower_components\*.* %targetpath%\bower_components\ /s/y)
 
-if not exist %targetpath%\main\main.js (xcopy %currentPath%\main\main.js %targetpath%\main\ /s/y)
+if not exist %targetpath%\res\main.js (xcopy %currentPath%\main\main.js %targetpath%\res\ /s/y)
 
-xcopy %currentPath%\main\app.js %targetpath%\main\ /s/y
+xcopy %currentPath%\main\app.js %targetpath%\res\ /s/y
 
-xcopy %currentPath%\main\main.css %targetpath%\main\ /s/y
+xcopy %currentPath%\main\main.css %targetpath%\res\ /s/y
 
 pause
