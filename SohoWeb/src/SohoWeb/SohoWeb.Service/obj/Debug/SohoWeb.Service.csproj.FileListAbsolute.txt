@@ -1,9 +1,7 @@
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\SohoWeb.Service.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\SohoWeb.Service.pdb
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\Common.Utility.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\SohoWeb.DataAccess.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\SohoWeb.Entity.dll
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\Common.Utility.DataAccess.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\PostSharp.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\SolrNet.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\Microsoft.Practices.ServiceLocation.dll
@@ -48,3 +46,5 @@ D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Servi
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\obj\Debug\ResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\obj\Debug\SohoWeb.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\obj\Debug\SohoWeb.Service.pdb
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\Soho.Utility.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\bin\Debug\Soho.Utility.DataAccess.dll

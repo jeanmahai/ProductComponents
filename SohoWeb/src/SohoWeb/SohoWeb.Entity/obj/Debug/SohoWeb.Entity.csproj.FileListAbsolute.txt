@@ -7,3 +7,7 @@ D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entit
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\ResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.dll
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.pdb
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\bin\Debug\SohoWeb.Entity.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\bin\Debug\SohoWeb.Entity.pdb
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Entity\obj\Debug\SohoWeb.Entity.pdb

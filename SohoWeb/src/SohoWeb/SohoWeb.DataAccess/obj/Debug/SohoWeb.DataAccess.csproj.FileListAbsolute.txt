@@ -1,7 +1,5 @@
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\SohoWeb.DataAccess.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\SohoWeb.DataAccess.pdb
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\Common.Utility.DataAccess.dll
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\Common.Utility.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\SohoWeb.Entity.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\PostSharp.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\SolrNet.dll
@@ -42,3 +40,5 @@ D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataA
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\obj\Debug\ResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\obj\Debug\SohoWeb.DataAccess.dll
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\obj\Debug\SohoWeb.DataAccess.pdb
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\Soho.Utility.DataAccess.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\bin\Debug\Soho.Utility.dll
