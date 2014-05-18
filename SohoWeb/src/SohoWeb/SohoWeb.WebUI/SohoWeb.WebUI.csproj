@@ -116,7 +116,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Controllers\SystemUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,9 +129,9 @@
     <Content Include="Controllers\_baseController.js" />
     <Content Include="Controllers\_parentController.js" />
     <Content Include="Global.asax" />
-    <Content Include="main\app.js" />
-    <Content Include="main\main.css" />
-    <Content Include="main\main.js" />
+    <Content Include="abc\app.js" />
+    <Content Include="abc\main.css" />
+    <Content Include="abc\main.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -182,7 +182,10 @@
     <Content Include="build.bat" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Main\Index.cshtml" />
+    <Content Include="Views\Master\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error404.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
