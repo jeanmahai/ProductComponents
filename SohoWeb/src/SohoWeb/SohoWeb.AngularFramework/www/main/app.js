@@ -11,6 +11,9 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
         if (cfg.loadingDom) {
             $N.dom = cfg.loadingDom;
         }
+        if (cfg.loadingDelay) {
+            $N.loadingDelay = cfg.loadingDelay;
+        }
     });
 
     //config url route
@@ -202,8 +205,8 @@ angular.module("NProvider", ["ng"]).
                         if (newVal.change) {
                             first = false;
                             var r = newVal.change();
-                            if (r && r.finally) {
-                                r.finally(function () {
+                            if (r && r["finally"]) {
+                                r["finally"](function () {
                                     console.info("page changed");
                                 });
                             }
@@ -219,6 +222,7 @@ angular.module("NProvider", ["ng"]).
             this.dom = null;
             this.timeout = null;
             this.width = null;
+            this.loadingDelay = 500;
         };
         N.prototype = {
             loading: function (config) {
@@ -234,7 +238,7 @@ angular.module("NProvider", ["ng"]).
                         clearTimeout(this.timeout);
                         this.timeout = null;
                     }
-                    this.dom.style.right = "0px";
+                    $(this.dom).addClass("loading-running");
                 }
             },
             loaded: function (response) {
@@ -248,9 +252,10 @@ angular.module("NProvider", ["ng"]).
                     }
 
                     function hideLoading() {
-                        this.dom.style.right = "-" + this.width + "px";
+                        //this.dom.style.right = "-" + this.width + "px";
+                        $(this.dom).removeClass("loading-running");
                     };
-                    this.timeout = setTimeout(hideLoading.bind(this), 1500);
+                    this.timeout = setTimeout(hideLoading.bind(this), this.loadingDelay);
                 }
             }
         };

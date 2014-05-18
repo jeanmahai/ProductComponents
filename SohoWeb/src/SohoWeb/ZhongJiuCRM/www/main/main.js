@@ -8,7 +8,7 @@
 
         //定义是否在http的时候显示loading
         showLoading:true,
-
+        loadingDelay:500,
         //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
 

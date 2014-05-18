@@ -16,7 +16,7 @@
         <div class="pure-u-1-1 top">
             <div class="logo"></div>
             <div class="n-top-menu">
-                <ul style="margin-top: 17px;">
+                <ul>
                     <li><a href="login.aspx">
                         <img src="images/logout.png"
                             style="width: 15px; height: 15px; vertical-align: bottom; margin-right: 5px;" />退出</a></li>
@@ -109,8 +109,7 @@
     </div>
     <div id="divLoading" class="n-loading">
         <div>
-            <div class="circle"></div>
-            <div class="circle1"></div>
+           <img src="images/loading.gif" />
         </div>
     </div>
 </body>
