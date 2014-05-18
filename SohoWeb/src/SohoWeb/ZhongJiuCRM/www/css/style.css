@@ -75,3 +75,8 @@ body,
 /*vertical-align: top;*/
 /*margin-right: 3px;*/
 /*}*/
+.my-form{
+    padding-left:5px;
+}
+.my-form span{ display:inline-block; width:81px; text-align:right;}
+.my-form .pure-g div{margin:2px 0 !important;}

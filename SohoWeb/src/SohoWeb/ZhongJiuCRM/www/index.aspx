@@ -17,7 +17,7 @@
             <div class="logo"></div>
             <div class="n-top-menu">
                 <ul style="margin-top: 17px;">
-                    <li><a href="#">
+                    <li><a href="login.aspx">
                         <img src="images/logout.png"
                             style="width: 15px; height: 15px; vertical-align: bottom; margin-right: 5px;" />退出</a></li>
                 </ul>
@@ -26,7 +26,7 @@
                 <ul style="margin-top: 17px;">
                     <li><a href="#/home">
                         <img src="images/home.png" />首页</a></li>
-                    <li><a href="#">
+                    <li><a href="#/customer/add">
                         <img src="images/add_user.png" />添加新会员</a></li>
                     <li><a href="#">
                         <img src="images/weixin_logo.png" />我的微信(10000)</a></li>

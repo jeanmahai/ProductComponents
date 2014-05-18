@@ -945,23 +945,19 @@
     <Content Include="www\bower_components\pure\tables-min.css" />
     <Content Include="www\bower_components\pure\tables.css" />
     <Content Include="www\bower_components\requirejs\require.js" />
-    <Content Include="www\controllers\baseController.js" />
-    <Content Include="www\controllers\dataGrid1Controller.js" />
-    <Content Include="www\controllers\datepickerController.js" />
-    <Content Include="www\controllers\DynamicController.js" />
-    <Content Include="www\controllers\HomeController.js" />
-    <Content Include="www\controllers\PageController.js" />
     <Content Include="www\controllers\testBaseController.js" />
+    <Content Include="www\controllers\testDatepickerController.js" />
+    <Content Include="www\controllers\_baseController.js" />
     <Content Include="www\controllers\_parentController.js" />
     <Content Include="www\index.html" />
     <Content Include="www\main\app.js" />
     <Content Include="www\main\main.css" />
     <Content Include="www\main\main.js" />
-    <Content Include="www\views\dataGrid1.html" />
+    <Content Include="www\views\baseController.html" />
+    <Content Include="www\views\dataTable.html" />
     <Content Include="www\views\datepicker.html" />
-    <Content Include="www\views\dynamicLoadControllerAndView.html" />
     <Content Include="www\views\home.html" />
-    <Content Include="www\views\testBaseController.html" />
+    <Content Include="www\views\repeat.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1047,6 +1043,7 @@
     <Content Include="www\bower_components\requirejs\README.md" />
     <Content Include="www\readme" />
     <Content Include="www\main\readme" />
+    <Content Include="www\controllers\readme" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="www\bower_components\jquery\src\sizzle\" />
