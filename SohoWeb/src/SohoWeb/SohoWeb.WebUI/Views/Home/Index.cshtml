@@ -1,11 +1,8 @@
 ﻿@model Soho.Utility.Web.Framework.PortalResult
 @{
     ViewBag.Title = "Index";
-    var data = Model.Data as List<SohoWeb.Entity.ControlPanel.Users>;
+    var data = Model.Data;
 }
 @{
-    foreach (var item in data)
-    {        
-        <h2>@(item.UserID)</h2>
-    }
+    <h2>@data</h2>
 }

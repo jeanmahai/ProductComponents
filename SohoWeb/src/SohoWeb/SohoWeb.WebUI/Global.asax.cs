@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -16,11 +13,10 @@ namespace SohoWeb.WebUI
         {
             ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
 
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
 
-            AutorunManager.Startup(ex => Logger.WriteLog(ex.ToString(), "Exception"));
-
+            AutorunManager.Startup(ex => Logger.WriteLog(ex.ToString(), "ApplicationException"));
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
         }
 
@@ -29,13 +25,13 @@ namespace SohoWeb.WebUI
             var ex = e.ExceptionObject as Exception;
             if (ex != null)
             {
-                Logger.WriteLog(ex.ToString(), "Exception");
+                Logger.WriteLog(ex.ToString(), "ApplicationException");
             }
         }
 
         protected void Application_End(object sender, EventArgs e)
         {
-            AutorunManager.Shutdown(ex => Logger.WriteLog(ex.ToString(), "Exception"));
+            AutorunManager.Shutdown(ex => Logger.WriteLog(ex.ToString(), "ApplicationException"));
         }
 
         protected void Application_Error()
@@ -53,19 +49,10 @@ namespace SohoWeb.WebUI
                             Response.RedirectToRoute("Error404", new { requestUrl = Request.Url.AbsoluteUri });
                             break;
                         default:
-                            Logger.WriteLog(exception.ToString(), "Exception");
-                            Response.RedirectToRoute("Error500");
+                            Logger.WriteLog(exception.ToString(), "HttpException");
+                            Response.RedirectToRoute("Error");
                             break;
                     }
-                }
-                else
-                {
-                    if (!(exception is BusinessException))
-                    {
-                        Logger.WriteLog(exception.ToString(), "Exception");
-                    }
-
-                    Response.RedirectToRoute("Error500", new RouteValueDictionary(new { error = exception.Message }));
                 }
                 Server.ClearError();
             }

@@ -1,26 +1,24 @@
 ﻿using System.Web.Mvc;
 using Soho.Utility.Web.Framework;
-
+using Soho.Utility;
+using SohoWeb.WebUI.ViewModels;
+using System.Web;
 using SohoWeb.Service.ControlPanel;
 
 namespace SohoWeb.WebUI.Controllers
 {
     /// <summary>
-    /// 默认处理
+    /// 控制面板
     /// </summary>
-    public class HomeController : WWWController
+    public class ControlPanelController : SSLController
     {
-        /// <summary>
-        /// 首页
-        /// </summary>
-        /// <returns></returns>
         public ActionResult Index()
         {
             PortalResult result = new PortalResult()
             {
                 Code = 0,
                 Success = true,
-                Data = 101,
+                Data = UserAuthService.Instance.GetUserByUserID("sohoadmin"),
                 Message = ""
             };
             return View(result);

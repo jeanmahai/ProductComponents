@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+
 using Soho.Utility.Web.Framework;
+using SohoWeb.WebUI.ViewModels;
 
 namespace SohoWeb.WebUI.Controllers
 {
     [ResultExecutAttribute]
     public class BaseController : Controller
     {
+        protected LoginAuthVM CurrUser = (new AuthMgr()).ReadUserInfo();
     }
 
     [AuthAttribute(NeedAuth = true)]

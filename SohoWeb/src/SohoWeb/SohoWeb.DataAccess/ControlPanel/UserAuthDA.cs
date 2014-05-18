@@ -7,22 +7,16 @@ namespace SohoWeb.DataAccess.ControlPanel
 {
     public class UserAuthDA
     {
-        public static List<Users> GetDemoData(int sysNo)
-        {
-            DataCommand cmd = DataCommandManager.GetDataCommand("Demo");
-            cmd.SetParameterValue("@SysNo", sysNo);
-            return cmd.ExecuteEntityList<Users>();
-        }
         /// <summary>
         /// 根据用户ID获取用户
         /// </summary>
         /// <param name="userID">用户ID</param>
         /// <returns></returns>
-        public static List<Users> GetUserByUserID(string userID)
+        public static Users GetUserByUserID(string userID)
         {
             DataCommand cmd = DataCommandManager.GetDataCommand("GetUserByUserID");
             cmd.SetParameterValue("@UserID", userID);
-            return cmd.ExecuteEntityList<Users>();
+            return cmd.ExecuteEntity<Users>();
         }
 
         /// <summary>
