@@ -1,5 +1,6 @@
 ﻿(function () {
     function menuHeaderClick() {
+        if ($(this).next("ul").css("display") == "block") return false;
         $(this).parent().parent().find("ul").slideUp();
         $(this).next("ul").slideDown();
         return false;

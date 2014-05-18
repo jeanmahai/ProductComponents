@@ -57,6 +57,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="exclude.txt" />
     <Content Include="Web.config" />
     <Content Include="www\bower_components\angular-cookies\angular-cookies.js" />
     <Content Include="www\bower_components\angular-cookies\angular-cookies.min.js" />

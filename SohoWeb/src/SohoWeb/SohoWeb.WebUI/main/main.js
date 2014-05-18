@@ -8,7 +8,7 @@
 
         //定义是否在http的时候显示loading
         showLoading:true,
-        loadingDelay:500,
+
         //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
 
@@ -29,42 +29,28 @@
         viewBasePath:"views/"
     };
     //url route
-    window["appRouteUrl"]={
-        home:{
-            routeUrl:"/home",
-            templateUrl:"views/home.html",
-            controller:"homeController"
-        },
-        customer: {
-            routeUrl: "/customer",
-            templateUrl: "views/customer.html",
-            controller: "CustomerController"
-        },
-        customer_add: {
-            routeUrl: "/customer/add",
-            templateUrl: "views/customer_add.html",
-            controller: "CustomerController"
-        },
-        demo:{
-            routeUrl:"/demo",
-            templateUrl: "views/dynamicLoadControllerAndView.html",
-            controller:"DynamicController"
-        },
-        datepicker:{
-            routeUrl:"/datepicker",
-            templateUrl: "views/datepicker.html",
-            controller:"datepickerController"
-        },
-        testBaseController:{
-            routeUrl:"/testBaseController",
-            templateUrl: "views/testBaseController.html",
-            controller:"testBaseController"
-        },
-        //默认跳转页面
-        otherwise:{
-            redirectTo:"/home"
-        }
-    };
+    window["appRouteUrl"]=[{
+        routeUrl:"/home",
+        templateUrl:"views/home.html"
+    },{
+        routeUrl:"/datepicker",
+        templateUrl: "views/datepicker.html",
+        controller:"testDatepickerController"
+    },{
+        routeUrl:"/base",
+        templateUrl: "views/baseController.html",
+        controller:"testBaseController"
+    },{
+        routeUrl:"/repeat",
+        templateUrl: "views/repeat.html",
+        controller:"testBaseController"
+    },{
+        redirectTo:"/home"
+    },{
+        routeUrl:"/dt",
+        templateUrl:"views/dataTable.html",
+        controller:"testBaseController"
+    }];
 
     function getShortDateString() {
         var date = new Date();
@@ -99,7 +85,6 @@
             'ng-grid': "../bower_components/ng-grid/ng-grid-2.0.11.min",
 
             'app': "../main/app"
-            ,"page_init":"../main/scripts/page_init"
         },
 
         // Add angular modules that does not support AMD out of the box, put it in a shim
@@ -130,12 +115,11 @@
                 }
             },
             'app':{
-                deps: ["angular", "page_init"],
+                deps:["angular"],
                 init:function(){
 
                 }
             }
-            ,"page_init":["jquery"]
         }
 
         // kick start application

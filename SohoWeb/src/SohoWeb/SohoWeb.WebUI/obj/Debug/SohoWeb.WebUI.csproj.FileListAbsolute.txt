@@ -1,7 +1,5 @@
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.pdb
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Common.Utility.dll
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Common.Utility.Web.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.Entity.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.Service.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Web.Mvc.dll
@@ -11,7 +9,6 @@ F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Web.Web
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Web.WebPages.Razor.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.DataAccess.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\PostSharp.dll
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Common.Utility.DataAccess.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SolrNet.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Microsoft.Practices.ServiceLocation.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\HttpWebAdapters.dll
@@ -29,11 +26,9 @@ F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\zh-Hans\System
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\zh-Hans\System.Web.WebPages.resources.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.pssym
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.csprojResolveAssemblyReference.cache
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.dll
 F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.pdb
-F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.dll.postsharp
 D:\Libariy\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.dll
 D:\Libariy\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.pdb
 D:\Libariy\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Soho.Utility.dll
@@ -99,3 +94,12 @@ D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\ResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.dll
 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.pdb
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Soho.Utility.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Soho.Utility.Web.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Net.Http.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Net.Http.Formatting.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Net.Http.WebRequest.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\System.Web.Http.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\Soho.Utility.DataAccess.dll
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\bin\SohoWeb.WebUI.pssym
+F:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\obj\Debug\SohoWeb.WebUI.dll.postsharp

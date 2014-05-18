@@ -964,6 +964,7 @@
     <Content Include="www\images\home.png" />
     <Content Include="www\images\info.png" />
     <Content Include="www\images\internet.png" />
+    <Content Include="www\images\loading.GIF" />
     <Content Include="www\images\login_bg.png" />
     <Content Include="www\images\logo.png" />
     <Content Include="www\images\logout.png" />

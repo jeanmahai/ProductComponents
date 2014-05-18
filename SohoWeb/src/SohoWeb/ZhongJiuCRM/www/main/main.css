@@ -1,17 +1,26 @@
 .n-loading{
     position: fixed;
-    bottom: 0px;
+    top:50%;
+    left:50%;
     height: 60px;
+    margin-top:-30px;
     text-align: center;
     width: 80px;
+    margin-left:-40px;
     padding: 5px 0;
     /*background: green;*/
-    right: -80px;
-    transition:right 1s;
-    -webkit-transition:right 1s;
-    -o-transition:right 1s;
-    -ms-transition:right 1s;
-    -moz-transition:right 1s;
+    transition:opacity 1s;
+    -webkit-transition:opacity 1s;
+    -o-transition:opacity 1s;
+    -ms-transition:opacity 1s;
+    -moz-transition:opacity 1s;
+    display:block;
+    display:none \9;
+    opacity:0;
+}
+.loading-running { 
+    opacity:1;
+    display:block \9;
 }
 @-moz-keyframes spinPulse {
     0% { -moz-transform:rotate(160deg); opacity:0; box-shadow:0 0 1px #2187e7;}
