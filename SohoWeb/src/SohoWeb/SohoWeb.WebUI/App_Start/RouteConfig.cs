@@ -9,7 +9,7 @@ namespace SohoWeb.WebUI
         public static void RegisterRoutes(RouteCollection routes)
         {
             RouteConfigurationSection section = (RouteConfigurationSection)ConfigurationManager.GetSection("routeConfig");
-
+            
             routes.MapRoute(section);
         }
     }
