@@ -25,7 +25,7 @@ namespace SohoWeb.Service.ControlPanel
             if (user == null)
                 throw new BusinessException("用户名不存在！");
             var currPassword = MD5Encrypt.MD5Encrypt32(string.Format("{0}-{1}", userPwd, user.UserAuthCode)).ToLower();
-            if (!currPassword.Equals(user.Password))
+            if (!currPassword.Equals(user.Password.ToLower()))
                 throw new BusinessException("密码错误！");
 
             return true;

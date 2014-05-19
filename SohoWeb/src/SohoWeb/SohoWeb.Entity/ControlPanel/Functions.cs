@@ -5,18 +5,16 @@ using SohoWeb.Entity.Enums;
 namespace SohoWeb.Entity.ControlPanel
 {
     [DataContract]
-    public class Users : EntityBase
+    public class Functions : EntityBase
     {
         [DataMember]
         public int? SysNo { get; set; }
         [DataMember]
-        public string UserID { get; set; }
+        public string FunctionName { get; set; }
         [DataMember]
-        public string UserName { get; set; }
+        public string FunctionKey { get; set; }
         [DataMember]
-        public string Password { get; set; }
-        [DataMember]
-        public string UserAuthCode { get; set; }
+        public string Description { get; set; }
         [DataMember]
         public CommonStatus Status { get; set; }
     }

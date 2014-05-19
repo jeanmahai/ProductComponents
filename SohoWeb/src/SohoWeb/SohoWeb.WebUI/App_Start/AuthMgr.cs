@@ -1,9 +1,11 @@
-﻿using Soho.Utility.Web;
+﻿using System;
+using System.Linq;
+using System.Configuration;
+
+using Soho.Utility.Web;
 using Soho.Utility.Web.Framework;
 using SohoWeb.Service.ControlPanel;
 using SohoWeb.WebUI.ViewModels;
-using System;
-using System.Configuration;
 
 namespace SohoWeb.WebUI
 {
@@ -13,7 +15,7 @@ namespace SohoWeb.WebUI
 
         public bool ValidateAuth(string controller, string action)
         {
-            return true;
+            return IsAllowed(controller, action);
         }
 
         public bool ValidateLogin()
@@ -36,14 +38,15 @@ namespace SohoWeb.WebUI
                     mobileLoginTimeout = mobileLoginTimeout <= 0 ? 30 : mobileLoginTimeout;
                 }
                 user.Timeout = DateTime.Now.AddMinutes(mobileLoginTimeout);
-                CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", user);
             }
+            WriteUserInfo(user);
 
             return true;
         }
 
         #endregion
 
+        #region 登录、登出
         /// <summary>
         /// 登录
         /// </summary>
@@ -66,7 +69,7 @@ namespace SohoWeb.WebUI
                     Timeout = DateTime.Now.AddMinutes(30),
                     RememberLogin = true
                 };
-                CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", authUser);
+                WriteUserInfo(authUser);
             }
             return result;
         }
@@ -78,8 +81,19 @@ namespace SohoWeb.WebUI
         public bool Logout()
         {
             LoginAuthVM authUser = null;
-            CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", authUser);
+            WriteUserInfo(authUser);
             return true;
+        }
+        #endregion
+
+        #region 读写用户信息
+        /// <summary>
+        /// 写用户信息
+        /// </summary>
+        /// <param name="authUser">用户信息</param>
+        public void WriteUserInfo(LoginAuthVM authUser)
+        {
+            CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", authUser);
         }
 
         /// <summary>
@@ -90,5 +104,103 @@ namespace SohoWeb.WebUI
         {
             return CookieHelper.GetCookie<LoginAuthVM>("LoginCookie");
         }
+        #endregion
+
+        #region 权限
+        /// <summary>
+        /// 是否有权限
+        /// </summary>
+        /// <param name="controller"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public bool IsAllowed(string controller, string action)
+        {
+            string authKey = string.Format("{0}|{1}", controller, action);
+            return IsAllowed(authKey);
+        }
+
+        /// <summary>
+        /// 是否有权限
+        /// </summary>
+        /// <param name="authKey"></param>
+        /// <returns></returns>
+        public bool IsAllowed(string authKey)
+        {
+            string[] allAuthFunctions = GetAllAuthFunctions();
+
+            //不存在有效的权限，则允许访问
+            if (allAuthFunctions == null || allAuthFunctions.Length == 0)
+                return true;
+
+            string[] currUserAuthInfo = GetCurrUserAuthInfo();
+            //存在该权限，但是当前用户无有效权限，则不允许访问
+            if ((allAuthFunctions.Contains(authKey, StringComparer.CurrentCultureIgnoreCase))
+                && (currUserAuthInfo == null || currUserAuthInfo.Length == 0))
+                return false;
+
+            //存在方法权限，但是当前用户不存在该权限，则不允许访问
+            if (allAuthFunctions.Contains(authKey, StringComparer.CurrentCultureIgnoreCase)
+                && !currUserAuthInfo.Contains(authKey, StringComparer.CurrentCultureIgnoreCase))
+                return false;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 刷新用户权限缓存
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        public void RefreshUserFunctions(int userSysNo)
+        {
+            GetUserAuthInfo(userSysNo, true);
+        }
+
+        /// <summary>
+        /// 获取当前用户有效权限
+        /// </summary>
+        /// <returns></returns>
+        private string[] GetCurrUserAuthInfo()
+        {
+            var user = ReadUserInfo();
+            return GetUserAuthInfo(user.UserSysNo, false);
+        }
+
+        /// <summary>
+        /// 获取所有有效权限
+        /// </summary>
+        /// <returns></returns>
+        private string[] GetAllAuthFunctions()
+        {
+            var cache = System.Runtime.Caching.MemoryCache.Default;
+            string cacheKey = "SOHO.WEB.ALLAUTHFUNCTIONS";
+            string[] allAuthFunctions = cache[cacheKey] as string[];
+            if (allAuthFunctions == null || allAuthFunctions.Length == 0)
+            {
+                allAuthFunctions = UserAuthService.Instance.GetAllValidFunctions();
+                if (allAuthFunctions != null && allAuthFunctions.Length > 0)
+                    cache.Set(cacheKey, allAuthFunctions, DateTimeOffset.Now.AddDays(1D));
+            }
+            return allAuthFunctions;
+        }
+
+        /// <summary>
+        /// 获取用户的权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        private string[] GetUserAuthInfo(int userSysNo, bool isFromDB)
+        {
+            var cache = System.Runtime.Caching.MemoryCache.Default;
+            string cacheKey = string.Format("SOHO.WEB.USER.AUTHINFO.{0}", userSysNo);
+            string[] authInfo = cache[cacheKey] as string[];
+            if (isFromDB || authInfo == null || authInfo.Length == 0)
+            {
+                authInfo = UserAuthService.Instance.GetFunctionsByUserSysNo(userSysNo);
+                if (authInfo != null && authInfo.Length > 0)
+                    cache.Set(cacheKey, authInfo, DateTimeOffset.Now.AddDays(1D));
+            }
+            return authInfo;
+        }
+        #endregion
     }
 }

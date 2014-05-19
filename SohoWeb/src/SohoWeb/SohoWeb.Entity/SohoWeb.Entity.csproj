@@ -41,10 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlPanel\Functions.cs" />
+    <Compile Include="ControlPanel\FunctionsQueryFilter.cs" />
+    <Compile Include="ControlPanel\Roles.cs" />
+    <Compile Include="ControlPanel\RolesQueryFilter.cs" />
     <Compile Include="ControlPanel\Users.cs" />
+    <Compile Include="ControlPanel\UsersQueryFilter.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Enums\Common.cs" />
+    <Compile Include="FilterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryResult.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

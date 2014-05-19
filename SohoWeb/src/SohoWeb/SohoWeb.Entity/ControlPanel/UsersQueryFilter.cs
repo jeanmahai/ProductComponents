@@ -1,11 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-using SohoWeb.Entity.Enums;
-
 namespace SohoWeb.Entity.ControlPanel
 {
     [DataContract]
-    public class Users : EntityBase
+    public class UsersQueryFilter : FilterBase
     {
         [DataMember]
         public int? SysNo { get; set; }
@@ -14,10 +12,6 @@ namespace SohoWeb.Entity.ControlPanel
         [DataMember]
         public string UserName { get; set; }
         [DataMember]
-        public string Password { get; set; }
-        [DataMember]
-        public string UserAuthCode { get; set; }
-        [DataMember]
-        public CommonStatus Status { get; set; }
+        public int? Status { get; set; }
     }
 }

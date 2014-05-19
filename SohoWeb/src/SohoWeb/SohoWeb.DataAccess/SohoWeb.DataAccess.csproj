@@ -46,7 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlPanel\FunctionsMgtDA.cs" />
+    <Compile Include="ControlPanel\RolesMgtDA.cs" />
     <Compile Include="ControlPanel\UserAuthDA.cs" />
+    <Compile Include="ControlPanel\UsersMgtDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

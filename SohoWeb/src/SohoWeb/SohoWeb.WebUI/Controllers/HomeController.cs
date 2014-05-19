@@ -20,7 +20,7 @@ namespace SohoWeb.WebUI.Controllers
             {
                 Code = 0,
                 Success = true,
-                Data = 101,
+                Data = 1001,
                 Message = ""
             };
             return View(result);
