@@ -88,7 +88,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
     //interceptor http
     app.factory("httpInterceptor", ["$N", function ($N) {
-        return{
+        return {
             'request': function (config) {
                 // do something on success
                 //处理自定义headers
@@ -102,11 +102,11 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
             'response': function (response) {
                 // do something on success
                 //处理自定义的headers
-//                var mobileCookie = response.headers("x-newegg-mobile-cookie");
-//                if (mobileCookie && mobileCookie != "") {
-//
-//                }
-//                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
+                //                var mobileCookie = response.headers("x-newegg-mobile-cookie");
+                //                if (mobileCookie && mobileCookie != "") {
+                //
+                //                }
+                //                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
                 //处理loaded
                 $N.loaded(response);
 
@@ -156,14 +156,16 @@ if (!Function.prototype.bind) {
  * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
  * */
 angular.module("NProvider", ["ng"]).
-    directive("myPager",function ($timeout) {
+    directive("myPager", function ($timeout) {
         return {
             require: "ngModel",
             restrict: "ACE",
             link: function (scope, element, attrs, controller) {
-                console.info("init my pager");
                 var pageInfo = scope[attrs.ngModel];
-                var first = true;
+                var first = false;
+                if (attrs["firstLoad"]) {
+                    first = angular.uppercase(attrs["firstLoad"]) === "TRUE";
+                }
 
                 function refresh() {
                     if (controller) {
@@ -192,23 +194,35 @@ angular.module("NProvider", ["ng"]).
                     }
                     return false;
                 }
-
-                element.find(".prev").bind("click", prev);
-                element.find(".next").bind("click", next);
+                var btnPre = element.find(".prev");
+                var btnNext = element.find(".next");
+                btnPre.attr("disabled", "").bind("click", prev);
+                btnNext.attr("disabled", "").bind("click", next);
 
                 scope.$watch(function (s) {
                     return s[attrs.ngModel];
                 }, function (newVal, oldVal) {
-                    console.info("data change");
-                    console.info(newVal);
-                    if (newVal && (newVal.index !== oldVal.index || newVal.size !== oldVal.size || first )) {
-                        if (newVal.change) {
-                            first = false;
-                            var r = newVal.change();
-                            if (r && r["finally"]) {
-                                r["finally"](function () {
-                                    console.info("page changed");
-                                });
+                    if (newVal) {
+                        var totalPage = 0;
+                        if (newVal.size > 0) {
+                            totalPage = newVal.total / newVal.size;
+                        }
+                        if (newVal.index >= totalPage) {
+                            btnNext.attr("disabled", "");
+                        }
+                        else {
+                            btnNext.removeAttr("disabled");
+                        }
+                        if (newVal.index !== oldVal.index || newVal.size !== oldVal.size || first) {
+                            if (newVal.change) {
+                                first = false;
+                                if (newVal.index <= 1) {
+                                    btnPre.attr("disabled", "");
+                                }
+                                else {
+                                    btnPre.removeAttr("disabled");
+                                }
+                                newVal.change();
                             }
                         }
                     }
@@ -265,7 +279,7 @@ angular.module("NProvider", ["ng"]).
     });
 
 (function () {
-    if (!window["N"])window["N"] = {};
+    if (!window["N"]) window["N"] = {};
     //分页实体
     function pager(index, size, onChange) {
         this.index = index || 1;

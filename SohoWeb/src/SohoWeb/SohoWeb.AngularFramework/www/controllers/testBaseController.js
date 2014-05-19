@@ -6,6 +6,8 @@ define(["app", "_baseController"], function (app) {
         angular.extend(this, $controller("_baseController", {$scope: $scope}));
         $scope.my = "i am child";
 
+        $scope.data = {};
+
         $scope.users = [
             {
                 name: "name1",
@@ -49,7 +51,9 @@ define(["app", "_baseController"], function (app) {
                 deferred.resolve();
                 $N.loaded();
             },2000);
-            return deferred.promise;
+            deferred.promise.finally(function () {
+                console.info("page changed");
+            });
         });
 
         $scope.filter =pager;

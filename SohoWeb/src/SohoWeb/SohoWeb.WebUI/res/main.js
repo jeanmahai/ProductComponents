@@ -51,6 +51,26 @@
         }
     };
 
+    window["appRouteUrl"] = [{
+        routeUrl:"/user",
+        templateUrl:"../Views/user.html",
+        controller:"ControlPanelController"
+    }, {
+        routeUrl: "/home",
+        templateUrl: "../Views/home.html",
+        controller: "homeController"
+    }, {
+        routeUrl: "/customer",
+        templateUrl: "Views/customer.html",
+        controller: "CustomerController"
+    }, {
+        routeUrl: "/customer/add",
+        templateUrl: "views/customer_add.html",
+        controller: "CustomerController"
+    }, {
+        redirectTo: "/home"
+    }];
+
     function getShortDateString() {
         var date = new Date();
         //cache 1 hour
