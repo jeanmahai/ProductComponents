@@ -50,9 +50,8 @@ define(["app", "_baseController"], function (app) {
                 $scope.getData();
                 deferred.resolve();
                 $N.loaded();
-            },2000);
+            },1);
             deferred.promise.finally(function () {
-                console.info("page changed");
             });
         });
 

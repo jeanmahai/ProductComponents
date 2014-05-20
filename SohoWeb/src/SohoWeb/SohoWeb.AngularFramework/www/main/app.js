@@ -156,76 +156,86 @@ if (!Function.prototype.bind) {
  * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
  * */
 angular.module("NProvider", ["ng"]).
-    directive("myPager", function ($timeout) {
+    directive("myPager",function ($timeout) {
         return {
             require: "ngModel",
             restrict: "ACE",
             link: function (scope, element, attrs, controller) {
                 var pageInfo = scope[attrs.ngModel];
+
                 var first = false;
                 if (attrs["firstLoad"]) {
                     first = angular.uppercase(attrs["firstLoad"]) === "TRUE";
                 }
+                var btnPre = element.find(".prev");
+                var btnNext = element.find(".next");
+                var timer = null;
 
-                function refresh() {
+                function setViewValue(value) {
+                    console.info("set new value");
                     if (controller) {
-                        controller.$setViewValue(pageInfo);
-                        controller.$render();
+                        var pageCount = 0;
+                        if (value.size > 0) {
+                            pageCount = value.total / value.size;
+                        }
+                        if (value.index < 1) value.index = 1;
+                        if (value.index > pageCount) value.index = pageCount;
+                        controller.$setViewValue(value);
                         scope.$apply();
                     }
                 }
 
-                function prev() {
-                    if (pageInfo && pageInfo.index && pageInfo.index > 1) {
-                        pageInfo.index--;
-                        refresh();
+                function render(value) {
+                    console.info("render");
+                    var pageCount = 0;
+                    if (value.size > 0) {
+                        pageCount = value.total / value.size;
                     }
+                    if (value.index <= 1) btnPre.attr("disabled", "");
+                    else btnPre.removeAttr("disabled");
+                    if (value.index >= pageCount) btnNext.attr("disabled", "");
+                    else btnNext.removeAttr("disabled");
+                }
+
+                function pageChange(value) {
+                    console.info("page change");
+                    first = false;
+                    value.change();
+                }
+
+                function prev() {
+                    if($(this).attr("disabled")) return false;
+                    pageInfo.index--;
+                    setViewValue(pageInfo);
                     return false;
                 }
 
                 function next() {
-                    var totalPage = 0;
-                    if (pageInfo.size > 0) {
-                        totalPage = pageInfo.total / pageInfo.size;
-                    }
-                    if (pageInfo.index < totalPage) {
-                        pageInfo.index++;
-                        refresh();
-                    }
+                    if($(this).attr("disabled")) return false;
+                    pageInfo.index++;
+                    setViewValue(pageInfo);
                     return false;
                 }
-                var btnPre = element.find(".prev");
-                var btnNext = element.find(".next");
+
                 btnPre.attr("disabled", "").bind("click", prev);
                 btnNext.attr("disabled", "").bind("click", next);
 
                 scope.$watch(function (s) {
                     return s[attrs.ngModel];
                 }, function (newVal, oldVal) {
-                    if (newVal) {
-                        var totalPage = 0;
-                        if (newVal.size > 0) {
-                            totalPage = newVal.total / newVal.size;
+                    console.info(newVal);
+                    console.info(oldVal);
+                    console.info("data change");
+                    if (timer) clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        //index,size changed or first=true
+                        if (newVal.index !== oldVal.index
+                            || newVal.size !== oldVal.size
+                            || first) {
+                            pageChange(newVal);
                         }
-                        if (newVal.index >= totalPage) {
-                            btnNext.attr("disabled", "");
-                        }
-                        else {
-                            btnNext.removeAttr("disabled");
-                        }
-                        if (newVal.index !== oldVal.index || newVal.size !== oldVal.size || first) {
-                            if (newVal.change) {
-                                first = false;
-                                if (newVal.index <= 1) {
-                                    btnPre.attr("disabled", "");
-                                }
-                                else {
-                                    btnPre.removeAttr("disabled");
-                                }
-                                newVal.change();
-                            }
-                        }
-                    }
+                        render(newVal);
+                    }, 500);
                 }, true);
             }
         };
