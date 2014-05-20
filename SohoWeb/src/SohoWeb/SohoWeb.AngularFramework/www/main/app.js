@@ -174,12 +174,9 @@ angular.module("NProvider", ["ng"]).
                 function setViewValue(value) {
                     console.info("set new value");
                     if (controller) {
-                        var pageCount = 0;
-                        if (value.size > 0) {
-                            pageCount = value.total / value.size;
-                        }
                         if (value.index < 1) value.index = 1;
-                        if (value.index > pageCount) value.index = pageCount;
+                        if (value.index > value.totalPage) value.index = value.totalPage;
+						
                         controller.$setViewValue(value);
                         scope.$apply();
                     }
@@ -187,31 +184,40 @@ angular.module("NProvider", ["ng"]).
 
                 function render(value) {
                     console.info("render");
-                    var pageCount = 0;
-                    if (value.size > 0) {
-                        pageCount = value.total / value.size;
-                    }
                     if (value.index <= 1) btnPre.attr("disabled", "");
                     else btnPre.removeAttr("disabled");
-                    if (value.index >= pageCount) btnNext.attr("disabled", "");
+                    if (value.index >= value.totalPage) btnNext.attr("disabled", "");
                     else btnNext.removeAttr("disabled");
+					if(controller){
+						console.info("controller render");
+						controller.$render();
+					}
                 }
 
                 function pageChange(value) {
                     console.info("page change");
                     first = false;
-                    value.change();
+					
+                    var promise=value.change();
+					if(promise && promise["finally"]){
+						promise["finally"](function(){
+							console.info("resolve page change");
+							value.pages=[];
+							for(var i=1;i<=value.totalPage;i++) value.pages.push(i);
+							value.pages.push("...");
+						});
+					}
                 }
 
                 function prev() {
-                    if($(this).attr("disabled")) return false;
+                    if(angular.element(this).attr("disabled")) return false;
                     pageInfo.index--;
                     setViewValue(pageInfo);
                     return false;
                 }
 
                 function next() {
-                    if($(this).attr("disabled")) return false;
+                    if(angular.element(this).attr("disabled")) return false;
                     pageInfo.index++;
                     setViewValue(pageInfo);
                     return false;
@@ -262,7 +268,7 @@ angular.module("NProvider", ["ng"]).
                         clearTimeout(this.timeout);
                         this.timeout = null;
                     }
-                    $(this.dom).addClass("loading-running");
+                    angular.element(this.dom).addClass("loading-running");
                 }
             },
             loaded: function (response) {
@@ -277,7 +283,7 @@ angular.module("NProvider", ["ng"]).
 
                     function hideLoading() {
                         //this.dom.style.right = "-" + this.width + "px";
-                        $(this.dom).removeClass("loading-running");
+                        angular.element(this.dom).removeClass("loading-running");
                     };
                     this.timeout = setTimeout(hideLoading.bind(this), this.loadingDelay);
                 }
@@ -296,17 +302,29 @@ angular.module("NProvider", ["ng"]).
         this.size = size || 0;
         this.change = onChange || angular.noop();
         this.total = 0;
+		this.pages=[];
+		this.totalPage=0;
     }
 
     pager.prototype = {
         setTotal: function (t) {
             this.total = t;
+			if(this.size>0) this.totalPage=t/this.size;
             return this;
         },
         setSize: function (s) {
             this.size = s;
             return this;
-        }
+        },
+		goto:function(index,current,evt){
+			index=parseInt(index);
+			if(isNaN(index)) return;
+			if(index<1) return;
+			if(index>this.totalPage) return;
+			if(index===this.index) return;
+			this.index=index;
+			this.change();
+		}
     };
     window["N"]["Pager"] = pager;
 })();

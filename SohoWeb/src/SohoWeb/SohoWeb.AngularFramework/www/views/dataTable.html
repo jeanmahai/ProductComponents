@@ -14,10 +14,11 @@
     </tr>
     </tbody>
 </table>
-<ul my-pager="pager" ng-model="filter" first-load="false" class="pure-paginator">
+<ul my-pager="pager" ng-model="filter" first-load="true" class="pure-paginator">
     <li><a class="pure-button prev">&#171;</a></li>
+	<li ng-repeat="index in filter.pages"><a class="pure-button {{filter.index===index?'pure-button-active':''}}" ng-click="filter.goto(index)">{{index}}</a></li>
     <li><a class="pure-button next">&#187;</a></li>
 </ul>
 <p>filter数据格式:N.Pager</p>
 <p>PageIndex:{{filter.index}},PageSize:{{filter.size}}</p>
-<button ng-click="addIndex()">add index</button>
+<button ng-click="addIndex()">add index</button><button ng-click="filter.goto(2)">goto 2</button>

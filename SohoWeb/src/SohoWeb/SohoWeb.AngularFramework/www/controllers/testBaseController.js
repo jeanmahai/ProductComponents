@@ -51,8 +51,7 @@ define(["app", "_baseController"], function (app) {
                 deferred.resolve();
                 $N.loaded();
             },1);
-            deferred.promise.finally(function () {
-            });
+            return deferred.promise;
         });
 
         $scope.filter =pager;
