@@ -225,14 +225,11 @@
     <Content Include="res\images\logo.psd" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="Configuration\Data\ControlPanel\UsersMgt.config" />
-=======
     <Content Include="res\css\fonts\fontawesome-webfont.eot" />
     <Content Include="res\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="res\css\fonts\fontawesome-webfont.woff" />
     <Content Include="res\css\fonts\FontAwesome.otf" />
->>>>>>> 715f3d5ac970e4474d26eef38e174efa017fc342
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

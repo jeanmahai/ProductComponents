@@ -156,76 +156,92 @@ if (!Function.prototype.bind) {
  * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
  * */
 angular.module("NProvider", ["ng"]).
-    directive("myPager", function ($timeout) {
+    directive("myPager",function ($timeout) {
         return {
             require: "ngModel",
             restrict: "ACE",
             link: function (scope, element, attrs, controller) {
                 var pageInfo = scope[attrs.ngModel];
+
                 var first = false;
                 if (attrs["firstLoad"]) {
                     first = angular.uppercase(attrs["firstLoad"]) === "TRUE";
                 }
+                var btnPre = element.find(".prev");
+                var btnNext = element.find(".next");
+                var timer = null;
 
-                function refresh() {
+                function setViewValue(value) {
+                    console.info("set new value");
                     if (controller) {
-                        controller.$setViewValue(pageInfo);
-                        controller.$render();
+                        if (value.index < 1) value.index = 1;
+                        if (value.index > value.totalPage) value.index = value.totalPage;
+						
+                        controller.$setViewValue(value);
                         scope.$apply();
                     }
                 }
 
+                function render(value) {
+                    console.info("render");
+                    if (value.index <= 1) btnPre.attr("disabled", "");
+                    else btnPre.removeAttr("disabled");
+                    if (value.index >= value.totalPage) btnNext.attr("disabled", "");
+                    else btnNext.removeAttr("disabled");
+					if(controller){
+						console.info("controller render");
+						controller.$render();
+					}
+                }
+
+                function pageChange(value) {
+                    console.info("page change");
+                    first = false;
+					
+                    var promise=value.change();
+					if(promise && promise["finally"]){
+						promise["finally"](function(){
+							console.info("resolve page change");
+							value.pages=[];
+							for(var i=1;i<=value.totalPage;i++) value.pages.push(i);
+							value.pages.push("...");
+						});
+					}
+                }
+
                 function prev() {
-                    if (pageInfo && pageInfo.index && pageInfo.index > 1) {
-                        pageInfo.index--;
-                        refresh();
-                    }
+                    if(angular.element(this).attr("disabled")) return false;
+                    pageInfo.index--;
+                    setViewValue(pageInfo);
                     return false;
                 }
 
                 function next() {
-                    var totalPage = 0;
-                    if (pageInfo.size > 0) {
-                        totalPage = pageInfo.total / pageInfo.size;
-                    }
-                    if (pageInfo.index < totalPage) {
-                        pageInfo.index++;
-                        refresh();
-                    }
+                    if(angular.element(this).attr("disabled")) return false;
+                    pageInfo.index++;
+                    setViewValue(pageInfo);
                     return false;
                 }
-                var btnPre = element.find(".prev");
-                var btnNext = element.find(".next");
+
                 btnPre.attr("disabled", "").bind("click", prev);
                 btnNext.attr("disabled", "").bind("click", next);
 
                 scope.$watch(function (s) {
                     return s[attrs.ngModel];
                 }, function (newVal, oldVal) {
-                    if (newVal) {
-                        var totalPage = 0;
-                        if (newVal.size > 0) {
-                            totalPage = newVal.total / newVal.size;
+                    console.info(newVal);
+                    console.info(oldVal);
+                    console.info("data change");
+                    if (timer) clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        //index,size changed or first=true
+                        if (newVal.index !== oldVal.index
+                            || newVal.size !== oldVal.size
+                            || first) {
+                            pageChange(newVal);
                         }
-                        if (newVal.index >= totalPage) {
-                            btnNext.attr("disabled", "");
-                        }
-                        else {
-                            btnNext.removeAttr("disabled");
-                        }
-                        if (newVal.index !== oldVal.index || newVal.size !== oldVal.size || first) {
-                            if (newVal.change) {
-                                first = false;
-                                if (newVal.index <= 1) {
-                                    btnPre.attr("disabled", "");
-                                }
-                                else {
-                                    btnPre.removeAttr("disabled");
-                                }
-                                newVal.change();
-                            }
-                        }
-                    }
+                        render(newVal);
+                    }, 500);
                 }, true);
             }
         };
@@ -252,7 +268,7 @@ angular.module("NProvider", ["ng"]).
                         clearTimeout(this.timeout);
                         this.timeout = null;
                     }
-                    $(this.dom).addClass("loading-running");
+                    angular.element(this.dom).addClass("loading-running");
                 }
             },
             loaded: function (response) {
@@ -267,7 +283,7 @@ angular.module("NProvider", ["ng"]).
 
                     function hideLoading() {
                         //this.dom.style.right = "-" + this.width + "px";
-                        $(this.dom).removeClass("loading-running");
+                        angular.element(this.dom).removeClass("loading-running");
                     };
                     this.timeout = setTimeout(hideLoading.bind(this), this.loadingDelay);
                 }
@@ -286,17 +302,29 @@ angular.module("NProvider", ["ng"]).
         this.size = size || 0;
         this.change = onChange || angular.noop();
         this.total = 0;
+		this.pages=[];
+		this.totalPage=0;
     }
 
     pager.prototype = {
         setTotal: function (t) {
             this.total = t;
+			if(this.size>0) this.totalPage=t/this.size;
             return this;
         },
         setSize: function (s) {
             this.size = s;
             return this;
-        }
+        },
+		goto:function(index,current,evt){
+			index=parseInt(index);
+			if(isNaN(index)) return;
+			if(index<1) return;
+			if(index>this.totalPage) return;
+			if(index===this.index) return;
+			this.index=index;
+			this.change();
+		}
     };
     window["N"]["Pager"] = pager;
 })();
