@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace SohoWeb.WebUI.Controllers
 {
-    public class MasterController : WWWController
+    public class MasterController : SSLController
     {
         public ActionResult Index()
         {

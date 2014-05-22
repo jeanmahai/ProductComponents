@@ -18,8 +18,7 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult Login()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<LoginInfoVM>(HttpUtility.UrlDecode(Request.Params["data"]));
-            bool loginResult = (new AuthMgr()).Login(requestVM.UserID, requestVM.UserPassword, requestVM.ValidateCode);
+            bool loginResult = (new AuthMgr()).Login(Request.Params["LoginID"], Request.Params["LoginPassword"], Request.Params["ValidateCode"]);
             PortalResult result = new PortalResult()
             {
                 Code = 0,
@@ -27,7 +26,7 @@ namespace SohoWeb.WebUI.Controllers
                 Data = loginResult,
                 Message = ""
             };
-            return View(result);
+            return Redirect("/Master");
         }
 
         /// <summary>

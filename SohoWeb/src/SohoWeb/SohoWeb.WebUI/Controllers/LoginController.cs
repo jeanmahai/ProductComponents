@@ -8,13 +8,13 @@ namespace SohoWeb.WebUI.Controllers
 {
     public class LoginController : WWWController
     {
-        //
-        // GET: /Login/
-
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }
