@@ -5,19 +5,22 @@
             data:{},
             list: [],
             update: function () {
-                var q = $http.post("/ControlPanel/UpdateUser", { data: this.data });
+                var me = this;
+                var q = $http.post("/ControlPanel/UpdateUser", { data: me.data });
                 q.success(function (data) {
                     console.info(data);
                 });
             },
             updatePsw: function () {
-                var q = $http.post("/ControlPanel/ModifyPassword", { data: this.data });
+                var me = this;
+                var q = $http.post("/ControlPanel/ModifyPassword", { data: me.data });
                 q.success(function (data) {
                     console.info(data);
                 });
             },
             add: function () {
-                var q = $http.post("/ControlPanel/InsertUser", { data: this.data });
+                var me = this;
+                var q = $http.post("/ControlPanel/InsertUser", { data: me.data });
                 q.success(function (data) {
                     console.info(data);
                 });
@@ -25,9 +28,17 @@
             remove:function(){},
             query: function () {
                 console.info("query user");
-                var q = $http.post("/ControlPanel/QueryUsers", {data:this.data});
+                var me = this;
+                var filter = {};
+                filter.data = {
+                    PageIndex: $scope.pager.index,
+                    PageSize:$scope.pager.size
+                };
+                angular.extend(filter.data, me.data);
+                var q = $http.post("/ControlPanel/QueryUsers", filter);
                 q.success(function (res) {
                     console.info(res);
+                    me.list = res;
                 });
             }
         };
