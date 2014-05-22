@@ -94,7 +94,6 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                 //处理自定义headers
                 config.headers = {
                     //"x-newegg-mobile-cookie": window.localStorage.getItem("x-newegg-mobile-cookie")
-                    "x-soho-app-id": "1002"
                 };
                 //处理loading
                 $N.loading(config);
@@ -110,19 +109,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                 //                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
                 //处理loaded
                 $N.loaded(response);
-                if (angular.isObject(response) && response.data) {
-                    var data = response.data;
-                    if (angular.isObject(data)) {
-                        if (data.Success === false) {
-                            if (data.Code = 1000000) {
-                                window.location.href = appConfig.login;
-                            }
-                        }
-                        else {
-                            return data.Data;
-                        }
-                    }
-                }
+
                 //处理异常
 
 
@@ -169,7 +156,7 @@ if (!Function.prototype.bind) {
  * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
  * */
 angular.module("NProvider", ["ng"]).
-    directive("myPager", function ($timeout) {
+    directive("myPager",function ($timeout) {
         return {
             require: "ngModel",
             restrict: "ACE",
@@ -189,7 +176,7 @@ angular.module("NProvider", ["ng"]).
                     if (controller) {
                         if (value.index < 1) value.index = 1;
                         if (value.index > value.totalPage) value.index = value.totalPage;
-
+						
                         controller.$setViewValue(value);
                         scope.$apply();
                     }
@@ -201,36 +188,36 @@ angular.module("NProvider", ["ng"]).
                     else btnPre.removeAttr("disabled");
                     if (value.index >= value.totalPage) btnNext.attr("disabled", "");
                     else btnNext.removeAttr("disabled");
-                    if (controller) {
-                        console.info("controller render");
-                        controller.$render();
-                    }
+					if(controller){
+						console.info("controller render");
+						controller.$render();
+					}
                 }
 
                 function pageChange(value) {
                     console.info("page change");
                     first = false;
-
-                    var promise = value.change();
-                    if (promise && promise["finally"]) {
-                        promise["finally"](function () {
-                            console.info("resolve page change");
-                            value.pages = [];
-                            for (var i = 1; i <= value.totalPage; i++) value.pages.push(i);
-                            value.pages.push("...");
-                        });
-                    }
+					
+                    var promise=value.change();
+					if(promise && promise["finally"]){
+						promise["finally"](function(){
+							console.info("resolve page change");
+							value.pages=[];
+							for(var i=1;i<=value.totalPage;i++) value.pages.push(i);
+							value.pages.push("...");
+						});
+					}
                 }
 
                 function prev() {
-                    if (angular.element(this).attr("disabled")) return false;
+                    if(angular.element(this).attr("disabled")) return false;
                     pageInfo.index--;
                     setViewValue(pageInfo);
                     return false;
                 }
 
                 function next() {
-                    if (angular.element(this).attr("disabled")) return false;
+                    if(angular.element(this).attr("disabled")) return false;
                     pageInfo.index++;
                     setViewValue(pageInfo);
                     return false;
@@ -315,29 +302,29 @@ angular.module("NProvider", ["ng"]).
         this.size = size || 0;
         this.change = onChange || angular.noop();
         this.total = 0;
-        this.pages = [];
-        this.totalPage = 0;
+		this.pages=[];
+		this.totalPage=0;
     }
 
     pager.prototype = {
         setTotal: function (t) {
             this.total = t;
-            if (this.size > 0) this.totalPage = t / this.size;
+			if(this.size>0) this.totalPage=t/this.size;
             return this;
         },
         setSize: function (s) {
             this.size = s;
             return this;
         },
-        goto: function (index, current, evt) {
-            index = parseInt(index);
-            if (isNaN(index)) return;
-            if (index < 1) return;
-            if (index > this.totalPage) return;
-            if (index === this.index) return;
-            this.index = index;
-            this.change();
-        }
+		goto:function(index,current,evt){
+			index=parseInt(index);
+			if(isNaN(index)) return;
+			if(index<1) return;
+			if(index>this.totalPage) return;
+			if(index===this.index) return;
+			this.index=index;
+			this.change();
+		}
     };
     window["N"]["Pager"] = pager;
 })();

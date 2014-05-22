@@ -228,3 +228,41 @@
 [ProcessName]: WebDev.WebServer40
 [ThreadID]: 5
 ** [2014-05-22 22:12:16.215] - End ****************************************************************
+
+** [2014-05-22 22:31:08.941] - Begin **************************************************************
+[LogID]: 4d54604c-e857-43aa-94b6-ba7b4dcf9279
+[Source]: SohoWeb
+[Category]: SohoWeb_Exception
+[RequestUrl]: http://localhost:8500/SystemUser/Login
+[UserHostAddress]: ::1
+[Content]: System.PlatformNotSupportedException: 此操作要求使用 IIS 集成管线模式。
+   在 System.Web.HttpResponse.get_Headers()
+   在 Soho.Utility.Web.MobileCookiePersister.Save(String cookieName, String cookieValue, Dictionary`2 parameters)
+   在 Soho.Utility.Web.CookieHelper.SaveCookie[T](String nodeName, T obj)
+   在 SohoWeb.WebUI.AuthMgr.WriteUserInfo(LoginAuthVM authUser) 位置 f:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\App_Start\AuthMgr.cs:行号 96
+   在 SohoWeb.WebUI.AuthMgr.Login(String userID, String userPwd, String validateCode) 位置 f:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\App_Start\AuthMgr.cs:行号 72
+   在 SohoWeb.WebUI.Controllers.SystemUserController.Login() 位置 f:\github\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\Controllers\SystemUserController.cs:行号 21
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+[ServerIP]: 20.0.0.20
+[ServerName]: MYTREE
+[ServerTime]: 2014-05-22 22:31:08.860
+[ProcessID]: 5404
+[ProcessName]: WebDev.WebServer40
+[ThreadID]: 11
+** [2014-05-22 22:31:08.941] - End ****************************************************************
