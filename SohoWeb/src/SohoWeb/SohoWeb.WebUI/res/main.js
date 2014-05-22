@@ -7,7 +7,9 @@
     window["appConfig"]={
 
         //定义是否在http的时候显示loading
-        showLoading:true,
+        showLoading: true,
+        serviceBaseUrl: "",
+        login:"Login/Index",
         loadingDelay:500,
         //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
@@ -55,6 +57,14 @@
         routeUrl:"/user",
         templateUrl:"../Views/user.html",
         controller:"ControlPanelController"
+    }, {
+        routeUrl: "/user/add",
+        templateUrl: "../Views/user_add.html",
+        controller: "ControlPanelController"
+    }, {
+        routeUrl: "/user/modifyPsw",
+        templateUrl: "../Views/modifyPsw.html",
+        controller: "ControlPanelController"
     }, {
         routeUrl: "/home",
         templateUrl: "../Views/home.html",

@@ -3,7 +3,7 @@
         <div class="header">
             <div class="title">用户管理</div>
             <div class="button-bar">
-                <a href="#/customer/add">添加新用户</a><a href="#">删除所选用户</a>
+                <a href="#/user/add">添加新用户</a><a href="#">删除所选用户</a>
             </div>
         </div>
     </div>
@@ -70,13 +70,9 @@
                 </tr>
             </tbody>
         </table>
-        <ul class="pure-paginator" my-pager ng-model="pager" >
+        <ul class="pure-paginator" my-pager ng-model="pager" first-load="true">
             <li><a class="pure-button prev" href="#">&#171;</a></li>
-            <li><a class="pure-button" href="#">1</a></li>
-            <li><a class="pure-button pure-button-active" href="#">2</a></li>
-            <li><a class="pure-button" href="#">3</a></li>
-            <li><a class="pure-button" href="#">4</a></li>
-            <li><a class="pure-button" href="#">5</a></li>
+            <li ng-repeat="a in pager.pages"><a class="pure-button" ng-click="pager.goto(a)">{{a}}</a></li>
             <li><a class="pure-button next" href="#">&#187;</a></li>
         </ul>
     </div>

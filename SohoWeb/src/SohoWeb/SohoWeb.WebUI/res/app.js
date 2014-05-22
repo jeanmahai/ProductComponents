@@ -94,6 +94,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                 //处理自定义headers
                 config.headers = {
                     //"x-newegg-mobile-cookie": window.localStorage.getItem("x-newegg-mobile-cookie")
+                    "x-soho-app-id": "1002"
                 };
                 //处理loading
                 $N.loading(config);
@@ -110,6 +111,17 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                 //处理loaded
                 $N.loaded(response);
 
+                if(angular.isObject(response)){
+                    var data=response.data;
+                    if (data.Success === false) {
+                        if (data.Code = 1000000) {
+                            window.location.href = appConfig.login;
+                        }
+                    }
+                    else {
+                        return data.Data;
+                    }
+                }
                 //处理异常
 
 
