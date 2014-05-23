@@ -33,6 +33,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     }]);
     //#endregion
 
+
     //#region 动态路由
     //动态routing,目前已经禁用了,由于功能还不成熟,暂停使用
     //需要做的东西::controller/:view/:params
@@ -90,35 +91,44 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     app.factory("httpInterceptor", ["$N", function ($N) {
         return {
             'request': function (config) {
-                // do something on success
                 //处理自定义headers
-                config.headers = {
-                    //"x-newegg-mobile-cookie": window.localStorage.getItem("x-newegg-mobile-cookie")
-                };
+                config.headers["x-soho-app-id"] = appConfig.appId || 1002;
                 //处理loading
                 $N.loading(config);
                 return config || $q.when(config);
             },
             'response': function (response) {
-                // do something on success
                 //处理自定义的headers
-                //                var mobileCookie = response.headers("x-newegg-mobile-cookie");
-                //                if (mobileCookie && mobileCookie != "") {
-                //
-                //                }
-                //                window.localStorage.setItem("x-newegg-mobile-cookie", mobileCookie);
                 //处理loaded
                 $N.loaded(response);
 
-                //处理异常
-
+                if (angular.isObject(response)) {
+                    if (angular.isObject(response.data)) {
+                        if (response.data.Success === false) {
+                            switch (response.data.Code) {
+                                //not login
+                                case 1000000:
+                                    $N.goto(appConfig.login || "");
+                                    break;
+                                default:
+                                    alert(response.data.Message);
+                            }
+                        }
+                        else {
+                            return response.data.Data;
+                        }
+                    }
+                }
 
                 return response || $q.when(response);
             }
         };
     }]);
+
+    //http provider
     app.config(function ($httpProvider) {
         $httpProvider.interceptors.push("httpInterceptor");
+        //$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     });
 
     //start
@@ -156,7 +166,7 @@ if (!Function.prototype.bind) {
  * 开发directive的命名规则,如:定义是的名字为myPager,使用时的名字为my-pager. 潜规则
  * */
 angular.module("NProvider", ["ng"]).
-    directive("myPager",function ($timeout) {
+    directive("myPager", function ($timeout) {
         return {
             require: "ngModel",
             restrict: "ACE",
@@ -176,7 +186,7 @@ angular.module("NProvider", ["ng"]).
                     if (controller) {
                         if (value.index < 1) value.index = 1;
                         if (value.index > value.totalPage) value.index = value.totalPage;
-						
+
                         controller.$setViewValue(value);
                         scope.$apply();
                     }
@@ -188,36 +198,36 @@ angular.module("NProvider", ["ng"]).
                     else btnPre.removeAttr("disabled");
                     if (value.index >= value.totalPage) btnNext.attr("disabled", "");
                     else btnNext.removeAttr("disabled");
-					if(controller){
-						console.info("controller render");
-						controller.$render();
-					}
+                    if (controller) {
+                        console.info("controller render");
+                        controller.$render();
+                    }
                 }
 
                 function pageChange(value) {
                     console.info("page change");
                     first = false;
-					
-                    var promise=value.change();
-					if(promise && promise["finally"]){
-						promise["finally"](function(){
-							console.info("resolve page change");
-							value.pages=[];
-							for(var i=1;i<=value.totalPage;i++) value.pages.push(i);
-							value.pages.push("...");
-						});
-					}
+
+                    var promise = value.change();
+                    if (promise && promise["finally"]) {
+                        promise["finally"](function () {
+                            console.info("resolve page change");
+                            value.pages = [];
+                            for (var i = 1; i <= value.totalPage; i++) value.pages.push(i);
+                            value.pages.push("...");
+                        });
+                    }
                 }
 
                 function prev() {
-                    if(angular.element(this).attr("disabled")) return false;
+                    if (angular.element(this).attr("disabled")) return false;
                     pageInfo.index--;
                     setViewValue(pageInfo);
                     return false;
                 }
 
                 function next() {
-                    if(angular.element(this).attr("disabled")) return false;
+                    if (angular.element(this).attr("disabled")) return false;
                     pageInfo.index++;
                     setViewValue(pageInfo);
                     return false;
@@ -287,6 +297,12 @@ angular.module("NProvider", ["ng"]).
                     };
                     this.timeout = setTimeout(hideLoading.bind(this), this.loadingDelay);
                 }
+            },
+            goto: function (url) {
+                if (url.indexOf("#") > 0) { }
+                else {
+                    window.location.href = url;
+                }
             }
         };
         this.$get = function () {
@@ -302,29 +318,29 @@ angular.module("NProvider", ["ng"]).
         this.size = size || 0;
         this.change = onChange || angular.noop();
         this.total = 0;
-		this.pages=[];
-		this.totalPage=0;
+        this.pages = [];
+        this.totalPage = 0;
     }
 
     pager.prototype = {
         setTotal: function (t) {
             this.total = t;
-			if(this.size>0) this.totalPage=t/this.size;
+            if (this.size > 0) this.totalPage = t / this.size;
             return this;
         },
         setSize: function (s) {
             this.size = s;
             return this;
         },
-		goto:function(index,current,evt){
-			index=parseInt(index);
-			if(isNaN(index)) return;
-			if(index<1) return;
-			if(index>this.totalPage) return;
-			if(index===this.index) return;
-			this.index=index;
-			this.change();
-		}
+        goto: function (index, current, evt) {
+            index = parseInt(index);
+            if (isNaN(index)) return;
+            if (index < 1) return;
+            if (index > this.totalPage) return;
+            if (index === this.index) return;
+            this.index = index;
+            this.change();
+        }
     };
     window["N"]["Pager"] = pager;
 })();
