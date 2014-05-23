@@ -88,7 +88,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
 
     //interceptor http
-    app.factory("httpInterceptor", ["$N", function ($N) {
+    app.factory("httpInterceptor", ["$N","$q", function ($N,$q) {
         return {
             'request': function (config) {
                 //处理自定义headers
@@ -113,9 +113,11 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
                                 default:
                                     alert(response.data.Message);
                             }
+                            throw new Error(response.data.Message);
                         }
                         else {
-                            return response.data.Data;
+                            response.data = response.data.Data;
+                            return response;
                         }
                     }
                 }
