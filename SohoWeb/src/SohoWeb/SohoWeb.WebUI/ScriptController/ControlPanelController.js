@@ -56,7 +56,15 @@
             remove: function () {
                 if (confirm("是否真的要删除?")) {
                     var me = this;
-                    console.info(me.list);
+                    var sysNos = [];
+                    angular.forEach(me.list, function (value) {
+                        if (value.Checked) sysNos.push(value.SysNo);
+                    });
+                    console.info(sysNos);
+                    //$http.post("", sysNos).
+                    //    success(function (res) {
+
+                    //    });
                 }
 
 
@@ -93,6 +101,8 @@
         $scope.pager = new N.Pager(1, 10, function () {
             user.query();
         });
+
+        
 
         if ($routeParams.sysNo && $routeParams.sysNo > 0) {
             $scope.user.data.SysNo = $routeParams.sysNo;
