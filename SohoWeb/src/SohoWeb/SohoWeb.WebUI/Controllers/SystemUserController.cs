@@ -27,7 +27,6 @@ namespace SohoWeb.WebUI.Controllers
                 Data = loginResult,
                 Message = ""
             };
-            CookieHelper.SaveCookie("UserName", "test");
 
             return Redirect("/Master");
         }

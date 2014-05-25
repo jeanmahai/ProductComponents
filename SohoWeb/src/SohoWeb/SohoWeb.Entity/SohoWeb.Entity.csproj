@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Soho.Utility">
+      <HintPath>..\..\ReferenceLib\Soho.Utility.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -48,6 +51,7 @@
     <Compile Include="ControlPanel\Users.cs" />
     <Compile Include="ControlPanel\UsersQueryFilter.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="EnumsHelper.cs" />
     <Compile Include="Enums\Common.cs" />
     <Compile Include="FilterBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,9 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System;
+using System.Runtime.Serialization;
 
 using SohoWeb.Entity.Enums;
 
 namespace SohoWeb.Entity.ControlPanel
 {
+    [Serializable]
     [DataContract]
     public class Roles : EntityBase
     {

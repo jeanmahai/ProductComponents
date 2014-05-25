@@ -42,7 +42,7 @@ namespace SohoWeb.WebUI.Controllers
             return entity;
         }
 
-        protected string GetParams()
+        private string GetParams()
         {
             var stream = Request.InputStream;
             stream.Seek(0, System.IO.SeekOrigin.Begin);

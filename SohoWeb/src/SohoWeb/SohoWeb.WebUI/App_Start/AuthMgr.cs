@@ -24,7 +24,7 @@ namespace SohoWeb.WebUI
             if (user == null || user.UserSysNo <= 0)
                 return false;
 
-            if (user != null && DateTime.Now < user.Timeout)
+            if (user != null && DateTime.Now >= user.Timeout)
             {
                 return false;
             }
@@ -94,6 +94,7 @@ namespace SohoWeb.WebUI
         public void WriteUserInfo(LoginAuthVM authUser)
         {
             CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", authUser);
+            CookieHelper.SaveCookie<string>("UserNameCookie", authUser.UserName);
         }
 
         /// <summary>

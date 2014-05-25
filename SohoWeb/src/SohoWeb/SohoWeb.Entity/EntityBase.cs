@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 
 namespace SohoWeb.Entity
 {
+    [Serializable]
     [DataContract]
     public class EntityBase
     {
