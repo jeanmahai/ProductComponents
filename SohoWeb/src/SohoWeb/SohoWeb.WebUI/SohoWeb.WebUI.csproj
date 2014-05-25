@@ -124,11 +124,11 @@
     <Compile Include="ViewModels\ModifyPasswordVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controllers\ControlPanelController.js" />
-    <Content Include="Controllers\CustomerController.js" />
-    <Content Include="Controllers\HomeController.js" />
-    <Content Include="Controllers\_baseController.js" />
-    <Content Include="Controllers\_parentController.js" />
+    <Content Include="ScriptController\ControlPanelController.js" />
+    <Content Include="ScriptController\CustomerController.js" />
+    <Content Include="ScriptController\HomeController.js" />
+    <Content Include="ScriptController\_baseController.js" />
+    <Content Include="ScriptController\_parentController.js" />
     <Content Include="Global.asax" />
     <Content Include="HtmlViews\customer.html" />
     <Content Include="HtmlViews\customer_add.html" />
