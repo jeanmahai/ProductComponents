@@ -266,3 +266,86 @@
 [ProcessName]: WebDev.WebServer40
 [ThreadID]: 11
 ** [2014-05-22 22:31:08.941] - End ****************************************************************
+
+** [2014-05-22 23:04:48.934] - Begin **************************************************************
+[LogID]: 45c0f89e-932d-4043-bb65-c328a7860b55
+[Source]: SohoWeb
+[Category]: SohoWeb_Exception
+[RequestUrl]: http://localhost:8500/SystemUser/Login
+[UserHostAddress]: ::1
+[Content]: Soho.Utility.DataAccess.Database.DbProvider.DataAccessException: 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: TCP Provider, error: 0 - 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。)
+<<Connection String>> : data source=10.1.220.207,14335\centerdb;database=SohoControlPanel;user id=sa;password=zhongjiu@890;connection reset=false;Timeout=30;connection lifetime=30; min pool size=0; max pool size=50
+<<SQL Script>> : 
+      SELECT [SysNo]
+      ,[UserID]
+      ,[UserName]
+      ,[Password]
+      ,[UserAuthCode]
+      ,[Status]
+      ,[InDate]
+      ,[InUserName]
+      ,[InUserSysNo]
+      ,[EditDate]
+      ,[EditUserName]
+      ,[EditUserSysNo]
+  FROM [SohoControlPanel].[dbo].[Users](NOLOCK)
+  WHERE [UserID] = @UserID
+      
+<<SQL Parameter(s)>> :
+@UserID [String] : sohoadmin [System.String]
+ ---> System.Data.SqlClient.SqlException: 在与 SQL Server 建立连接时出现与网络相关的或特定于实例的错误。未找到或无法访问服务器。请验证实例名称是否正确并且 SQL Server 已配置为允许远程连接。 (provider: TCP Provider, error: 0 - 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。) ---> System.ComponentModel.Win32Exception: 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   在 System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   在 System.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, Boolean encrypt, Boolean trustServerCert, Boolean integratedSecurity, Boolean withFailover)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   在 System.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   在 System.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions)
+   在 System.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnectionOptions userOptions)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionFactory.TryGetConnection(DbConnection owningConnection, TaskCompletionSource`1 retry, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   在 System.Data.ProviderBase.DbConnectionClosed.TryOpenConnection(DbConnection outerConnection, DbConnectionFactory connectionFactory, TaskCompletionSource`1 retry, DbConnectionOptions userOptions)
+   在 System.Data.SqlClient.SqlConnection.TryOpen(TaskCompletionSource`1 retry)
+   在 System.Data.SqlClient.SqlConnection.Open()
+   在 Soho.Utility.DataAccess.Database.DbProvider.TransactionScopeConnections.GetOpenConnection(String connectionString, Func`1 creator, Boolean disposeInnerConnection)
+   在 Soho.Utility.DataAccess.DbHelper.GetOpenConnection(String connectionString, IDbFactory factory, Boolean disposeInnerConnection)
+   在 Soho.Utility.DataAccess.DbHelper.ExecuteReader(String databaseName, CommandType cmdType, String cmdText, Int32 timeout, DbParameter[] commandParameters)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 Soho.Utility.DataAccess.DbHelper.ExecuteReader(String databaseName, CommandType cmdType, String cmdText, Int32 timeout, DbParameter[] commandParameters)
+   在 Soho.Utility.DataAccess.DataCommand.ExecuteDataReader()
+   在 Soho.Utility.DataAccess.DataCommand.ExecuteEntity[T](Action`2 manualMapper, Boolean propertyNameIgnoreCase, Boolean skipNotExistProperty, Char splitter)
+   在 Soho.Utility.DataAccess.DataCommand.ExecuteEntity[T](Action`2 manualMapper, Boolean propertyNameIgnoreCase, Boolean skipNotExistProperty)
+   在 Soho.Utility.DataAccess.DataCommand.ExecuteEntity[T]()
+   在 SohoWeb.DataAccess.ControlPanel.UserAuthDA.GetUserByUserID(String userID) 位置 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.DataAccess\ControlPanel\UserAuthDA.cs:行号 19
+   在 SohoWeb.Service.ControlPanel.UserAuthService.Login(String userID, String userPwd, String validateCode) 位置 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.Service\ControlPanel\UserAuthService.cs:行号 23
+   在 SohoWeb.WebUI.AuthMgr.Login(String userID, String userPwd, String validateCode) 位置 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\App_Start\AuthMgr.cs:行号 59
+   在 SohoWeb.WebUI.Controllers.SystemUserController.Login() 位置 D:\ProjectCollection\BaseLib\ProductComponents\SohoWeb\src\SohoWeb\SohoWeb.WebUI\Controllers\SystemUserController.cs:行号 21
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+[ServerIP]: 192.168.1.100
+[ServerName]: ZhYanming
+[ServerTime]: 2014-05-22 23:04:48.857
+[ProcessID]: 7212
+[ProcessName]: WebDev.WebServer40
+[ThreadID]: 10
+** [2014-05-22 23:04:48.934] - End ****************************************************************
