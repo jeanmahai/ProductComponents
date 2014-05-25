@@ -102,15 +102,7 @@
             user.query();
         });
 
-        $scope.resetForm = function (form) {
-            if (form) {
-                if (form[0]) form[0].reset();
-                else form.reset();
-            }
-            else {
-                $("form")[0].reset();
-            }
-        };
+        
 
         if ($routeParams.sysNo && $routeParams.sysNo > 0) {
             $scope.user.data.SysNo = $routeParams.sysNo;
