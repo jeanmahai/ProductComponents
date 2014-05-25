@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Soho.Utility;
 using Soho.Utility.Web.Framework;
 using SohoWeb.WebUI.ViewModels;
+using Soho.Utility.Web;
 
 namespace SohoWeb.WebUI.Controllers
 {
@@ -26,6 +27,8 @@ namespace SohoWeb.WebUI.Controllers
                 Data = loginResult,
                 Message = ""
             };
+            CookieHelper.SaveCookie("UserName", "test");
+
             return Redirect("/Master");
         }
 

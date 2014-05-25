@@ -3,7 +3,7 @@
         <div class="header">
             <div class="title">用户管理</div>
             <div class="button-bar">
-                <a href="#/user/add">添加新用户</a><a href="#">删除所选用户</a>
+                <a href="#/user/add">添加新用户</a><a href="javascript:void(0)" ng-click="user.remove()">删除所选用户</a>
             </div>
         </div>
     </div>
@@ -52,7 +52,7 @@
             <thead>
                 <tr>
                     <th>
-                        <input type="checkbox" /></th>
+                        <!--<input type="checkbox" onclick="checkAll(this)"/>--></th>
                     <th>#</th>
                     <th>用户ID</th>
                     <th>用户名</th>
@@ -66,7 +66,7 @@
             <tbody>
                 <tr ng-repeat="a in user.list">
                     <td>
-                        <input type="checkbox" value="{{a.SysNo}}" /></td>
+                        <input type="checkbox" value="{{a.SysNo}}" ng-model="a.Checked"/></td>
                     <td><a href="#/user/{{a.SysNo}}">{{a.SysNo}}</a></td>
                     <td>{{a.UserID}}</td>
                     <td>{{a.UserName}}</td>
@@ -85,3 +85,8 @@
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    //function checkAll(tar) {
+    //    $("[ng-model='a.Checked']").prop("checked", $(tar).prop("checked"));
+    //}
+</script>

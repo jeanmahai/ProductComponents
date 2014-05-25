@@ -40,6 +40,10 @@
         templateUrl: "../HtmlViews/user_add.html",
         controller: "ControlPanelController"
     }, {
+        routeUrl: "/user/:sysNo",
+        templateUrl: "../HtmlViews/user_edit.html",
+        controller: "ControlPanelController"
+    }, {
         routeUrl: "/user/modifyPsw",
         templateUrl: "../HtmlViews/modifyPsw.html",
         controller: "ControlPanelController"
@@ -55,7 +59,7 @@
         routeUrl: "/customer/add",
         templateUrl: "../HtmlViews/customer_add.html",
         controller: "CustomerController"
-    }, {
+    } , {
         redirectTo: "/home"
     }];
 

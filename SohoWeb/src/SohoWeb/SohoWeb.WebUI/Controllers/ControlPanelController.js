@@ -1,6 +1,7 @@
-﻿define(["app"], function (app) {
+﻿define(["app", "_baseController"], function (app) {
     app.register.controller("ControlPanelController",
-    function ($scope, $http) {
+    function ($scope, $http, $routeParams, $controller) {
+        angular.extend(this, $controller("_baseController", { $scope: $scope }));
         var user = {
             data: {},
             list: [],
@@ -11,16 +12,40 @@
                     console.info(data);
                 });
             },
-            updatePsw: function () {
+            modifyPassword: function () {
                 var me = this;
+                if (me.data.NewPassword !== me.data.Confirmpassword) {
+                    alert("两次密码输入不一致,请重新输入");
+                    return;
+                }
+                me.data.UserID = $scope._userID;
                 var q = $http.post("/ControlPanel/ModifyPassword", { data: me.data });
                 q.success(function (data) {
-                    console.info(data);
+                    alert("密码修改成功");
                 });
             },
             save: function () {
                 //如果有sysno就是修改否则就是添加
                 var me = this;
+                if (me.data.Password !== me.data.ConfirmPassword) {
+                    alert("两次密码输入不一致,请重新输入");
+                    me.data.Password = "";
+                    me.data.ConfirmPassword = "";
+                    return;
+                }
+                if (me.data.SysNo) {
+                    var sysNo = parseInt(me.data.SysNo);
+                    //edit
+                    if (!isNaN(sysNo) && sysNo > 0) {
+                        $http.post("/ControlPanel/UpdateUser", me.data).
+                            success(function (res) {
+                                alert("修改成功");
+                            });
+                        return;
+                    }
+                }
+
+                //add
                 $http.post("/ControlPanel/InsertUser", me.data).success(function (data) {
                     console.info(data);
                     alert("添加成功");
@@ -28,7 +53,14 @@
                     console.info(arguments);
                 });
             },
-            remove: function () { },
+            remove: function () {
+                if (confirm("是否真的要删除?")) {
+                    var me = this;
+                    console.info(me.list);
+                }
+
+
+            },
             query: function () {
                 console.info("query user");
                 var me = this;
@@ -42,6 +74,18 @@
                     me.list = res.ResultList;
                     $scope.pager.setTotal(res.TotalCount);
                 });
+            },
+            queryUserBySysNo: function () {
+                var me = this;
+                $http.post("/ControlPanel/GetUserByUserSysNo", me.data).
+                    success(function (res) {
+
+                        me.data = {
+                            UserID: res.UserID,
+                            UserName: res.UserName,
+                            SysNo: res.SysNo
+                        };
+                    });
             }
         };
         $scope.user = user;
@@ -49,5 +93,11 @@
         $scope.pager = new N.Pager(1, 10, function () {
             user.query();
         });
+
+        if ($routeParams.sysNo && $routeParams.sysNo > 0) {
+            $scope.user.data.SysNo = $routeParams.sysNo;
+
+            $scope.user.queryUserBySysNo();
+        }
     });
 });

@@ -40,7 +40,8 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult UpdateUser()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            //var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var requestVM = GetParams<Users>();
             this.SetEntityBase(requestVM, false);
             UsersMgtService.Instance.UpdateUserBySysNo(requestVM);
 
@@ -85,8 +86,8 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult ModifyPassword()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<ModifyPasswordVM>(HttpUtility.UrlDecode(Request.Params["data"]));
-
+            //var requestVM = SerializationUtility.JsonDeserialize2<ModifyPasswordVM>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var requestVM = GetParams<ModifyPasswordVM>();
             Users entity = new Users()
             {
                 UserID = requestVM.UserID,
@@ -130,7 +131,9 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult GetUserByUserSysNo()
         {
-            int sysNo = int.Parse(Request.Params["SysNo"]);
+            //int sysNo = int.Parse(Request.Params["SysNo"]);
+            var user = GetParams<Users>();
+            int sysNo = user.SysNo.Value;
 
             PortalResult result = new PortalResult()
             {
