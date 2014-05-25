@@ -1,8 +1,8 @@
-﻿define(["app"],function(app){
+﻿define(["app"], function (app) {
     app.register.controller("ControlPanelController",
-    function($scope,$http){
-        var user={
-            data:{},
+    function ($scope, $http) {
+        var user = {
+            data: {},
             list: [],
             update: function () {
                 var me = this;
@@ -18,33 +18,35 @@
                     console.info(data);
                 });
             },
-            add: function () {
+            save: function () {
+                //如果有sysno就是修改否则就是添加
                 var me = this;
-                var q = $http.post("/ControlPanel/InsertUser", { data: me.data });
-                q.success(function (data) {
+                $http.post("/ControlPanel/InsertUser", me.data).success(function (data) {
                     console.info(data);
+                    alert("添加成功");
+                }).catch(function () {
+                    console.info(arguments);
                 });
             },
-            remove:function(){},
+            remove: function () { },
             query: function () {
                 console.info("query user");
                 var me = this;
                 var filter = {};
-                filter.data = {
+                filter = {
                     PageIndex: $scope.pager.index,
-                    PageSize:$scope.pager.size
+                    PageSize: $scope.pager.size
                 };
-                angular.extend(filter.data, me.data);
-                var q = $http.post("/ControlPanel/QueryUsers", filter);
-                q.success(function (res) {
-                    console.info(res);
-                    me.list = res;
+                angular.extend(filter, me.data);
+                $http.post("/ControlPanel/QueryUsers", filter).success(function (res) {
+                    me.list = res.ResultList;
+                    $scope.pager.setTotal(res.TotalCount);
                 });
             }
         };
-        $scope.user=user;
+        $scope.user = user;
 
-        $scope.pager=new N.Pager(1,10,function(){
+        $scope.pager = new N.Pager(1, 10, function () {
             user.query();
         });
     });

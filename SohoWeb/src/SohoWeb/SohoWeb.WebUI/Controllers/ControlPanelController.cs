@@ -20,7 +20,8 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult InsertUser()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            //var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var requestVM = GetParams<Users>();
             this.SetEntityBase(requestVM, true);
 
             PortalResult result = new PortalResult()
@@ -110,8 +111,9 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult QueryUsers()
         {
-            var filter = SerializationUtility.JsonDeserialize2<UsersQueryFilter>(HttpUtility.UrlDecode(Request.Params["data"]));
 
+            //var filter = SerializationUtility.JsonDeserialize2<UsersQueryFilter>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var filter = GetParams<UsersQueryFilter>();
             PortalResult result = new PortalResult()
             {
                 Code = 0,

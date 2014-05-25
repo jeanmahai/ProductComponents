@@ -32,7 +32,11 @@
     window["appRouteUrl"]=[{
         routeUrl:"/home",
         templateUrl:"views/home.html"
-    },{
+    }, {
+        routeUrl: "/form",
+        templateUrl: "views/form.html",
+        controller:"testFormController"
+    }, {
         routeUrl:"/datepicker",
         templateUrl: "views/datepicker.html",
         controller:"testDatepickerController"
