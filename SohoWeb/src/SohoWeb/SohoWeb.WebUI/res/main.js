@@ -4,49 +4,50 @@
 (function () {
 
     //config
-    window["appConfig"]={
+    window["appConfig"] = {
 
         //定义是否在http的时候显示loading
         showLoading: true,
         serviceBaseUrl: "",
-        login:"Login/Index",
-        loadingDelay:500,
+        login: "Login/Index",
+        loadingDelay: 500,
         //这个值可以缺省
-        loadingDom:document.getElementById("divLoading"),
+        loadingDom: document.getElementById("divLoading"),
 
         //定义需要依赖的js文件
-        angularModualJS:["angularAMD"
+        angularModualJS: ["angularAMD"
             , "angular-route"
             //, "ng-grid"
             , "angular-cookies"
             , "angular-date"],
 
         //定义需要依赖的angular modual
-        angularModualNames:["ngRoute"//
+        angularModualNames: ["ngRoute"//
             // , "ngGrid"
             , "ngCookies"
             , "NProvider"
             , "ui.date"],
         index: "/home",
-        viewBasePath:"views/"
+        viewBasePath: "views/"
     };
     //url route
     window["appRouteUrl"] = [{
-        routeUrl:"/user",
+        routeUrl: "/user",
         templateUrl: "../HtmlViews/user.html",
-        controller:"ControlPanelController"
+        controller: "ControlPanelController"
     }, {
         routeUrl: "/user/add",
         templateUrl: "../HtmlViews/user_add.html",
         controller: "ControlPanelController"
     }, {
+        routeUrl: "/user/modifyPsw",
+        templateUrl: "../HtmlViews/user_modify_password.html",
+        controller: "ControlPanelController"
+    }, {
         routeUrl: "/user/:sysNo",
         templateUrl: "../HtmlViews/user_edit.html",
         controller: "ControlPanelController"
-    }, {
-        routeUrl: "/user/modifyPsw",
-        templateUrl: "../HtmlViews/modifyPsw.html",
-        controller: "ControlPanelController"
+
     }, {
         routeUrl: "/home",
         templateUrl: "../HtmlViews/home.html",
@@ -59,7 +60,7 @@
         routeUrl: "/customer/add",
         templateUrl: "../HtmlViews/customer_add.html",
         controller: "CustomerController"
-    } , {
+    }, {
         redirectTo: "/home"
     }];
 
@@ -96,7 +97,7 @@
             'ng-grid': "../bower_components/ng-grid/ng-grid-2.0.11.min",
 
             'app': "../res/app"
-            ,"page_init":"../res/scripts/page_init"
+            , "page_init": "../res/scripts/page_init"
         },
 
         // Add angular modules that does not support AMD out of the box, put it in a shim
@@ -126,17 +127,17 @@
                     loadCss("bower_components/jquery-ui/themes/ui-darkness/jquery-ui.min.css");
                 }
             },
-            'app':{
+            'app': {
                 deps: ["angular", "page_init"],
-                init:function(){
+                init: function () {
 
                 }
             }
-            ,"page_init":["jquery"]
+            , "page_init": ["jquery"]
         }
 
         // kick start application
-        ,deps: ['app']
+        , deps: ['app']
         //set javascript no cache
         , urlArgs: "_=" + getShortDateString()
     });

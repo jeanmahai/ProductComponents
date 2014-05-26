@@ -4,7 +4,7 @@
 define(["app"],function(app){
     app.register.controller("_baseController",function($scope,$cookies){
         console.info("i am base controller");
-        $scope._userName = "";
+        $scope._userName = $cookies["soho.web.username"];
         //$scope._userSysNo = "";
         $scope._userID = "";
         console.info($cookies);

@@ -14,13 +14,11 @@
             },
             modifyPassword: function () {
                 var me = this;
-                if (me.data.NewPassword !== me.data.Confirmpassword) {
+                if (me.data.NewPassword !== me.data.ConfirmPassword) {
                     alert("两次密码输入不一致,请重新输入");
                     return;
                 }
-                me.data.UserID = $scope._userID;
-                var q = $http.post("/ControlPanel/ModifyPassword", { data: me.data });
-                q.success(function (data) {
+                $http.post("/ControlPanel/ModifyPassword", me.data).success(function () {
                     alert("密码修改成功");
                 });
             },
@@ -61,10 +59,10 @@
                         if (value.Checked) sysNos.push(value.SysNo);
                     });
                     console.info(sysNos);
-                    //$http.post("", sysNos).
-                    //    success(function (res) {
-
-                    //    });
+                    $http.post("/ControlPanel/DeleteUser", sysNos).
+                        success(function (res) {
+                            alert("删除成功!");
+                        });
                 }
 
 
