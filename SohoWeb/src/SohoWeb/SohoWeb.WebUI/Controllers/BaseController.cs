@@ -1,6 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
+using Soho.Utility;
 using Soho.Utility.Web.Framework;
 using SohoWeb.Entity;
 using SohoWeb.WebUI.ViewModels;
@@ -37,6 +40,19 @@ namespace SohoWeb.WebUI.Controllers
                 entity.EditUserName = user.UserName;
             }
             return entity;
+        }
+
+        private string GetParams()
+        {
+            var stream = Request.InputStream;
+            stream.Seek(0, System.IO.SeekOrigin.Begin);
+            return new StreamReader(stream).ReadToEnd();
+        }
+        protected T GetParams<T>()
+        {
+            var str = GetParams();
+            var obj = new JavaScriptSerializer().Deserialize<T>(str);
+            return SerializationUtility.JsonDeserialize2<T>(str);
         }
     }
 

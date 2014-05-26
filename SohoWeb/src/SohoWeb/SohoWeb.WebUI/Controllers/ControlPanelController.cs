@@ -6,6 +6,9 @@ using Soho.Utility.Web.Framework;
 using SohoWeb.Service.ControlPanel;
 using SohoWeb.Entity.ControlPanel;
 using SohoWeb.WebUI.ViewModels;
+using System.Collections.Generic;
+using SohoWeb.Entity;
+using SohoWeb.Entity.Enums;
 
 namespace SohoWeb.WebUI.Controllers
 {
@@ -14,13 +17,30 @@ namespace SohoWeb.WebUI.Controllers
     /// </summary>
     public class ControlPanelController : SSLController
     {
+        #region 用户
+        /// <summary>
+        /// 获取用户状态枚举列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetCommonStatusList()
+        {
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = EnumsHelper.GetKeyValuePairs<CommonStatus>(EnumAppendItemType.Select),
+                Message = ""
+            };
+            return View(result);
+        }
+
         /// <summary>
         /// 添加用户
         /// </summary>
         /// <returns></returns>
         public ActionResult InsertUser()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var requestVM = GetParams<Users>();
             this.SetEntityBase(requestVM, true);
 
             PortalResult result = new PortalResult()
@@ -39,7 +59,7 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult UpdateUser()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<Users>(HttpUtility.UrlDecode(Request.Params["data"]));
+            var requestVM = GetParams<Users>();
             this.SetEntityBase(requestVM, false);
             UsersMgtService.Instance.UpdateUserBySysNo(requestVM);
 
@@ -59,20 +79,28 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult DeleteUser()
         {
-            int sysNo = int.Parse(Request.Params["SysNo"]);
-            Users entity = new Users()
+            var request = GetParams<List<string>>();
+
+            bool bResult = false;
+            if (request != null && request.Count > 0)
             {
-                SysNo = sysNo,
-                Status = Entity.Enums.CommonStatus.InValid
-            };
-            this.SetEntityBase(entity, false);
-            UsersMgtService.Instance.UpdateUserStatusBySysNo(entity);
+                foreach (string str in request)
+                {
+                    Users entity = new Users()
+                    {
+                        SysNo = int.Parse(str),
+                        Status = Entity.Enums.CommonStatus.InValid
+                    };
+                    this.SetEntityBase(entity, false);
+                    UsersMgtService.Instance.UpdateUserStatusBySysNo(entity);
+                }
+            }
 
             PortalResult result = new PortalResult()
             {
                 Code = 0,
-                Success = true,
-                Data = true,
+                Success = bResult,
+                Data = bResult,
                 Message = ""
             };
             return View(result);
@@ -84,11 +112,10 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult ModifyPassword()
         {
-            var requestVM = SerializationUtility.JsonDeserialize2<ModifyPasswordVM>(HttpUtility.UrlDecode(Request.Params["data"]));
-
+            var requestVM = GetParams<ModifyPasswordVM>();
             Users entity = new Users()
             {
-                UserID = requestVM.UserID,
+                UserID = this.CurrUser.UserID,
                 Password = requestVM.NewPassword
             };
             this.SetEntityBase(entity, false);
@@ -110,8 +137,7 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult QueryUsers()
         {
-            var filter = SerializationUtility.JsonDeserialize2<UsersQueryFilter>(HttpUtility.UrlDecode(Request.Params["data"]));
-
+            var filter = GetParams<UsersQueryFilter>();
             PortalResult result = new PortalResult()
             {
                 Code = 0,
@@ -128,7 +154,8 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult GetUserByUserSysNo()
         {
-            int sysNo = int.Parse(Request.Params["SysNo"]);
+            var user = GetParams<Users>();
+            int sysNo = user.SysNo.Value;
 
             PortalResult result = new PortalResult()
             {
@@ -139,23 +166,6 @@ namespace SohoWeb.WebUI.Controllers
             };
             return View(result);
         }
-
-        /// <summary>
-        /// 根据用户ID获取有效用户
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult GetUserByUserID()
-        {
-            string userID = Request.Params["UserID"];
-
-            PortalResult result = new PortalResult()
-            {
-                Code = 0,
-                Success = true,
-                Data = UsersMgtService.Instance.GetValidUserByUserID(userID),
-                Message = ""
-            };
-            return View(result);
-        }
+        #endregion
     }
 }

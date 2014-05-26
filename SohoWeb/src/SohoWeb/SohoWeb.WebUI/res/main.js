@@ -31,53 +31,35 @@
         viewBasePath:"views/"
     };
     //url route
-    window["appRouteUrl"]={
-        home:{
-            routeUrl:"/home",
-            templateUrl: "../Views/home.html",
-            controller:"homeController"
-        },
-        customer: {
-            routeUrl: "/customer",
-            templateUrl: "Views/customer.html",
-            controller: "CustomerController"
-        },
-        customer_add: {
-            routeUrl: "/customer/add",
-            templateUrl: "views/customer_add.html",
-            controller: "CustomerController"
-        },
-        //默认跳转页面
-        otherwise:{
-            redirectTo:"/home"
-        }
-    };
-
     window["appRouteUrl"] = [{
         routeUrl:"/user",
-        templateUrl:"../Views/user.html",
+        templateUrl: "../HtmlViews/user.html",
         controller:"ControlPanelController"
     }, {
         routeUrl: "/user/add",
-        templateUrl: "../Views/user_add.html",
+        templateUrl: "../HtmlViews/user_add.html",
+        controller: "ControlPanelController"
+    }, {
+        routeUrl: "/user/:sysNo",
+        templateUrl: "../HtmlViews/user_edit.html",
         controller: "ControlPanelController"
     }, {
         routeUrl: "/user/modifyPsw",
-        templateUrl: "../Views/modifyPsw.html",
+        templateUrl: "../HtmlViews/modifyPsw.html",
         controller: "ControlPanelController"
     }, {
         routeUrl: "/home",
-        templateUrl: "../Views/home.html",
+        templateUrl: "../HtmlViews/home.html",
         controller: "homeController"
     }, {
         routeUrl: "/customer",
-        templateUrl: "Views/customer.html",
+        templateUrl: "../HtmlViews/customer.html",
         controller: "CustomerController"
     }, {
         routeUrl: "/customer/add",
-        templateUrl: "views/customer_add.html",
+        templateUrl: "../HtmlViews/customer_add.html",
         controller: "CustomerController"
-    }, {
+    } , {
         redirectTo: "/home"
     }];
 
@@ -99,7 +81,7 @@
     }
 
     require.config({
-        baseUrl: "../../Controllers",
+        baseUrl: "../../ScriptController",
         paths: {
             'angular': '../bower_components/angular/angular.min',
             'angular-route': '../bower_components/angular-route/angular-route.min',

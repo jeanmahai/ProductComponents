@@ -15,7 +15,7 @@
     <AssemblyName>SohoWeb.WebUI</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -40,10 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\ReferenceLib\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="Soho.Utility">
       <HintPath>..\..\ReferenceLib\Soho.Utility.dll</HintPath>
     </Reference>
@@ -67,6 +63,7 @@
       <HintPath>..\..\ReferenceLib\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -128,12 +125,20 @@
     <Compile Include="ViewModels\ModifyPasswordVM.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Controllers\ControlPanelController.js" />
-    <Content Include="Controllers\CustomerController.js" />
-    <Content Include="Controllers\HomeController.js" />
-    <Content Include="Controllers\_baseController.js" />
-    <Content Include="Controllers\_parentController.js" />
+    <Content Include="ScriptController\ControlPanelController.js" />
+    <Content Include="ScriptController\CustomerController.js" />
+    <Content Include="ScriptController\HomeController.js" />
+    <Content Include="ScriptController\_baseController.js" />
+    <Content Include="ScriptController\_parentController.js" />
     <Content Include="Global.asax" />
+    <Content Include="HtmlViews\customer.html" />
+    <Content Include="HtmlViews\customer_add.html" />
+    <Content Include="HtmlViews\home.html" />
+    <Content Include="HtmlViews\modifyPsw.html" />
+    <Content Include="HtmlViews\user.html" />
+    <Content Include="HtmlViews\user_add.html" />
+    <Content Include="HtmlViews\user_edit.html" />
+    <Content Include="HtmlViews\user_modify_password.html" />
     <Content Include="res\app.js" />
     <Content Include="res\css\css\font-awesome.css" />
     <Content Include="res\css\css\font-awesome.min.css" />
@@ -249,17 +254,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>8500</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/SohoWeb.WebUI</IISUrl>
-          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>http://localhostTest</IISAppRootUrl>
+          <IISUrl>http://localhost:8500/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://localhost:8500/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

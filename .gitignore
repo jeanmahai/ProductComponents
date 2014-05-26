@@ -29,4 +29,8 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 bower_components
 .idea
+<<<<<<< HEAD
 node_modules
+=======
+[lL]og/
+>>>>>>> 3e38ddeb8830505ed155d3df2375d418fd0d82de
