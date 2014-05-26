@@ -10,12 +10,12 @@ namespace SohoWeb.Entity
     [DataContract]
     public class QueryResult<T> where T : class
     {
+        public int ServicePageIndex { get; set; }
         /// <summary>
         /// 当前显示第几页数据，从1开始
         /// </summary>
         [DataMember]
-        public int PageIndex { get { return this.ServicePageIndex++; } }
-        public int ServicePageIndex { get; set; }
+        public int PageIndex { get { return (this.ServicePageIndex <= 1 ? 1 : this.ServicePageIndex + 1); } }
         /// <summary>
         /// 每页显示几条数据
         /// </summary>

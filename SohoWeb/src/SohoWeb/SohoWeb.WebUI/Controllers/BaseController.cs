@@ -20,22 +20,22 @@ namespace SohoWeb.WebUI.Controllers
             var user = (new AuthMgr()).ReadUserInfo();
             if (bIsCreate.HasValue && bIsCreate.Value)
             {
-                entity.InDate = DateTime.Now;
+                entity.InDate = DateTime.Now.ToString();
                 entity.InUserSysNo = user.UserSysNo;
                 entity.InUserName = user.UserName;
             }
             else if (bIsCreate.HasValue && !bIsCreate.Value)
             {
-                entity.EditDate = DateTime.Now;
+                entity.EditDate = DateTime.Now.ToString();
                 entity.EditUserSysNo = user.UserSysNo;
                 entity.EditUserName = user.UserName;
             }
             else
             {
-                entity.InDate = DateTime.Now;
+                entity.InDate = DateTime.Now.ToString();
                 entity.InUserSysNo = user.UserSysNo;
                 entity.InUserName = user.UserName;
-                entity.EditDate = DateTime.Now;
+                entity.EditDate = DateTime.Now.ToString();
                 entity.EditUserSysNo = user.UserSysNo;
                 entity.EditUserName = user.UserName;
             }

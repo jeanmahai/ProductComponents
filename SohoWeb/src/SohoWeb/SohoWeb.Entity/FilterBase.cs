@@ -15,7 +15,7 @@ namespace SohoWeb.Entity
         /// </summary>
         [DataMember]
         public int PageIndex { get; set; }
-        public int ServicePageIndex { get { return this.PageIndex < 1 ? 0 : this.PageIndex--; } }
+        public int ServicePageIndex { get { return (this.PageIndex < 1 ? 0 : this.PageIndex - 1); } }
         /// <summary>
         /// 每页显示几条数据
         /// </summary>

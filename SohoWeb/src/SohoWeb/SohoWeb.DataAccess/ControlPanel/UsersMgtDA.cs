@@ -67,32 +67,18 @@ namespace SohoWeb.DataAccess.ControlPanel
             result.ServicePageIndex = filter.ServicePageIndex;
             result.PageSize = filter.PageSize;
 
-            PagingInfoEntity page = new PagingInfoEntity();
-            page.MaximumRows = filter.PageSize;
-            page.StartRowIndex = filter.ServicePageIndex * filter.PageSize;
+            PagingInfoEntity page = DataAccessUtil.ToPagingInfo(filter);
             CustomDataCommand cmd = DataCommandManager.CreateCustomDataCommandFromConfig("QueryUsers");
             using (var sqlBuilder = new DynamicQuerySqlBuilder(cmd.CommandText, cmd, page, "SysNo DESC"))
             {
-                if (filter.SysNo.HasValue)
-                {
-                    sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "SysNo", DbType.Int32,
-                        "@SysNo", QueryConditionOperatorType.Equal, filter.SysNo.Value);
-                }
-                if (!string.IsNullOrWhiteSpace(filter.UserID))
-                {
-                    sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "UserID", DbType.String,
-                        "@UserID", QueryConditionOperatorType.Like, filter.UserID);
-                }
-                if (!string.IsNullOrWhiteSpace(filter.UserName))
-                {
-                    sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "UserName", DbType.String,
-                        "@UserName", QueryConditionOperatorType.Like, filter.UserName);
-                }
-                if (filter.Status.HasValue)
-                {
-                    sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "Status", DbType.Int32,
-                        "@Status", QueryConditionOperatorType.Equal, filter.Status.Value);
-                }
+                sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "SysNo", DbType.Int32,
+                    "@SysNo", QueryConditionOperatorType.Equal, filter.SysNo);
+                sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "UserID", DbType.String,
+                    "@UserID", QueryConditionOperatorType.Like, filter.UserID);
+                sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "UserName", DbType.String,
+                    "@UserName", QueryConditionOperatorType.Like, filter.UserName);
+                sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "Status", DbType.Int32,
+                    "@Status", QueryConditionOperatorType.Equal, filter.Status);
 
                 cmd.CommandText = sqlBuilder.BuildQuerySql();
                 result.ResultList = cmd.ExecuteEntityList<Users>();

@@ -74,6 +74,25 @@ namespace SohoWeb.WebUI.Controllers
         }
 
         /// <summary>
+        /// 更新权限状态
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateUserStatus()
+        {
+            var user = GetParams<Users>();
+            UsersMgtService.Instance.UpdateUserStatusBySysNo(user);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
         /// 删除用户
         /// </summary>
         /// <returns></returns>
@@ -162,6 +181,136 @@ namespace SohoWeb.WebUI.Controllers
                 Code = 0,
                 Success = true,
                 Data = UsersMgtService.Instance.GetValidUserByUserSysNo(sysNo),
+                Message = ""
+            };
+            return View(result);
+        }
+        #endregion
+
+        #region 权限点
+
+        /// <summary>
+        /// 添加权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertFunctions()
+        {
+            var requestVM = GetParams<Functions>();
+            this.SetEntityBase(requestVM, true);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = FunctionsMgtService.Instance.InsertFunctions(requestVM),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 更新权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateFunction()
+        {
+            var requestVM = GetParams<Functions>();
+            this.SetEntityBase(requestVM, false);
+            FunctionsMgtService.Instance.UpdateFunctionsBySysNo(requestVM);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 更新权限状态
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateFunctionStatus()
+        {
+            var functions = GetParams<Functions>();
+            FunctionsMgtService.Instance.UpdateFunctionsStatusBySysNo(functions);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 删除权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DeleteFunction()
+        {
+            var request = GetParams<List<string>>();
+
+            bool bResult = false;
+            if (request != null && request.Count > 0)
+            {
+                foreach (string str in request)
+                {
+                    Functions entity = new Functions()
+                    {
+                        SysNo = int.Parse(str),
+                        Status = Entity.Enums.CommonStatus.InValid
+                    };
+                    this.SetEntityBase(entity, false);
+                    FunctionsMgtService.Instance.UpdateFunctionsStatusBySysNo(entity);
+                }
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = bResult,
+                Data = bResult,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 查询权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult QueryFunctions()
+        {
+            var filter = GetParams<FunctionsQueryFilter>();
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = FunctionsMgtService.Instance.QueryFunctions(filter),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 根据权限编号获取有效权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetFunctionsBySysNo()
+        {
+            var user = GetParams<Functions>();
+            int sysNo = user.SysNo.Value;
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = FunctionsMgtService.Instance.GetValidFunctionsBySysNo(sysNo),
                 Message = ""
             };
             return View(result);

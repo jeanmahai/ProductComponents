@@ -11,13 +11,13 @@ namespace SohoWeb.Entity
     public class EntityBase
     {
         [DataMember]
-        public DateTime? InDate { get; set; }
+        public string InDate { get; set; }
         [DataMember]
         public string InUserName { get; set; }
         [DataMember]
         public int? InUserSysNo { get; set; }
         [DataMember]
-        public DateTime? EditDate { get; set; }
+        public string EditDate { get; set; }
         [DataMember]
         public string EditUserName { get; set; }
         [DataMember]

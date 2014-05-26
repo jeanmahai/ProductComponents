@@ -15,5 +15,7 @@ namespace SohoWeb.Entity.ControlPanel
         public string RoleName { get; set; }
         [DataMember]
         public CommonStatus Status { get; set; }
+        [DataMember]
+        public string StatusText { get { return this.Status.GetEnumDescription(); } }
     }
 }
