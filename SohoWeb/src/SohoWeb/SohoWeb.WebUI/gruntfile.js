@@ -59,7 +59,7 @@ module.exports=function(grunt){
 		,karma:{
 			unit:{
 				options:{
-					files:["test/*-karma.js"]
+					files:["Tests/*-karma.js"]
 				},
 				autoWatch:true,
 				// runnerPort:9999,
