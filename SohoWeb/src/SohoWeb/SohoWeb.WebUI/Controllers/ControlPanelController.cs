@@ -108,7 +108,7 @@ namespace SohoWeb.WebUI.Controllers
                     Users entity = new Users()
                     {
                         SysNo = int.Parse(str),
-                        Status = Entity.Enums.CommonStatus.InValid
+                        Status = Entity.Enums.CommonStatus.Deleted
                     };
                     this.SetEntityBase(entity, false);
                     UsersMgtService.Instance.UpdateUserStatusBySysNo(entity);
@@ -263,7 +263,7 @@ namespace SohoWeb.WebUI.Controllers
                     Functions entity = new Functions()
                     {
                         SysNo = int.Parse(str),
-                        Status = Entity.Enums.CommonStatus.InValid
+                        Status = Entity.Enums.CommonStatus.Deleted
                     };
                     this.SetEntityBase(entity, false);
                     FunctionsMgtService.Instance.UpdateFunctionsStatusBySysNo(entity);
@@ -315,6 +315,138 @@ namespace SohoWeb.WebUI.Controllers
             };
             return View(result);
         }
+        #endregion
+
+        #region 角色
+
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertRoles()
+        {
+            var requestVM = GetParams<Roles>();
+            this.SetEntityBase(requestVM, true);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = RolesMgtService.Instance.InsertRoles(requestVM),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 更新角色
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateRole()
+        {
+            var requestVM = GetParams<Roles>();
+            this.SetEntityBase(requestVM, false);
+            RolesMgtService.Instance.UpdateRolesBySysNo(requestVM);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 更新角色状态
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateRoleStatus()
+        {
+            var role = GetParams<Roles>();
+            RolesMgtService.Instance.UpdateRolesStatusBySysNo(role);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult DeleteRole()
+        {
+            var request = GetParams<List<string>>();
+
+            bool bResult = false;
+            if (request != null && request.Count > 0)
+            {
+                foreach (string str in request)
+                {
+                    Roles entity = new Roles()
+                    {
+                        SysNo = int.Parse(str),
+                        Status = Entity.Enums.CommonStatus.Deleted
+                    };
+                    this.SetEntityBase(entity, false);
+                    RolesMgtService.Instance.UpdateRolesStatusBySysNo(entity);
+                }
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = bResult,
+                Data = bResult,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 查询角色
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult QueryRoles()
+        {
+            var filter = GetParams<RolesQueryFilter>();
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = RolesMgtService.Instance.QueryRoles(filter),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 根据角色编号获取有效角色
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetRolesBySysNo()
+        {
+            var user = GetParams<Roles>();
+            int sysNo = user.SysNo.Value;
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = RolesMgtService.Instance.GetValidRolesBySysNo(sysNo),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        //public ActionResult GetRoleUsers()
         #endregion
     }
 }

@@ -15,17 +15,17 @@ namespace SohoWeb.Entity.Enums
     public enum CommonStatus
     {
         /// <summary>
+        /// 删除
+        /// </summary>
+        [EnumMember]
+        [Description("删除")]
+        Deleted = -100,
+        /// <summary>
         /// 无效
         /// </summary>
         [EnumMember]
         [Description("无效")]
-        InValid = -100,
-        /// <summary>
-        /// 初始化
-        /// </summary>
-        [EnumMember]
-        [Description("初始化")]
-        Init = 0,
+        InValid = 0,
         /// <summary>
         /// 有效
         /// </summary>

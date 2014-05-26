@@ -31,7 +31,7 @@ namespace SohoWeb.Service.ControlPanel
         public void UpdateFunctionsBySysNo(Functions entity)
         {
             var existsList = FunctionsMgtDA.GetValidFunctionsByKey(entity.FunctionKey);
-            if (existsList != null && existsList.Count > 0 && existsList[0].SysNo == entity.SysNo)
+            if (existsList != null && existsList.Count > 0 && existsList[0].SysNo != entity.SysNo)
             {
                 throw new BusinessException("该权限点已存在！");
             }
