@@ -8,5 +8,15 @@ define(["app"],function(app){
         //$scope._userSysNo = "";
         $scope._userID = "";
         console.info($cookies);
+
+        $scope.resetForm = function (form) {
+            if (form) {
+                if (form[0]) form[0].reset();
+                else form.reset();
+            }
+            else {
+                $("form")[0].reset();
+            }
+        };
     });
 });

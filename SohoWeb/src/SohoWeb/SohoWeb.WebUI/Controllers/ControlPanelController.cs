@@ -7,6 +7,8 @@ using SohoWeb.Service.ControlPanel;
 using SohoWeb.Entity.ControlPanel;
 using SohoWeb.WebUI.ViewModels;
 using System.Collections.Generic;
+using SohoWeb.Entity;
+using SohoWeb.Entity.Enums;
 
 namespace SohoWeb.WebUI.Controllers
 {
@@ -15,6 +17,23 @@ namespace SohoWeb.WebUI.Controllers
     /// </summary>
     public class ControlPanelController : SSLController
     {
+        #region 用户
+        /// <summary>
+        /// 获取用户状态枚举列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetCommonStatusList()
+        {
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = EnumsHelper.GetKeyValuePairs<CommonStatus>(EnumAppendItemType.Select),
+                Message = ""
+            };
+            return View(result);
+        }
+
         /// <summary>
         /// 添加用户
         /// </summary>
@@ -147,5 +166,6 @@ namespace SohoWeb.WebUI.Controllers
             };
             return View(result);
         }
+        #endregion
     }
 }

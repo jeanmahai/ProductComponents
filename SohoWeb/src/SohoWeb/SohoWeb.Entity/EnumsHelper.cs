@@ -22,7 +22,7 @@ namespace SohoWeb.Entity
             Type enumType = typeof(TEnum);
             if (enumType.IsEnum || IsGenericEnum(enumType))
             {
-                Dictionary<TEnum, string> dic = null;// EnumHelper.GetDescriptions<TEnum>();
+                Dictionary<TEnum, string> dic = EnumHelper.GetDescriptions<TEnum>();
                 if (dic != null && dic.Count > 0)
                 {
                     foreach (TEnum e in dic.Keys)
