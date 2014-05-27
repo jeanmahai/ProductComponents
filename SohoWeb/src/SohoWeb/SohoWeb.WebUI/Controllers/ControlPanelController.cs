@@ -560,10 +560,10 @@ namespace SohoWeb.WebUI.Controllers
 
             if (requestVM != null && requestVM.Count > 0)
             {
-                foreach (var item in requestVM)
+                requestVM.ForEach(m =>
                 {
-                    this.SetEntityBase(item);
-                }
+                    this.SetEntityBase(m);
+                });
             }
             RolesMgtService.Instance.SaveUserRoles(requestVM);
 
@@ -618,12 +618,26 @@ namespace SohoWeb.WebUI.Controllers
 
             if (requestVM != null && requestVM.Count > 0)
             {
-                foreach (var item in requestVM)
+                requestVM.ForEach(m =>
                 {
-                    this.SetEntityBase(item);
-                }
+                    this.SetEntityBase(m);
+                });
             }
             RolesMgtService.Instance.SaveRoleFunctions(requestVM);
+            if (requestVM != null && requestVM.Count > 0)
+            {
+                requestVM.ForEach(m =>
+                {
+                    var users = RolesMgtService.Instance.GetRoleUsersByRoleSysNo(m.RoleSysNo);
+                    if (users != null && users.Count > 0)
+                    {
+                        users.ForEach(n =>
+                        {
+                            (new AuthMgr()).RefreshUserFunctions(n.UserSysNo);
+                        });
+                    }
+                });
+            }
 
             PortalResult result = new PortalResult()
             {
@@ -674,14 +688,20 @@ namespace SohoWeb.WebUI.Controllers
         {
             var requestVM = GetParams<List<UserFunctions>>();
 
+            int userSysNo = 0;
             if (requestVM != null && requestVM.Count > 0)
             {
-                foreach (var item in requestVM)
+                userSysNo = requestVM[0].UserSysNo;
+                requestVM.ForEach(m =>
                 {
-                    this.SetEntityBase(item);
-                }
+                    this.SetEntityBase(m);
+                });
             }
             UsersMgtService.Instance.SaveUserFunctions(requestVM);
+            if (userSysNo > 0)
+            {
+                (new AuthMgr()).RefreshUserFunctions(userSysNo);
+            }
 
             PortalResult result = new PortalResult()
             {

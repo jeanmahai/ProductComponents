@@ -248,6 +248,9 @@
   <ItemGroup>
     <Content Include="Configuration\Data\ControlPanel\RolesMgt.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\AuthError.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

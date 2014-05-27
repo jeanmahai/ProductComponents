@@ -24,5 +24,14 @@ namespace SohoWeb.WebUI.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 授权错误
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AuthError()
+        {
+            return View();
+        }
     }
 }

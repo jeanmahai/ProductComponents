@@ -80,7 +80,7 @@ namespace SohoWeb.WebUI
         /// <returns></returns>
         public bool Logout()
         {
-            LoginAuthVM authUser = null;
+            LoginAuthVM authUser = new LoginAuthVM();
             WriteUserInfo(authUser);
             return true;
         }
