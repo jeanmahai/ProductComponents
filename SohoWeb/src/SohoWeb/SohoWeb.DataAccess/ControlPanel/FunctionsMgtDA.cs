@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using SohoWeb.Entity;
 using SohoWeb.Entity.ControlPanel;
 using Soho.Utility.DataAccess;
+using SohoWeb.Entity.Enums;
 
 namespace SohoWeb.DataAccess.ControlPanel
 {
@@ -60,6 +61,8 @@ namespace SohoWeb.DataAccess.ControlPanel
             CustomDataCommand cmd = DataCommandManager.CreateCustomDataCommandFromConfig("QueryFunctions");
             using (var sqlBuilder = new DynamicQuerySqlBuilder(cmd.CommandText, cmd, page, "SysNo DESC"))
             {
+                sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "Status", DbType.Int32,
+                    "@Status1", QueryConditionOperatorType.NotEqual, CommonStatus.Deleted);
                 sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "SysNo", DbType.Int32,
                     "@SysNo", QueryConditionOperatorType.Equal, filter.SysNo);
                 sqlBuilder.ConditionConstructor.AddCondition(QueryConditionRelationType.AND, "FunctionName", DbType.String,

@@ -100,7 +100,6 @@ namespace SohoWeb.WebUI.Controllers
         {
             var request = GetParams<List<string>>();
 
-            bool bResult = false;
             if (request != null && request.Count > 0)
             {
                 foreach (string str in request)
@@ -118,8 +117,8 @@ namespace SohoWeb.WebUI.Controllers
             PortalResult result = new PortalResult()
             {
                 Code = 0,
-                Success = bResult,
-                Data = bResult,
+                Success = true,
+                Data = true,
                 Message = ""
             };
             return View(result);
@@ -255,7 +254,6 @@ namespace SohoWeb.WebUI.Controllers
         {
             var request = GetParams<List<string>>();
 
-            bool bResult = false;
             if (request != null && request.Count > 0)
             {
                 foreach (string str in request)
@@ -273,8 +271,8 @@ namespace SohoWeb.WebUI.Controllers
             PortalResult result = new PortalResult()
             {
                 Code = 0,
-                Success = bResult,
-                Data = bResult,
+                Success = true,
+                Data = true,
                 Message = ""
             };
             return View(result);
@@ -385,7 +383,6 @@ namespace SohoWeb.WebUI.Controllers
         {
             var request = GetParams<List<string>>();
 
-            bool bResult = false;
             if (request != null && request.Count > 0)
             {
                 foreach (string str in request)
@@ -403,8 +400,8 @@ namespace SohoWeb.WebUI.Controllers
             PortalResult result = new PortalResult()
             {
                 Code = 0,
-                Success = bResult,
-                Data = bResult,
+                Success = true,
+                Data = true,
                 Message = ""
             };
             return View(result);
