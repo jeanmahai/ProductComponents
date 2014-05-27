@@ -95,17 +95,33 @@
             }
         };
         $scope.user = user;
+        
+        $scope.userStatus = [];
+        $http.post("/ControlPanel/GetCommonStatusList", {}).success(function (res) {
+            $scope.userStatus = res;
+        });
 
         $scope.pager = new N.Pager(1, 10, function () {
             user.query();
         });
-
-        
 
         if ($routeParams.sysNo && $routeParams.sysNo > 0) {
             $scope.user.data.SysNo = $routeParams.sysNo;
 
             $scope.user.queryUserBySysNo();
         }
+
+        
+        $scope.data = {};
+        //
+        function getUserRole(userSysNo) {
+            $http.post("/ControlPanel/GetUserRolesInfo", [userSysNo]).success(function (res) {
+                $scope.data = res;
+            });
+        }
+        if ($routeParams["SysNo"] && $routeParams["SysNo"] > 0) {
+            getUserRole($routeParams["SysNo"]);
+        }
+
     });
 });
