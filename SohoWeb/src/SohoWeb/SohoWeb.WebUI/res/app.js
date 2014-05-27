@@ -133,9 +133,15 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
         //$httpProvider.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
     });
 
+	
+	//_baseController
+	if(appConfig.baseController){
+		app.controller("_baseController",appConfig.baseController);
+	}
+	
     //start
     angularAMD.bootstrap(app);
-
+	
     return app;
 });
 //javascript 1.8 及以上的功能 在移动端部分浏览器没有此功能

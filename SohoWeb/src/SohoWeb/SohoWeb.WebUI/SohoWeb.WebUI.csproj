@@ -120,9 +120,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\LoginAuthVM.cs" />
-    <Compile Include="ViewModels\LoginInfoVM.cs" />
-    <Compile Include="ViewModels\ModifyPasswordVM.cs" />
+    <Compile Include="ViewModels\ControlPanel\FunctionsMaintainVM.cs" />
+    <Compile Include="ViewModels\ControlPanel\LoginAuthVM.cs" />
+    <Compile Include="ViewModels\ControlPanel\LoginInfoVM.cs" />
+    <Compile Include="ViewModels\ControlPanel\ModifyPasswordVM.cs" />
+    <Compile Include="ViewModels\ControlPanel\UserRolesInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ScriptController\ControlPanelController.js" />

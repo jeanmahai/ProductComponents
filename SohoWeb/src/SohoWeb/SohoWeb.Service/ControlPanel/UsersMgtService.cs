@@ -4,6 +4,7 @@ using Soho.Utility.Encryption;
 using SohoWeb.Entity;
 using SohoWeb.Entity.ControlPanel;
 using SohoWeb.DataAccess.ControlPanel;
+using System.Collections.Generic;
 
 namespace SohoWeb.Service.ControlPanel
 {
@@ -96,6 +97,42 @@ namespace SohoWeb.Service.ControlPanel
         public Users GetValidUserByUserSysNo(int userSysNo)
         {
             return UsersMgtDA.GetValidUserByUserSysNo(userSysNo);
+        }
+
+        /// <summary>
+        /// 获取用户存在的权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public List<Functions> GetUserExistsFunctions(int userSysNo)
+        {
+            return UsersMgtDA.GetUserExistsFunctions(userSysNo);
+        }
+
+        /// <summary>
+        /// 获取用户不存在的权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public List<Functions> GetUserNotExistsFunctions(int userSysNo)
+        {
+            return UsersMgtDA.GetUserNotExistsFunctions(userSysNo);
+        }
+
+        /// <summary>
+        /// 保存用户权限
+        /// </summary>
+        /// <param name="list"></param>
+        public void SaveUserFunctions(List<UserFunctions> list)
+        {
+            if (list != null && list.Count > 0)
+            {
+                UsersMgtDA.DeleteUserFunctionsByUserSysNo(list[0].UserSysNo);
+                foreach (var item in list)
+                {
+                    UsersMgtDA.InsertUserFunctions(item);
+                }
+            }
         }
     }
 }

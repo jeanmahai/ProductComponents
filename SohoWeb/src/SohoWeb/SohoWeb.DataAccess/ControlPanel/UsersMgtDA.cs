@@ -120,5 +120,51 @@ namespace SohoWeb.DataAccess.ControlPanel
             cmd.SetParameterValue("@SysNo", userSysNo);
             return cmd.ExecuteEntity<Users>();
         }
+
+        /// <summary>
+        /// 获取用户存在的权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public static List<Functions> GetUserExistsFunctions(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetUserExistsFunctions");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            return cmd.ExecuteEntityList<Functions>();
+        }
+
+        /// <summary>
+        /// 获取用户不存在的权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public static List<Functions> GetUserNotExistsFunctions(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetUserNotExistsFunctions");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            return cmd.ExecuteEntityList<Functions>();
+        }
+
+        /// <summary>
+        /// 添加用户权限
+        /// </summary>
+        /// <param name="entity">用户权限信息</param>
+        public static void InsertUserFunctions(UserFunctions entity)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("InsertUserFunctions");
+            cmd.SetParameterValue<UserFunctions>(entity);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 根据用户编号删除用户权限
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        public static void DeleteUserFunctionsByUserSysNo(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("DeleteUserFunctionsByUserSysNo");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            cmd.ExecuteNonQuery();
+        }
     }
 }

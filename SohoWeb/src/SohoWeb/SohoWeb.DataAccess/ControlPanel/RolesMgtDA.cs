@@ -101,5 +101,121 @@ namespace SohoWeb.DataAccess.ControlPanel
             cmd.SetParameterValue("@RoleName", roleName);
             return cmd.ExecuteEntityList<Roles>();
         }
+
+        /// <summary>
+        /// 根据角色编号获取角色用户
+        /// </summary>
+        /// <param name="roleSysNo">角色编号</param>
+        /// <returns></returns>
+        public static List<RoleUsers> GetRoleUsersByRoleSysNo(int roleSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetRoleUsersByRoleSysNo");
+            cmd.SetParameterValue("@RoleSysNo", roleSysNo);
+            return cmd.ExecuteEntityList<RoleUsers>();
+        }
+
+        /// <summary>
+        /// 根据用户编号获取角色用户
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public static List<RoleUsers> GetRoleUsersByUserSysNo(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetRoleUsersByUserSysNo");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            return cmd.ExecuteEntityList<RoleUsers>();
+        }
+
+        /// <summary>
+        /// 根据用户编号获取用户存在的角色
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public static List<Roles> GetExistsRoleByUserSysNo(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetExistsRoleByUserSysNo");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            return cmd.ExecuteEntityList<Roles>();
+        }
+
+        /// <summary>
+        /// 根据用户编号获取用户不存在的角色
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        /// <returns></returns>
+        public static List<Roles> GetNotExistsRoleByUserSysNo(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetNotExistsRoleByUserSysNo");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            return cmd.ExecuteEntityList<Roles>();
+        }
+
+        /// <summary>
+        /// 根据用户编号删除用户角色
+        /// </summary>
+        /// <param name="userSysNo">用户编号</param>
+        public static void DeleteRoleUsersByUserSysNo(int userSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("DeleteRoleUsersByUserSysNo");
+            cmd.SetParameterValue("@UserSysNo", userSysNo);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 添加用户角色
+        /// </summary>
+        /// <param name="entity">用户角色信息</param>
+        public static void InsertRoleUsers(RoleUsers entity)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("InsertRoleUsers");
+            cmd.SetParameterValue<RoleUsers>(entity);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 获取角色存在的权限
+        /// </summary>
+        /// <param name="roleSysNo">角色编号</param>
+        /// <returns></returns>
+        public static List<Functions> GetRoleExistsFunctions(int roleSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetRoleExistsFunctions");
+            cmd.SetParameterValue("@RoleSysNo", roleSysNo);
+            return cmd.ExecuteEntityList<Functions>();
+        }
+
+        /// <summary>
+        /// 获取角色不存在的权限
+        /// </summary>
+        /// <param name="roleSysNo">角色编号</param>
+        /// <returns></returns>
+        public static List<Functions> GetRoleNotExistsFunctions(int roleSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("GetRoleNotExistsFunctions");
+            cmd.SetParameterValue("@RoleSysNo", roleSysNo);
+            return cmd.ExecuteEntityList<Functions>();
+        }
+
+        /// <summary>
+        /// 添加角色权限
+        /// </summary>
+        /// <param name="entity">角色权限信息</param>
+        public static void InsertRoleFunctions(RoleFunctions entity)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("InsertRoleFunctions");
+            cmd.SetParameterValue<RoleFunctions>(entity);
+            cmd.ExecuteNonQuery();
+        }
+
+        /// <summary>
+        /// 根据角色编号删除角色权限
+        /// </summary>
+        /// <param name="roleSysNo">角色编号</param>
+        public static void DeleteRoleFunctionsByRoleSysNo(int roleSysNo)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("DeleteRoleFunctionsByRoleSysNo");
+            cmd.SetParameterValue("@RoleSysNo", roleSysNo);
+            cmd.ExecuteNonQuery();
+        }
     }
 }

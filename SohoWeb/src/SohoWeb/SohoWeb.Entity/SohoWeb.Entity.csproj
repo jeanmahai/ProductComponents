@@ -46,8 +46,11 @@
   <ItemGroup>
     <Compile Include="ControlPanel\Functions.cs" />
     <Compile Include="ControlPanel\FunctionsQueryFilter.cs" />
+    <Compile Include="ControlPanel\RoleFunctions.cs" />
     <Compile Include="ControlPanel\Roles.cs" />
     <Compile Include="ControlPanel\RolesQueryFilter.cs" />
+    <Compile Include="ControlPanel\RoleUsers.cs" />
+    <Compile Include="ControlPanel\UserFunctions.cs" />
     <Compile Include="ControlPanel\Users.cs" />
     <Compile Include="ControlPanel\UsersQueryFilter.cs" />
     <Compile Include="EntityBase.cs" />

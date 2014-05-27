@@ -1,14 +1,15 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using System.Collections.Generic;
 
 using Soho.Utility;
 using Soho.Utility.Web.Framework;
 using SohoWeb.Service.ControlPanel;
 using SohoWeb.Entity.ControlPanel;
 using SohoWeb.WebUI.ViewModels;
-using System.Collections.Generic;
 using SohoWeb.Entity;
 using SohoWeb.Entity.Enums;
+using SohoWeb.WebUI.ViewModels.ControlPanel;
 
 namespace SohoWeb.WebUI.Controllers
 {
@@ -17,9 +18,8 @@ namespace SohoWeb.WebUI.Controllers
     /// </summary>
     public class ControlPanelController : SSLController
     {
-        #region 用户
         /// <summary>
-        /// 获取用户状态枚举列表
+        /// 获取控制面板通用状态枚举列表
         /// </summary>
         /// <returns></returns>
         public ActionResult GetCommonStatusList()
@@ -33,6 +33,32 @@ namespace SohoWeb.WebUI.Controllers
             };
             return View(result);
         }
+
+        /// <summary>
+        /// 获取指定key该用户是否有权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetIsAllowByKey()
+        {
+            var request = GetParams<List<string>>();
+
+            bool bResult = false;
+            if (request != null && request.Count > 0)
+            {
+                bResult = (new AuthMgr()).IsAllowed(request[0]);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = bResult,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        #region 用户
 
         /// <summary>
         /// 添加用户
@@ -443,7 +469,230 @@ namespace SohoWeb.WebUI.Controllers
             return View(result);
         }
 
-        //public ActionResult GetRoleUsers()
+        #endregion
+
+        #region 角色用户管理
+
+        /// <summary>
+        /// 根据角色编号获取角色用户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetRoleUsersByRoleSysNo()
+        {
+            var request = GetParams<List<string>>();
+
+            List<RoleUsers> data = null;
+            if (request != null && request.Count > 0)
+            {
+                int roleSysNo = int.Parse(request[0]);
+                data = RolesMgtService.Instance.GetRoleUsersByRoleSysNo(roleSysNo);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = data,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 根据用户编号获取角色用户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetRoleUsersByUserSysNo()
+        {
+            var request = GetParams<List<string>>();
+
+            List<RoleUsers> data = null;
+            if (request != null && request.Count > 0)
+            {
+                int userSysNo = int.Parse(request[0]);
+                data = RolesMgtService.Instance.GetRoleUsersByUserSysNo(userSysNo);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = data,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 获取用户存在不存在的角色信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetUserRolesInfo()
+        {
+            var request = GetParams<List<string>>();
+
+            UserRolesInfoVM data = new UserRolesInfoVM();
+
+            if (request != null && request.Count > 0)
+            {
+                int userSysNo = int.Parse(request[0]);
+                data.ExistsRoles = RolesMgtService.Instance.GetExistsRoleByUserSysNo(userSysNo);
+                data.NotExistsRoles = RolesMgtService.Instance.GetNotExistsRoleByUserSysNo(userSysNo);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = data,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 保存用户角色信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SaveUserRoles()
+        {
+            var requestVM = GetParams<List<RoleUsers>>();
+
+            if (requestVM != null && requestVM.Count > 0)
+            {
+                foreach (var item in requestVM)
+                {
+                    this.SetEntityBase(item);
+                }
+            }
+            RolesMgtService.Instance.SaveUserRoles(requestVM);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        #endregion
+
+        #region 角色权限管理
+
+        /// <summary>
+        /// 获取角色存在不存在的权限信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetRoleFunctionsInfo()
+        {
+            var request = GetParams<List<string>>();
+
+            FunctionsMaintainVM data = new FunctionsMaintainVM();
+
+            if (request != null && request.Count > 0)
+            {
+                int roleSysNo = int.Parse(request[0]);
+                data.ExistsFunctions = RolesMgtService.Instance.GetRoleExistsFunctions(roleSysNo);
+                data.NotExistsFunctions = RolesMgtService.Instance.GetRoleNotExistsFunctions(roleSysNo);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = data,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 保存角色权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SaveRoleFunctions()
+        {
+            var requestVM = GetParams<List<RoleFunctions>>();
+
+            if (requestVM != null && requestVM.Count > 0)
+            {
+                foreach (var item in requestVM)
+                {
+                    this.SetEntityBase(item);
+                }
+            }
+            RolesMgtService.Instance.SaveRoleFunctions(requestVM);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        #endregion
+
+        #region 用户权限管理
+
+        /// <summary>
+        /// 获取用户存在不存在的权限信息
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetUserFunctionsInfo()
+        {
+            var request = GetParams<List<string>>();
+
+            FunctionsMaintainVM data = new FunctionsMaintainVM();
+
+            if (request != null && request.Count > 0)
+            {
+                int userSysNo = int.Parse(request[0]);
+                data.ExistsFunctions = UsersMgtService.Instance.GetUserExistsFunctions(userSysNo);
+                data.NotExistsFunctions = UsersMgtService.Instance.GetUserNotExistsFunctions(userSysNo);
+            }
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = data,
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 保存用户权限
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SaveUserFunctions()
+        {
+            var requestVM = GetParams<List<UserFunctions>>();
+
+            if (requestVM != null && requestVM.Count > 0)
+            {
+                foreach (var item in requestVM)
+                {
+                    this.SetEntityBase(item);
+                }
+            }
+            UsersMgtService.Instance.SaveUserFunctions(requestVM);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = true,
+                Message = ""
+            };
+            return View(result);
+        }
+
         #endregion
     }
 }
