@@ -8,6 +8,10 @@
 
         //定义是否在http的时候显示loading
         showLoading:true,
+		
+		baseController:function($scope){
+			$scope.BaseName="i am a base controller with body";
+		},
 
         //这个值可以缺省
         loadingDom:document.getElementById("divLoading"),
@@ -118,6 +122,7 @@
                     loadCss("bower_components/jquery-ui/themes/ui-darkness/jquery-ui.min.css");
                 }
             },
+			"_baseController":["angular","angular-cookies"],
             'app':{
                 deps:["angular"],
                 init:function(){
