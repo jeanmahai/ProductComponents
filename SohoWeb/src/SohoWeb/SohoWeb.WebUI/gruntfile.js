@@ -58,13 +58,14 @@ module.exports=function(grunt){
 		// }
 		,karma:{
 			unit:{
-				options:{
-					files:["Tests/*-karma.js"]
-				},
-				autoWatch:true,
-				// runnerPort:9999,
-				browsers:["Chrome"],
-				frameworks:["jasmine"]
+				// options:{
+					// files:["Tests/*-karma.js"]
+				// },
+				// autoWatch:true,
+				// // runnerPort:9999,
+				// browsers:["Chrome"], 
+				// frameworks:["jasmine"]
+				configFile:"karma.conf.js"
 			}
 		}
 	});
