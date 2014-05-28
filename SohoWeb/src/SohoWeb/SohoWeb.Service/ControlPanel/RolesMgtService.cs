@@ -18,6 +18,10 @@ namespace SohoWeb.Service.ControlPanel
         /// <returns></returns>
         public int InsertRoles(Roles entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.RoleName))
+                throw new BusinessException("必须输入角色名！");
+
             var existsList = RolesMgtDA.GetValidRolesByRoleName(entity.RoleName);
             if (existsList != null && existsList.Count > 0)
             {
@@ -32,6 +36,10 @@ namespace SohoWeb.Service.ControlPanel
         /// <param name="entity">角色信息</param>
         public void UpdateRolesBySysNo(Roles entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.RoleName))
+                throw new BusinessException("必须输入角色名！");
+
             var existsList = RolesMgtDA.GetValidRolesByRoleName(entity.RoleName);
             if (existsList != null && existsList.Count > 0 && existsList[0].SysNo != entity.SysNo)
             {

@@ -5,6 +5,10 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     var cfg = window["appConfig"];
     var app = angular.module("app", cfg.angularModualNames);
 
+	if(appConfig.unitTest){
+		app._angularAMD_=angularAMD;
+	}
+	
     //config $N
     app.run(function ($N) {
         $N.showLoading = cfg.showLoading;
@@ -135,8 +139,8 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
 
 	
 	//_baseController
-	if(appConfig.baseController){
-		app.controller("_baseController",appConfig.baseController);
+	if(appConfig.parentController){
+	    app.controller("_parentController", appConfig.parentController);
 	}
 	
     //start

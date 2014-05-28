@@ -257,6 +257,9 @@
   <ItemGroup>
     <Content Include="Views\Shared\AuthError.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Data\ControlPanel\LogsMgt.config" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

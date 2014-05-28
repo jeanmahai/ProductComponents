@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BaseService.cs" />
     <Compile Include="ControlPanel\FunctionsMgtService.cs" />
+    <Compile Include="ControlPanel\LogsMgtService.cs" />
     <Compile Include="ControlPanel\RolesMgtService.cs" />
     <Compile Include="ControlPanel\UserAuthService.cs" />
     <Compile Include="ControlPanel\UsersMgtService.cs" />

@@ -5,6 +5,10 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
     var cfg = window["appConfig"];
     var app = angular.module("app", cfg.angularModualNames);
 
+	if(appConfig.unitTest){
+		app._angularAMD_=angularAMD;
+	}
+	
     //config $N
     app.run(function ($N) {
         $N.showLoading = cfg.showLoading;
