@@ -2,9 +2,11 @@
 using System.Web.Mvc;
 
 using Soho.Utility;
+using Soho.Utility.Web;
 using Soho.Utility.Web.Framework;
 using SohoWeb.WebUI.ViewModels;
-using Soho.Utility.Web;
+using SohoWeb.Entity.ControlPanel;
+using SohoWeb.Service.ControlPanel;
 
 namespace SohoWeb.WebUI.Controllers
 {
@@ -28,7 +30,14 @@ namespace SohoWeb.WebUI.Controllers
                 Message = ""
             };
 
-            return Redirect("/Master");
+            if (!string.IsNullOrWhiteSpace(Request.Params["ReturnUrl"]))
+            {
+                return Redirect(Request.Params["ReturnUrl"]);
+            }
+            else
+            {
+                return Redirect("/Master");
+            }
         }
 
         /// <summary>
@@ -54,7 +63,17 @@ namespace SohoWeb.WebUI.Controllers
         /// <returns></returns>
         public ActionResult Register()
         {
-            return View();
+            var requestVM = GetParams<Users>();
+            this.SetEntityBase(requestVM, true);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = UsersMgtService.Instance.InsertUser(requestVM),
+                Message = ""
+            };
+            return View(result);
         }
     }
 }

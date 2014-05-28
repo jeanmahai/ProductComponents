@@ -80,7 +80,7 @@ namespace SohoWeb.WebUI
         /// <returns></returns>
         public bool Logout()
         {
-            LoginAuthVM authUser = null;
+            LoginAuthVM authUser = new LoginAuthVM();
             WriteUserInfo(authUser);
             return true;
         }
@@ -94,7 +94,7 @@ namespace SohoWeb.WebUI
         public void WriteUserInfo(LoginAuthVM authUser)
         {
             CookieHelper.SaveCookie<LoginAuthVM>("LoginCookie", authUser);
-            CookieHelper.SaveCookie<string>("UserNameCookie", System.Web.HttpUtility.UrlEncode(authUser.UserName));
+            CookieHelper.SaveCookie<string>("UserNameCookie", authUser.UserName);
         }
 
         /// <summary>

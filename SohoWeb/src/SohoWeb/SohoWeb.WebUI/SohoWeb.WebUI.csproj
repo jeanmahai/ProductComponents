@@ -127,11 +127,16 @@
     <Compile Include="ViewModels\ControlPanel\UserRolesInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HtmlViews\funs.html" />
+    <Content Include="HtmlViews\funs_insert.html" />
+    <Content Include="HtmlViews\funs_update.html" />
+    <Content Include="HtmlViews\role.html" />
+    <Content Include="HtmlViews\role_insert.html" />
+    <Content Include="HtmlViews\role_update.html" />
     <Content Include="ScriptController\ControlPanelController.js" />
     <Content Include="ScriptController\CustomerController.js" />
+    <Content Include="ScriptController\FunsController.js" />
     <Content Include="ScriptController\HomeController.js" />
-    <Content Include="ScriptController\_baseController.js" />
-    <Content Include="ScriptController\_parentController.js" />
     <Content Include="Global.asax" />
     <Content Include="HtmlViews\customer.html" />
     <Content Include="HtmlViews\customer_add.html" />
@@ -169,6 +174,7 @@
     <Content Include="res\main.css" />
     <Content Include="res\main.js" />
     <Content Include="res\scripts\page_init.js" />
+    <Content Include="ScriptController\RoleController.js" />
     <Content Include="Views\customer.html" />
     <Content Include="Views\customer_add.html" />
     <Content Include="Views\home.html" />
@@ -247,6 +253,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\Data\ControlPanel\RolesMgt.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\AuthError.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

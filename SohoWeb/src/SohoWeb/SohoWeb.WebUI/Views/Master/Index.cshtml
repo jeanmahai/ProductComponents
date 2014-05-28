@@ -13,7 +13,7 @@
     <link href="../../res/css/style.css" type="text/css" rel="stylesheet" />
     <script data-main="../../res/main.js" src="../../bower_components/requirejs/require.js"></script>
 </head>
-<body>
+<body ng-controller="_parentController">
     <div class="pure-g layout">
         <!--top-->
         <div class="pure-u-1-1 top">
@@ -39,7 +39,7 @@
                 </ul>
             </div>
             <div class="n-top-menu2" style="float: right;">
-                <p style="color: white; margin-top: 19px;">{{_userName}},你好,欢迎使用中酒网CRM!</p>
+                <p style="color: white; margin-top: 19px;">{{_UserName}},你好,欢迎使用中酒网CRM!</p>
             </div>
         </div>
         <!--left-->
@@ -97,8 +97,8 @@
                     <img src="../../res/images/tool.png" />控制面板</a>
                 <ul>
                     <li><a href="#/user"><i></i>用户管理</a></li>
-                    <li><a href="#"><i></i>权限管理</a></li>
-                    <li><a href="#"><i></i>角色管理</a></li>
+                    <li><a href="#/funs"><i></i>权限管理</a></li>
+                    <li><a href="#/role"><i></i>角色管理</a></li>
                     <li><a href="#/user/modifyPsw"><i></i>修改密码</a></li>
                     <li><a href="#"><i></i>日志管理</a></li>
                     <li><a href="#"><i></i>邮件服务配置</a></li>

@@ -28,10 +28,46 @@
             , "NProvider"
             , "ui.date"],
         index: "/home",
-        viewBasePath: "views/"
+        viewBasePath: "views/",
+
+        parentController: function ($scope, $cookies) {
+            $scope._UserName = "";
+            if ($cookies && $cookies["soho.web.username"]) {
+                $scope._UserName = $cookies["soho.web.username"].replace(/\"/gi,"");
+            }
+            console.info($scope._UserName);
+        }
     };
     //url route
     window["appRouteUrl"] = [{
+        routeUrl: "/user/allot/role/:SysNo",
+        templateUrl: "../HtmlViews/allot_role.html",
+        controller: "ControlPanelController"
+    },{
+        routeUrl: "/role/:SysNo",
+        templateUrl: "../HtmlViews/role_update.html",
+        controller: "RoleController"
+    },{
+        routeUrl: "/role_insert",
+        templateUrl: "../HtmlViews/role_insert.html",
+        controller: "RoleController"
+    },{
+        routeUrl: "/role",
+        templateUrl: "../HtmlViews/role.html",
+        controller: "RoleController"
+    },{
+        routeUrl: "/funs/:SysNo",
+        templateUrl: "../HtmlViews/funs_update.html",
+        controller: "FunsController"
+    },{
+        routeUrl: "/funs_insert",
+        templateUrl: "../HtmlViews/funs_insert.html",
+        controller: "FunsController"
+    },{
+        routeUrl: "/funs",
+        templateUrl: "../HtmlViews/funs.html",
+        controller: "FunsController"
+    },{
         routeUrl: "/user",
         templateUrl: "../HtmlViews/user.html",
         controller: "ControlPanelController"
@@ -117,12 +153,13 @@
                 }
             },
             "angular-cookies": ["angular"],
-            "jquery-ui-core": ["jquery"],
-            "jquery-ui-datepicker-zh-cn": ["jquery-ui-core", "jquery-ui-datepicker"],
-            "jquery-ui-datepicker": ["jquery-ui-core"],
+            //"jquery-ui-core": ["jquery"],
+            //"jquery-ui-datepicker-zh-cn": ["jquery-ui-core", "jquery-ui-datepicker"],
+            //"jquery-ui-datepicker": ["jquery-ui-core"],
             "jquery-ui": ["jquery"],
             "angular-date": {
-                deps: ["angular", "jquery-ui-core", "jquery-ui-datepicker"],
+                //deps: ["angular", "jquery-ui-core", "jquery-ui-datepicker"],
+                deps: ["angular", "jquery-ui"],
                 init: function (a, b, c) {
                     loadCss("bower_components/jquery-ui/themes/ui-darkness/jquery-ui.min.css");
                 }
