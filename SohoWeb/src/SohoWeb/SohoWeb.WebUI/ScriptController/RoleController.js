@@ -51,6 +51,19 @@
                 alert("状态更新成功!");
             });
         };
+        $scope.saveRoleAllotFun = function () {
+            var postData = [];
+            $("#selected li").each(function () {
+                var me = $(this);
+                postData.push({
+                    RoleSysNo: $scope.data.SysNo,
+                    FunctionSysNo: me.attr("SysNo")
+                });
+            });
+            $http.post("/ControlPanel/SaveRoleFunctions",postData).success(function () {
+                alert("保存成功");
+            });
+        };
 
         function getFuns(sysNo) {
             $http.post("/ControlPanel/GetRolesBySysNo", { SysNo: sysNo }).success(function (res) {
@@ -59,6 +72,13 @@
         }
         if ($routeParams && $routeParams["SysNo"] && $routeParams["SysNo"] > 0) {
             getFuns($routeParams["SysNo"]);
+        }
+        if ($routeParams && $routeParams["RoleSysNo"] && $routeParams["RoleSysNo"] > 0) {
+            getFuns($routeParams["RoleSysNo"]);
+            $http.post("/ControlPanel/GetRoleFunctionsInfo", [$routeParams["RoleSysNo"]]).success(function (res) {
+                $scope.selected = res.ExistsFunctions;
+                $scope.unselected = res.NotExistsFunctions;
+            });
         }
     });
 });

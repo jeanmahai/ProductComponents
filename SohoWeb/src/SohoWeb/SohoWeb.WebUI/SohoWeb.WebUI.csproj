@@ -127,10 +127,13 @@
     <Compile Include="ViewModels\ControlPanel\UserRolesInfoVM.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="HtmlViews\allot_fun.html" />
+    <Content Include="HtmlViews\allot_role.html" />
     <Content Include="HtmlViews\funs.html" />
     <Content Include="HtmlViews\funs_insert.html" />
     <Content Include="HtmlViews\funs_update.html" />
     <Content Include="HtmlViews\role.html" />
+    <Content Include="HtmlViews\role_allot_fun.html" />
     <Content Include="HtmlViews\role_insert.html" />
     <Content Include="HtmlViews\role_update.html" />
     <Content Include="ScriptController\ControlPanelController.js" />

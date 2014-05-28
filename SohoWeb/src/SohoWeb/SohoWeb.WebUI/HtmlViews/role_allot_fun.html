@@ -1,29 +1,29 @@
 ﻿<div class="pure-g">
     <div class="pure-u-1">
         <div class="header">
-            <div class="title">[{{user.data.SysNo}}]{{user.data.UserID}} >> 添加角色 </div>
+            <div class="title">[{{data.SysNo}}]{{data.RoleName}} >> 添加权限 </div>
             <div class="button-bar">
-                <a href="javascript:void(0)" ng-click="saveAllotRoles()">保存</a>
+                <a href="javascript:void(0)" ng-click="saveRoleAllotFun()">保存</a>
             </div>
         </div>
     </div>
     <div class="pure-u-1-2 ">
         <div id="unselectedRoles" class="role-list">
             <div class="title">
-                角色列表
+                权限列表
             </div>
             <ul>
-                <li ng-repeat="item in unselectedRoles" SysNo="{{item.SysNo}}">[{{item.SysNo}}]{{item.RoleName}}</li>
+                <li ng-repeat="item in unselected" SysNo="{{item.SysNo}}">[{{item.SysNo}}]{{item.FunctionName}}</li>
             </ul>
         </div>
     </div>
     <div class="pure-u-1-2 ">
-        <div id="selectRoles" class="role-list">
+        <div id="selected" class="role-list">
             <div class="title">
-                已选角色
+                已选权限
             </div>
             <ul>
-                <li ng-repeat="item in selectedRoles" SysNo="{{item.SysNo}}">[{{item.SysNo}}]{{item.RoleName}}</li>
+                <li ng-repeat="item in selected" SysNo="{{item.SysNo}}">[{{item.SysNo}}]{{item.FunctionName}}</li>
             </ul>
         </div>
     </div>
@@ -32,5 +32,5 @@
     $(".role-list ul").sortable({
         connectWith: "ul"
     });
-    
+
 </script>

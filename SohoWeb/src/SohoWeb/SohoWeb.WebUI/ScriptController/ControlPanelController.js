@@ -95,7 +95,7 @@
             }
         };
         $scope.user = user;
-        
+
         $scope.userStatus = [];
         $http.post("/ControlPanel/GetCommonStatusList", {}).success(function (res) {
             $scope.userStatus = res;
@@ -111,17 +111,71 @@
             $scope.user.queryUserBySysNo();
         }
 
-        
+
         $scope.data = {};
         //
+        $scope.unselectedRoles = [];
+        $scope.selectedRoles = [];
         function getUserRole(userSysNo) {
             $http.post("/ControlPanel/GetUserRolesInfo", [userSysNo]).success(function (res) {
-                $scope.data = res;
+                $scope.unselectedRoles = res.NotExistsRoles;
+                $scope.selectedRoles = res.ExistsRoles;
             });
         }
         if ($routeParams["SysNo"] && $routeParams["SysNo"] > 0) {
-            getUserRole($routeParams["SysNo"]);
+            if ($routeParams["name"] === "role") {
+                getUserRole($routeParams["SysNo"]);
+            }
+            if ($routeParams["name"] === "fun") {
+                $http.post("/ControlPanel/GetUserFunctionsInfo", [$routeParams["SysNo"]]).success(function (res) {
+                    $scope.unselectedRoles = res.NotExistsFunctions;
+                    $scope.selectedRoles = res.ExistsFunctions;
+                });
+            }
+
+            //get user by sysno
+            $http.post("/ControlPanel/GetUserByUserSysNo", { SysNo: $routeParams["SysNo"] }).success(function (res) {
+                $scope.user.data = res;
+            });
         }
+
+        function getSelectedSysNo() {
+            var data = [];
+            $("#selectRoles li").each(function () {
+                data.push($(this).attr("SysNo"));
+            });
+            return data;
+        }
+
+        $scope.saveAllotRoles = function () {
+            var selected = getSelectedSysNo();
+
+            var postData = [];
+            angular.forEach(selected, function (value) {
+                postData.push({
+                    UserSysNo: $scope.user.data.SysNo,
+                    RoleSysNo: value
+                });
+            });
+            $http.post("/ControlPanel/SaveUserRoles", postData).success(function () {
+                alert("保存成功!");
+            });
+        };
+
+        $scope.saveAllotFuns = function () {
+            var selected = getSelectedSysNo();
+
+            var postData = [];
+            angular.forEach(selected, function (value) {
+                postData.push({
+                    UserSysNo: $scope.user.data.SysNo,
+                    FunctionSysNo: value
+                });
+            });
+            $http.post("/ControlPanel/SaveUserFunctions", postData).success(function () {
+                alert("保存成功!");
+            });
+        };
 
     });
 });

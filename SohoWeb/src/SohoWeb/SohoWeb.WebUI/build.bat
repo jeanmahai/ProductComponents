@@ -14,14 +14,14 @@ set targetpath=%cd%\SohoWeb.WebUI
 
 echo target path : %targetpath%
 
-xcopy %currentPath%\controllers\*.* %targetpath%\ScriptController\*.* /s/y/exclude:%excludePath%
+::xcopy %currentPath%\controllers\*.* %targetpath%\ScriptController\*.* /s/y/exclude:%excludePath%
 
-if not exist %targetpath%\bower_components\ (xcopy %currentPath%\bower_components\*.* %targetpath%\bower_components\ /s/y)
+::if not exist %targetpath%\bower_components\ (xcopy %currentPath%\bower_components\*.* %targetpath%\bower_components\ /s/y)
 
-if not exist %targetpath%\res\main.js (xcopy %currentPath%\main\main.js %targetpath%\res\ /s/y)
+::if not exist %targetpath%\res\main.js (xcopy %currentPath%\main\main.js %targetpath%\res\ /s/y)
 
 xcopy %currentPath%\main\app.js %targetpath%\res\ /s/y
 
-xcopy %currentPath%\main\main.css %targetpath%\res\ /s/y
+::xcopy %currentPath%\main\main.css %targetpath%\res\ /s/y
 
 pause
