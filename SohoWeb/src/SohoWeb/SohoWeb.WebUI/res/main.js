@@ -40,8 +40,14 @@
     };
     //url route
     window["appRouteUrl"] = [{
-        routeUrl: "/user/allot/role/:SysNo",
-        templateUrl: "../HtmlViews/allot_role.html",
+        routeUrl: "/role/allot/fun/:RoleSysNo",
+        templateUrl: "../HtmlViews/role_allot_fun.html",
+        controller: "RoleController"
+    }, {
+        routeUrl: "/user/allot/:name/:SysNo",
+        templateUrl: function ($routeParams) {
+            return "../HtmlViews/allot_"+$routeParams["name"]+".html";
+        },
         controller: "ControlPanelController"
     },{
         routeUrl: "/role/:SysNo",
