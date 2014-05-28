@@ -33,9 +33,9 @@
         parentController: function ($scope, $cookies) {
             $scope._UserName = "";
             if ($cookies && $cookies["soho.web.username"]) {
-                $scope._UserName = $cookies["soho.web.username"].replace(/\"/gi,"");
+                $scope._UserName = $cookies["soho.web.username"].replace(/\"/gi, "");
+                $("#spanUserName").show()
             }
-            console.info($scope._UserName);
         }
     };
     //url route
@@ -46,34 +46,34 @@
     }, {
         routeUrl: "/user/allot/:name/:SysNo",
         templateUrl: function ($routeParams) {
-            return "../HtmlViews/allot_"+$routeParams["name"]+".html";
+            return "../HtmlViews/allot_" + $routeParams["name"] + ".html";
         },
         controller: "ControlPanelController"
-    },{
+    }, {
         routeUrl: "/role/:SysNo",
         templateUrl: "../HtmlViews/role_update.html",
         controller: "RoleController"
-    },{
+    }, {
         routeUrl: "/role_insert",
         templateUrl: "../HtmlViews/role_insert.html",
         controller: "RoleController"
-    },{
+    }, {
         routeUrl: "/role",
         templateUrl: "../HtmlViews/role.html",
         controller: "RoleController"
-    },{
+    }, {
         routeUrl: "/funs/:SysNo",
         templateUrl: "../HtmlViews/funs_update.html",
         controller: "FunsController"
-    },{
+    }, {
         routeUrl: "/funs_insert",
         templateUrl: "../HtmlViews/funs_insert.html",
         controller: "FunsController"
-    },{
+    }, {
         routeUrl: "/funs",
         templateUrl: "../HtmlViews/funs.html",
         controller: "FunsController"
-    },{
+    }, {
         routeUrl: "/user",
         templateUrl: "../HtmlViews/user.html",
         controller: "ControlPanelController"
