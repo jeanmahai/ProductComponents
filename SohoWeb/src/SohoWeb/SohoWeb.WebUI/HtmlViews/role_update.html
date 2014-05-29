@@ -26,7 +26,7 @@
                     <div class="pure-u-1-3">
                         <label>
                             <span>状态:</span><select class="pure-input-2-3" ng-model="data.Status">
-                                <option ng-repeat="item in status" value="{{item.Key}}" {{item.Value==data.Status?"selected":""}}>{{item.Value}}</option>
+                                <option ng-repeat="item in status" value="{{item.Key}}" ng-selected={{item.Value==data.Status}}>{{item.Value}}</option>
                             </select>
                         </label>
                     </div>

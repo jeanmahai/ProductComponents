@@ -40,6 +40,10 @@
     };
     //url route
     window["appRouteUrl"] = [{
+        routeUrl: "/log",
+        templateUrl: "../HtmlViews/log.html",
+        controller: "LogController"
+    },{
         routeUrl: "/role/allot/fun/:RoleSysNo",
         templateUrl: "../HtmlViews/role_allot_fun.html",
         controller: "RoleController"
