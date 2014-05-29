@@ -46,6 +46,9 @@
   <ItemGroup>
     <Compile Include="ControlPanel\Functions.cs" />
     <Compile Include="ControlPanel\FunctionsQueryFilter.cs" />
+    <Compile Include="ControlPanel\LogCategorys.cs" />
+    <Compile Include="ControlPanel\Logs.cs" />
+    <Compile Include="ControlPanel\LogsQueryFilter.cs" />
     <Compile Include="ControlPanel\RoleFunctions.cs" />
     <Compile Include="ControlPanel\Roles.cs" />
     <Compile Include="ControlPanel\RolesQueryFilter.cs" />

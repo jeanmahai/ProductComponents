@@ -714,5 +714,102 @@ namespace SohoWeb.WebUI.Controllers
         }
 
         #endregion
+
+        #region 日志管理
+
+        /// <summary>
+        /// 获取日志的纲
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetLogClasses()
+        {
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = LogsMgtService.Instance.GetLogClasses(),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 根据纲获取日志目
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetLogSectionByClasses()
+        {
+            var request = GetParams<List<string>>();
+            int classes = 0;
+            if (request != null && request.Count > 0)
+                classes = int.Parse(request[0]);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = LogsMgtService.Instance.GetLogSectionByClasses(classes),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 根据目获取日志科
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetLogFamliyBySection()
+        {
+            var request = GetParams<List<string>>();
+            int section = 0;
+            if (request != null && request.Count > 0)
+                section = int.Parse(request[0]);
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = LogsMgtService.Instance.GetLogFamliyBySection(section),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 添加日志
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult InsertLogs()
+        {
+            var requestVM = GetParams<Logs>();
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = LogsMgtService.Instance.InsertLogs(requestVM),
+                Message = ""
+            };
+            return View(result);
+        }
+
+        /// <summary>
+        /// 查询日志
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult QueryLogs()
+        {
+            var filter = GetParams<LogsQueryFilter>();
+
+            PortalResult result = new PortalResult()
+            {
+                Code = 0,
+                Success = true,
+                Data = LogsMgtService.Instance.QueryLogs(filter),
+                Message = ""
+            };
+            return View(result);
+        }
+        #endregion
     }
 }

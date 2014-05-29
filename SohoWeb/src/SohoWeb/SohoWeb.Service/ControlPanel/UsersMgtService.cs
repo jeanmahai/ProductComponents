@@ -17,6 +17,14 @@ namespace SohoWeb.Service.ControlPanel
         /// <returns></returns>
         public int InsertUser(Users entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.UserID))
+                throw new BusinessException("必须输入用户ID！");
+            if (string.IsNullOrWhiteSpace(entity.UserName))
+                throw new BusinessException("必须输入用户名！");
+            if (string.IsNullOrWhiteSpace(entity.Password))
+                throw new BusinessException("必须输入密码！");
+
             var userList = UsersMgtDA.GetValidUserListByUserID(entity.UserID);
             if (userList != null && userList.Count > 0)
             {
@@ -33,6 +41,12 @@ namespace SohoWeb.Service.ControlPanel
         /// <param name="entity">用户信息</param>
         public void UpdateUserBySysNo(Users entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.UserID))
+                throw new BusinessException("必须输入用户ID！");
+            if (string.IsNullOrWhiteSpace(entity.UserName))
+                throw new BusinessException("必须输入用户名！");
+
             var userList = UsersMgtDA.GetValidUserListByUserID(entity.UserID);
             if (userList != null && userList.Count > 0)
             {
@@ -60,6 +74,12 @@ namespace SohoWeb.Service.ControlPanel
         /// <param name="oldPassword">旧密码</param>
         public void UpdateUserPasswordBySysNo(Users entity, string oldPassword)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(oldPassword))
+                throw new BusinessException("必须输入旧密码！");
+            if (string.IsNullOrWhiteSpace(entity.Password))
+                throw new BusinessException("必须输入新密码！");
+
             var user = UsersMgtDA.GetValidUserByUserID(entity.UserID);
             string currOldPassword = MD5Encrypt.MD5Encrypt32(string.Format("{0}-{1}", oldPassword, user.UserAuthCode)).ToLower();
             if (!currOldPassword.Equals(user.Password))

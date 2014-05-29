@@ -16,6 +16,12 @@ namespace SohoWeb.Service.ControlPanel
         /// <returns></returns>
         public int InsertFunctions(Functions entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.FunctionKey))
+                throw new BusinessException("必须输入权限Key！");
+            if (string.IsNullOrWhiteSpace(entity.FunctionName))
+                throw new BusinessException("必须输入权限名称！");
+
             var existsList = FunctionsMgtDA.GetValidFunctionsByKey(entity.FunctionKey);
             if (existsList != null && existsList.Count > 0)
             {
@@ -30,6 +36,12 @@ namespace SohoWeb.Service.ControlPanel
         /// <param name="entity">权限信息</param>
         public void UpdateFunctionsBySysNo(Functions entity)
         {
+            //check
+            if (string.IsNullOrWhiteSpace(entity.FunctionKey))
+                throw new BusinessException("必须输入权限Key！");
+            if (string.IsNullOrWhiteSpace(entity.FunctionName))
+                throw new BusinessException("必须输入权限名称！");
+
             var existsList = FunctionsMgtDA.GetValidFunctionsByKey(entity.FunctionKey);
             if (existsList != null && existsList.Count > 0 && existsList[0].SysNo != entity.SysNo)
             {
