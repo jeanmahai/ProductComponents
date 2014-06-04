@@ -28,16 +28,22 @@ namespace SohoWeb.Entity.ControlPanel
         /// </summary>
         [DataMember]
         public int Classes { get; set; }
+        [DataMember]
+        public string ClassesText { get; set; }
         /// <summary>
         /// 目
         /// </summary>
         [DataMember]
         public int Section { get; set; }
+        [DataMember]
+        public string SectionText { get; set; }
         /// <summary>
         /// 科
         /// </summary>
         [DataMember]
         public int Family { get; set; }
+        [DataMember]
+        public string FamilyText { get; set; }
         /// <summary>
         /// 业务编号
         /// </summary>

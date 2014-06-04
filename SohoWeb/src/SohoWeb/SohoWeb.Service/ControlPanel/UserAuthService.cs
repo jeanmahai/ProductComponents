@@ -28,6 +28,20 @@ namespace SohoWeb.Service.ControlPanel
             if (!currPassword.Equals(user.Password.ToLower()))
                 throw new BusinessException("密码错误！");
 
+            #region 写登录Log
+            Logs log = new Logs()
+            {
+                Classes = 1001,
+                Section = 1002,
+                Family = 1005,
+                RefenceSysNo = user.SysNo.Value,
+                Contents = "登录成功。",
+                InUserSysNo = 0,
+                InUserName = "System"
+            };
+            LogsMgtService.Instance.InsertLogs(log);
+            #endregion
+
             return true;
         }
 
