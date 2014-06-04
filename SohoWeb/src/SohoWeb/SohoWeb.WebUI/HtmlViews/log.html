@@ -37,7 +37,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>上一级编号</th>
                     <th>纲</th>
                     <th>目</th>
                     <th>科</th>
@@ -48,10 +47,9 @@
             <tbody>
                 <tr ng-repeat="a in result">
                     <td>{{a.SysNo}}</td>
-                    <td>{{a.ParentSysNo}}</td>
-                    <td>{{a.Classes}}</td>
-                    <td>{{a.Section}}</td>
-                    <td>{{a.Family}}</td>
+                    <td>{{a.ClassesText}}</td>
+                    <td>{{a.SectionText}}</td>
+                    <td>{{a.FamilyText}}</td>
                     <td>{{a.RefenceSysNo}}</td>
                     <td>{{a.Contents}}</td>
                 </tr>

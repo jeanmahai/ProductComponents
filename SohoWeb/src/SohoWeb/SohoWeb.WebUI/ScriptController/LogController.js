@@ -1,5 +1,5 @@
 ﻿define(["app"], function (app) {
-    
+
     app.register.controller("LogController", function ($scope, $http) {
 
         $scope.data = {};
@@ -8,18 +8,18 @@
 
         $scope.select = function () {
 
-            var me=this;
+            var me = this;
 
             var filter = {
                 PageIndex: $scope.pager.index,
-                PageSize:$scope.pager.size
+                PageSize: $scope.pager.size
             };
 
             angular.extend(filter, me.data);
 
-            $http.post("/ControlPanel/QueryLogs",filter).success(function (res) {
+            $http.post("/ControlPanel/QueryLogs", filter).success(function (res) {
 
-
+                $scope.result = res.ResultList;
 
             });
 
