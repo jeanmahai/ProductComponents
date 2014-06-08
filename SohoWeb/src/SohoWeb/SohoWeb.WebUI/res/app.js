@@ -96,7 +96,7 @@ define(window["appConfig"].angularModualJS, function (angularAMD) {
         return {
             'request': function (config) {
                 //处理自定义headers
-                config.headers["x-soho-app-id"] = appConfig.appId || 1002;
+                config.headers["x-soho-app-id"] = appConfig.appId || 'ed1ff821c83e4aeb8c142ec08871361f';
                 //处理loading
                 $N.loading(config);
                 return config || $q.when(config);
