@@ -6,6 +6,6 @@ D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Send.pdb
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\bin\Release\Soho.EmailAndSMS.Service.pdb
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\Soho.EmailAndSMS.SMSJobHost.csprojResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\SohoSMSJob.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\01-Host\Soho.EmailAndSMS.SMSJobHost\obj\Release\SohoSMSJob.pdb

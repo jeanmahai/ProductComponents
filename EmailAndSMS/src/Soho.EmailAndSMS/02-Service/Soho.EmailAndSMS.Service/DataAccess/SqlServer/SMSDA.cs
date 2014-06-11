@@ -76,7 +76,7 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                     new SqlParameter("@ReceivePhoneNumber", entity.ReceivePhoneNumber),
                     new SqlParameter("@SMSBody", entity.SMSBody),
                     new SqlParameter("@Status", entity.Status),
-                    new SqlParameter("@SendTime", entity.SendTime.HasValue ? entity.SendTime.Value.ToString() : ""),
+                    new SqlParameter("@SendTime", entity.SendTime),
                     new SqlParameter("@Note", string.IsNullOrWhiteSpace(entity.Note) ? "" : entity.Note)
                 };
                 retVal = db.ExecuteNonQuery(CommandType.Text, sql, para);
@@ -191,9 +191,9 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                                 ReceivePhoneNumber = row["ReceivePhoneNumber"].ToString(),
                                 SMSBody = row["SMSBody"].ToString(),
                                 Status = (SMSStatus)int.Parse(row["Status"].ToString()),
-                                SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
-                                InDate = DateTime.Parse(row["InDate"].ToString()),
-                                LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
+                                SendTime = row["SendTime"].ToString(),
+                                InDate = row["InDate"].ToString(),
+                                LastUpdateTime = row["LastUpdateTime"].ToString(),
                                 Note = row["Note"].ToString(),
                             });
                         }
@@ -258,9 +258,9 @@ SELECT [SysNo]
                             ReceivePhoneNumber = row["ReceivePhoneNumber"].ToString(),
                             SMSBody = row["SMSBody"].ToString(),
                             Status = (SMSStatus)int.Parse(row["Status"].ToString()),
-                            SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
-                            InDate = DateTime.Parse(row["InDate"].ToString()),
-                            LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
+                            SendTime = row["SendTime"].ToString(),
+                            InDate = row["InDate"].ToString(),
+                            LastUpdateTime = row["LastUpdateTime"].ToString(),
                             Note = row["Note"].ToString(),
                         });
                     }

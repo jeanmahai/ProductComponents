@@ -16,7 +16,8 @@ namespace TestConsole
             Console.WriteLine(DateTime.Now);
             
             //SMSTest();
-            SMSTest();
+            //SMSTest();
+            QueryMailTest();
 
             Console.WriteLine(DateTime.Now);
             Console.ReadKey(true);
@@ -32,8 +33,8 @@ namespace TestConsole
             filter.EmailAddress = "j";
             //filter.Keywords = "1";
             //filter.Status = EmailStatus.SendSuccess;
-            filter.BeginInDate = DateTime.Parse("2014-05-01 23:56:33.237");
-            filter.EndInDate = DateTime.Parse("2014-06-02 23:56:33.237");
+            filter.BeginInDate = "2014-05-01 23:56:33.237";
+            filter.EndInDate = "2014-06-02 23:56:33.237";
             filter.PageSize = 6;
             filter.PageIndex = 1;
             QueryResult<EmailEntity> list = EmailProcessor.Instance.QueryMail(filter);
@@ -89,6 +90,26 @@ namespace TestConsole
             //    });
             //}
             //SMSProcessor.Instance.BatchInsertSMS(list);
+        }
+        static void QueryMailTest()
+        {
+            EmailQueryFilter filter = new EmailQueryFilter()
+            {
+                PageIndex = 1,
+                PageSize = 100,
+                BeginInDate = "2014-01-01",
+                EndInDate = "2014-08-01",
+                UserSysNo = 1001,
+                ReceiveName = "t",
+                EmailAddress = "t",
+                Keywords = "测",
+                Status = EmailStatus.AuditPassed
+            };
+            var data = EmailProcessor.Instance.QueryMail(filter);
+            if (data.ResultList != null)
+                Console.WriteLine(data.ResultList.Count);
+            else
+                Console.WriteLine("NULL Data");
         }
     }
 }

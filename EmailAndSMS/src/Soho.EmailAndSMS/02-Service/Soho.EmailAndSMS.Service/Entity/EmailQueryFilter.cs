@@ -39,12 +39,12 @@ namespace Soho.EmailAndSMS.Service.Entity
         /// 插入时间起
         /// </summary>
         [DataMember]
-        public DateTime? BeginInDate { get; set; }
+        public string BeginInDate { get; set; }
         /// <summary>
         /// 插入时间止
         /// </summary>
         [DataMember]
-        public DateTime? EndInDate { get; set; }
+        public string EndInDate { get; set; }
         /// <summary>
         /// 当前显示第几页数据
         /// </summary>

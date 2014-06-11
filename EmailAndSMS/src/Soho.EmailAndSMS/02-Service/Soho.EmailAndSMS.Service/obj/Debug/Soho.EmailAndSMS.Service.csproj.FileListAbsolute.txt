@@ -5,6 +5,5 @@ D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\Soho.EmailAndSMS.Service\obj\Debug\Soho.EmailAndSMS.Service.pdb
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\bin\Debug\Soho.EmailAndSMS.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\bin\Debug\Soho.EmailAndSMS.Service.pdb
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Debug\ResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Debug\Soho.EmailAndSMS.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Service\obj\Debug\Soho.EmailAndSMS.Service.pdb

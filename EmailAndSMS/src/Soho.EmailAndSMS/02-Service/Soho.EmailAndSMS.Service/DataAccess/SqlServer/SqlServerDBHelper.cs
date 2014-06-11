@@ -86,7 +86,7 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
         public SqlServerDBHelper()
         {
             conn = new System.Data.SqlClient.SqlConnection();
-            conn.ConnectionString = "data source=.;database=SohoEmailAndSMS;user id=sa;password=123;connection reset=false;Timeout=30;connection lifetime=30; min pool size=0; max pool size=50";//ConnectionString;
+            conn.ConnectionString = ConnectionString;
 
             try
             {

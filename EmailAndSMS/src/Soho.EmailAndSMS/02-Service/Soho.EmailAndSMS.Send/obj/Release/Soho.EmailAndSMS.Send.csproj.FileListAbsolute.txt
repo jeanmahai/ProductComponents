@@ -2,6 +2,6 @@ D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\bin\Release\Soho.EmailAndSMS.Send.pdb
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\bin\Release\Soho.EmailAndSMS.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\bin\Release\Soho.EmailAndSMS.Service.pdb
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\obj\Release\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\obj\Release\Soho.EmailAndSMS.Send.csprojResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\obj\Release\Soho.EmailAndSMS.Send.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\02-Service\Soho.EmailAndSMS.Send\obj\Release\Soho.EmailAndSMS.Send.pdb

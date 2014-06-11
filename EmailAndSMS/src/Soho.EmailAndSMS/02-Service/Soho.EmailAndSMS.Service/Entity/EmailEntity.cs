@@ -65,17 +65,17 @@ namespace Soho.EmailAndSMS.Service.Entity
         /// 发送时间，为null则不指定发送时间，审核通过即可发送
         /// </summary>
         [DataMember]
-        public DateTime? SendTime { get; set; }
+        public string SendTime { get; set; }
         /// <summary>
         /// 插入时间
         /// </summary>
         [DataMember]
-        public DateTime InDate { get; set; }
+        public string InDate { get; set; }
         /// <summary>
         /// 最后更新时间
         /// </summary>
         [DataMember]
-        public DateTime? LastUpdateTime { get; set; }
+        public string LastUpdateTime { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

@@ -5,6 +5,6 @@ D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\bin\Debug\Soho.EmailAndSMS.Service.dll
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\bin\Debug\Soho.EmailAndSMS.Send.pdb
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\bin\Debug\Soho.EmailAndSMS.Service.pdb
-D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\obj\x86\Debug\TestConsole.csprojResolveAssemblyReference.cache
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\obj\x86\Debug\TestConsole.exe
 D:\ProjectCollection\BaseLib\ProductComponents\EmailAndSMS\src\Soho.EmailAndSMS\TestConsole\obj\x86\Debug\TestConsole.pdb

@@ -89,7 +89,7 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                     new SqlParameter("@IsBodyHtml", entity.IsBodyHtml),
                     new SqlParameter("@EmailPriority", entity.EmailPriority),
                     new SqlParameter("@Status", entity.Status),
-                    new SqlParameter("@SendTime", entity.SendTime.HasValue ? entity.SendTime.Value.ToString() : ""),
+                    new SqlParameter("@SendTime", entity.SendTime),
                     new SqlParameter("@Note", string.IsNullOrWhiteSpace(entity.Note) ? "" : entity.Note)
                 };
                 retVal = db.ExecuteNonQuery(CommandType.Text, sql, para);
@@ -173,12 +173,12 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                     strWhere += " AND [Status] = @Status";
                     param.Add(new SqlParameter("@Status", filter.Status));
                 }
-                if (filter.BeginInDate.HasValue)
+                if (!string.IsNullOrWhiteSpace(filter.BeginInDate))
                 {
                     strWhere += " AND [InDate] >= @BeginInDate";
                     param.Add(new SqlParameter("@BeginInDate", filter.BeginInDate));
                 }
-                if (filter.EndInDate.HasValue)
+                if (!string.IsNullOrWhiteSpace(filter.EndInDate))
                 {
                     strWhere += " AND [InDate] <= @EndInDate";
                     param.Add(new SqlParameter("@EndInDate", filter.EndInDate));
@@ -214,9 +214,9 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                                 IsBodyHtml = row["IsBodyHtml"].ToString() == "1" ? true : false,
                                 EmailPriority = (MailPriority)int.Parse(row["EmailPriority"].ToString()),
                                 Status = (EmailStatus)int.Parse(row["Status"].ToString()),
-                                SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
-                                InDate = DateTime.Parse(row["InDate"].ToString()),
-                                LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
+                                SendTime = row["SendTime"].ToString(),
+                                InDate = row["InDate"].ToString(),
+                                LastUpdateTime = row["LastUpdateTime"].ToString(),
                                 Note = row["Note"].ToString(),
                             });
                         }
@@ -289,9 +289,9 @@ SELECT [SysNo]
                             IsBodyHtml = row["IsBodyHtml"].ToString() == "1" ? true : false,
                             EmailPriority = (MailPriority)int.Parse(row["EmailPriority"].ToString()),
                             Status = (EmailStatus)int.Parse(row["Status"].ToString()),
-                            SendTime = string.IsNullOrWhiteSpace(row["SendTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["SendTime"].ToString()),
-                            InDate = DateTime.Parse(row["InDate"].ToString()),
-                            LastUpdateTime = string.IsNullOrWhiteSpace(row["LastUpdateTime"].ToString()) ? DateTime.MinValue : DateTime.Parse(row["LastUpdateTime"].ToString()),
+                            SendTime = row["SendTime"].ToString(),
+                            InDate = row["InDate"].ToString(),
+                            LastUpdateTime = row["LastUpdateTime"].ToString(),
                             Note = row["Note"].ToString(),
                         });
                     }
