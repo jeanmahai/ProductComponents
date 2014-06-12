@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.WebMgt", "SohoWeb.WebMgt\SohoWeb.WebMgt.csproj", "{7A7DF52C-855B-449B-9A3B-60A76E765A8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.DataAccess", "SohoWeb.DataAccess\SohoWeb.DataAccess.csproj", "{11C061BE-7860-40A8-94E9-C40340205407}"
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.Service", "SohoWeb.Service\SohoWeb.Service.csproj", "{1EB8735D-D334-4425-B5E7-7022C27D3642}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.AngularFramework", "SohoWeb.AngularFramework\SohoWeb.AngularFramework.csproj", "{B24B9920-96C0-4F5A-8230-B7105E06B889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.WebSite", "SohoWeb.WebSite\SohoWeb.WebSite.csproj", "{3D1D0CB1-7C1E-4B8E-8ECD-B7D77A4D0AD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{B24B9920-96C0-4F5A-8230-B7105E06B889}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B24B9920-96C0-4F5A-8230-B7105E06B889}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B24B9920-96C0-4F5A-8230-B7105E06B889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D1D0CB1-7C1E-4B8E-8ECD-B7D77A4D0AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D1D0CB1-7C1E-4B8E-8ECD-B7D77A4D0AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D1D0CB1-7C1E-4B8E-8ECD-B7D77A4D0AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D1D0CB1-7C1E-4B8E-8ECD-B7D77A4D0AD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
