@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.WebUI", "SohoWeb.WebUI\SohoWeb.WebUI.csproj", "{7A7DF52C-855B-449B-9A3B-60A76E765A8C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.WebMgt", "SohoWeb.WebMgt\SohoWeb.WebMgt.csproj", "{7A7DF52C-855B-449B-9A3B-60A76E765A8C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SohoWeb.DataAccess", "SohoWeb.DataAccess\SohoWeb.DataAccess.csproj", "{11C061BE-7860-40A8-94E9-C40340205407}"
 EndProject
