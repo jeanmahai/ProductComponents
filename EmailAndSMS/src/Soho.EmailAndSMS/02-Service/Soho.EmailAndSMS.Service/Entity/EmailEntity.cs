@@ -61,6 +61,42 @@ namespace Soho.EmailAndSMS.Service.Entity
         /// </summary>
         [DataMember]
         public EmailStatus Status { get; set; }
+        [DataMember]
+        public string StatusText
+        {
+            get
+            {
+                string result = "";
+                switch (this.Status)
+                {
+                    case EmailStatus.Voided:
+                        result = "已作废";
+                        break;
+                    case EmailStatus.Initial:
+                        result = "初始态";
+                        break;
+                    case EmailStatus.AuditRejected:
+                        result = "审核拒绝";
+                        break;
+                    case EmailStatus.AuditPassed:
+                        result = "审核通过";
+                        break;
+                    case EmailStatus.DelaySend:
+                        result = "延迟发送";
+                        break;
+                    case EmailStatus.Sending:
+                        result = "发送中";
+                        break;
+                    case EmailStatus.SendSuccess:
+                        result = "发送成功";
+                        break;
+                    case EmailStatus.SendFailure:
+                        result = "发送失败";
+                        break;
+                }
+                return result;
+            }
+        }
         /// <summary>
         /// 发送时间，为null则不指定发送时间，审核通过即可发送
         /// </summary>
