@@ -81,15 +81,15 @@ namespace Soho.EmailAndSMS.Service.DataAccess.SqlServer
                 SqlParameter[] para = new SqlParameter[]
                 { 
                     new SqlParameter("@UserSysNo", entity.UserSysNo.HasValue ? entity.UserSysNo.Value : 0),
-                    new SqlParameter("@ReceiveName", entity.ReceiveName),
+                    new SqlParameter("@ReceiveName", string.IsNullOrWhiteSpace(entity.ReceiveName) ? "" : entity.ReceiveName),
                     new SqlParameter("@ReceiveAddress", entity.ReceiveAddress),
-                    new SqlParameter("@CCAddress", entity.CCAddress),
+                    new SqlParameter("@CCAddress", string.IsNullOrWhiteSpace(entity.CCAddress) ? "" : entity.CCAddress),
                     new SqlParameter("@EmailTitle", entity.EmailTitle),
                     new SqlParameter("@EmailBody", entity.EmailBody),
                     new SqlParameter("@IsBodyHtml", entity.IsBodyHtml),
                     new SqlParameter("@EmailPriority", entity.EmailPriority),
                     new SqlParameter("@Status", entity.Status),
-                    new SqlParameter("@SendTime", entity.SendTime),
+                    new SqlParameter("@SendTime", string.IsNullOrWhiteSpace(entity.SendTime) ? "" : entity.SendTime),
                     new SqlParameter("@Note", string.IsNullOrWhiteSpace(entity.Note) ? "" : entity.Note)
                 };
                 retVal = db.ExecuteNonQuery(CommandType.Text, sql, para);

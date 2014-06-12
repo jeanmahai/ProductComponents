@@ -17,7 +17,9 @@ namespace TestConsole
             
             //SMSTest();
             //SMSTest();
-            QueryMailTest();
+            //QueryMailTest();
+            //InsertMailTest();
+            InsertSMSTest();
 
             Console.WriteLine(DateTime.Now);
             Console.ReadKey(true);
@@ -110,6 +112,31 @@ namespace TestConsole
                 Console.WriteLine(data.ResultList.Count);
             else
                 Console.WriteLine("NULL Data");
+        }
+        static void InsertMailTest()
+        {
+            EmailEntity entity = new EmailEntity() 
+            {
+                ReceiveName = "ABC",
+                ReceiveAddress = "a@b.com",
+                EmailTitle = "Test",
+                EmailBody = "Test content",
+                IsBodyHtml = false,
+                EmailPriority = System.Net.Mail.MailPriority.Normal,
+                Status = EmailStatus.AuditPassed
+            };
+            EmailProcessor.Instance.InsertMail(entity);
+        }
+        static void InsertSMSTest()
+        {
+            SMSEntity entity = new SMSEntity()
+            {
+                ReceiveName = "ABC",
+                ReceivePhoneNumber = "13833441501",
+                SMSBody = "Test短信",
+                Status = SMSStatus.AuditPassed
+            };
+            SMSProcessor.Instance.InsertSMS(entity);
         }
     }
 }
