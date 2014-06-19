@@ -129,6 +129,21 @@
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Data\Customer\CustomerMgt.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Data\Database.config" />
+    <Content Include="Configuration\Data\DbCommandFiles.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\BusinessRoute.config" />
+    <Content Include="Configuration\Cookie.config" />
+    <Content Include="Configuration\Route.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="build.bat" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
