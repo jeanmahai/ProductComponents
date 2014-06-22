@@ -108,6 +108,11 @@
     <Compile Include="App_Start\AuthMgr.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MasterController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -127,10 +132,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configuration\Data\Customer\CustomerMgt.config" />
+    <Content Include="Configuration\Data\Customer\CustomerMgt.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configuration\Data\Database.config" />
@@ -143,6 +149,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="build.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SohoWeb.Entity\SohoWeb.Entity.csproj">
+      <Project>{a957fac5-c6e5-415b-b2b1-654c5263c23f}</Project>
+      <Name>SohoWeb.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SohoWeb.Service\SohoWeb.Service.csproj">
+      <Project>{1eb8735d-d334-4425-b5e7-7022c27d3642}</Project>
+      <Name>SohoWeb.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

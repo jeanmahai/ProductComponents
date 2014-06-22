@@ -27,6 +27,10 @@ namespace SohoWeb.Entity.Customer
         public CustomerStatus Status { get; set; }
         [DataMember]
         public string StatusText { get { return this.Status.GetEnumDescription(); } }
+        [DataMember]
+        public string RegDate { get; set; }
+        [DataMember]
+        public string RegIP { get; set; }
 
         #endregion
 

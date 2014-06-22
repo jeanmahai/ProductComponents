@@ -57,6 +57,7 @@
     <Compile Include="ControlPanel\Users.cs" />
     <Compile Include="ControlPanel\UsersQueryFilter.cs" />
     <Compile Include="Customer\CustomerInfo.cs" />
+    <Compile Include="Customer\CustomerLoginLog.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="EnumsHelper.cs" />
     <Compile Include="Enums\Common.cs" />

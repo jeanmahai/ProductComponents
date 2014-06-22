@@ -47,9 +47,9 @@ namespace SohoWeb.DataAccess.Customer
         /// 更新用户密码
         /// </summary>
         /// <param name="entity">用户信息</param>
-        public static void UpdateCustomerPasswordByUserID(CustomerInfo entity)
+        public static void UpdateCustomerPasswordByCustomerID(CustomerInfo entity)
         {
-            DataCommand cmd = DataCommandManager.GetDataCommand("UpdateCustomerPasswordByUserID");
+            DataCommand cmd = DataCommandManager.GetDataCommand("UpdateCustomerPasswordByCustomerID");
             cmd.SetParameterValue<CustomerInfo>(entity);
             cmd.ExecuteNonQuery();
         }
@@ -82,6 +82,17 @@ namespace SohoWeb.DataAccess.Customer
             DataCommand cmd = DataCommandManager.GetDataCommand("GetValidCustomerByCustomerSysNo");
             cmd.SetParameterValue("@SysNo", customerSysNo);
             return cmd.ExecuteEntity<CustomerInfo>();
+        }
+
+        /// <summary>
+        /// 创建用户登录日志
+        /// </summary>
+        /// <param name="entity">登录日志</param>
+        public static void InsertCustomerLoginLog(CustomerLoginLog entity)
+        {
+            DataCommand cmd = DataCommandManager.GetDataCommand("InsertCustomerLoginLog");
+            cmd.SetParameterValue<CustomerLoginLog>(entity);
+            cmd.ExecuteNonQuery();
         }
     }
 }
